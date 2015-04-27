@@ -1,0 +1,51 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Sidenav area */
+
+md-list .md-button {
+    color: inherit;
+    text-align: center;
+    width: 100%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+md-sidenav md-list {
+    padding: 0px 0px 8px 0px;
+}
+
+/* Parallax Settings */
+.fixedElement {
+    position: fixed;
+}
+
+.photo {
+    background-attachment: fixed;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    min-height: 600px;
+    width: 100%;
+    position: relative;
+}
+
+.home {
+    background-image: url(../assets/images/IMG-20131225-WA0040.jpg);
+}
+
+.about {
+    background-image: url(../assets/images/IMG_2439.jpg);
+}
+
+.photos {
+    background-image: url(../assets/images/DSCN7814.JPG);
+}
+
+.gigs {
+    background-image: url(../assets/images/IMG_20140630_171149_2.jpg);
+}
+
+.contact {
+    background-image: url(../assets/images/DSCN7815.JPG);
+}
