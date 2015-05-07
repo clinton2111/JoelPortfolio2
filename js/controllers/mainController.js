@@ -4,10 +4,31 @@ angular.module('joelPortfolio.controller', []).controller('MainController', [
       console.log('Toggled');
       return $mdSidenav('left').toggle();
     };
-    return $scope.navigateTo = function(id) {
+    $scope.navigateTo = function(id) {
       console.log('Navigate to ' + id);
       $location.hash(id);
       return $anchorScroll();
     };
+    return $(window).scroll(function() {
+      var add, st, winH;
+      st = $(this).scrollTop();
+      winH = $(this).height();
+      add = 100;
+      return $('section').each(function() {
+        var pos;
+        pos = $(this).position().top;
+        if (st + winH >= pos + add) {
+          return $(this).stop().animate({
+            opacity: 1,
+            marginTop: 10
+          }, 'fast');
+        } else {
+          return $(this).stop().animate({
+            opacity: 0,
+            marginTop: 0
+          }, 'fast');
+        }
+      });
+    });
   }
 ]);

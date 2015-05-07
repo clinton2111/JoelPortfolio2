@@ -17,35 +17,53 @@ md-sidenav md-list {
 }
 
 /* Parallax Settings */
-.fixedElement {
+.sticky {
     position: fixed;
+    top: 0;
+}
+
+.menu-padding {
+    padding-top: 40px;
 }
 
 .photo {
     background-attachment: fixed;
-    background-position: 50% 0;
     background-repeat: no-repeat;
-    min-height: 600px;
+    min-height: 800px;
     width: 100%;
     position: relative;
+    background-position: 50% 0;
+
 }
 
 .home {
-    background-image: url(../assets/images/IMG-20131225-WA0040.jpg);
+    background-image: url(../assets/images/header1.jpg);
+    background-size: cover;
+
 }
 
 .about {
-    background-image: url(../assets/images/IMG_2439.jpg);
+    background-color: #ffffff;
+    height: 800px;
+    text-align: center
 }
 
-.photos {
-    background-image: url(../assets/images/DSCN7814.JPG);
+.svg_header {
+    height: 80%;
+    width: auto;
+    position: relative;
 }
 
-.gigs {
-    background-image: url(../assets/images/IMG_20140630_171149_2.jpg);
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.contact {
-    background-image: url(../assets/images/DSCN7815.JPG);
+.headertext {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section{
+    opacity: 0;
 }

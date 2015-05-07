@@ -1,67 +1,100 @@
-<div>
-    <md-toolbar class="md-primary md-hue-3 fixedElement ">
+<div layout="column">
+    <md-toolbar class="md-primary md-hue-3 sticky">
         <div class="md-toolbar-tools">
             <md-button class="menu" ng-click="toggleNav()">
                 <ng-md-icon icon="menu" style="fill:white" size="32"></ng-md-icon>
             </md-button>
-            <h2 class="md-flex">DJ Joel Official Site</h2>
+            <object class="flex svg_header" type="image/svg+xml" data="../assets/images/joellogo.svg"></object>
         </div>
     </md-toolbar>
 
-    <div flex layout="row">
 
-        <md-sidenav class="fixedElement " md-component-id="left">
-            <md-toolbar class="md-primary md-hue-3" md-scroll-shrink>
-                <div class="md-toolbar-tools">
-                    <h2 class="md-flex">DJ Joel Official Site</h2>
+    <md-sidenav class="sticky" md-component-id="left">
+        <md-toolbar class="md-primary md-hue-3">
+            <div class="md-toolbar-tools">
+                <md-button class="menu" ng-click="toggleNav()">
+                    <ng-md-icon icon="arrow_back" style="fill:white" size="32"></ng-md-icon>
+                </md-button>
+                <object class="flex svg_header" type="image/svg+xml" data="../assets/images/joellogo.svg"></object>
+            </div>
+        </md-toolbar>
+        <md-list>
+            <md-item>
+                <md-button class="md-primary" ng-click="navigateTo('Home')">Home</md-button>
+            </md-item>
+            <md-divider></md-divider>
+            <md-item>
+                <md-button class="md-primary" ng-click="navigateTo('About')">About</md-button>
+            </md-item>
+            <md-divider></md-divider>
+            <md-item>
+                <md-button class="md-primary" ng-click="navigateTo('Photos')">Photos</md-button>
+            </md-item>
+            <md-divider></md-divider>
+            <md-item>
+                <md-button class="md-primary" ng-click="navigateTo('Gigs')">Gigs</md-button>
+            </md-item>
+            <md-divider></md-divider>
+            <md-item>
+                <md-button class="md-primary" ng-click="navigateTo('Mixes')">Mixes</md-button>
+            </md-item>
+            <md-divider></md-divider>
+            <md-item>
+                <md-button class="md-primary" ng-click="navigateTo('Contact')">Contact</md-button>
+            </md-item>
+            <md-divider></md-divider>
+        </md-list>
+    </md-sidenav>
+
+    <md-content flex id="content" class="menu-padding">
+        <!--Keep background-attachment to fixed to achieve fixed scroll effect-->
+
+        <div parallax-background parallax-ratio="0.4" class="photo home" id="Home" layout="column"
+             layout-align="center center" flex>
+
+
+            <object type="image/svg+xml"
+                    data="../assets/images/joellogo.svg" style="width: 100%"></object>
+
+            <div layout="row" layout-align="center center" flex>
+                <a>
+                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                </a>
+                <a>
+                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                </a>
+                <a>
+                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                </a>
+                <a>
+                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                </a>
+                <a>
+                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                </a>
+                <a>
+                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                </a>
+            </div>
+
+        </div>
+        <div class="about" id="About" layout="row" layout-align="center center" flex>
+            <section flex="33">
+                <div>
+                    <h1>Section 1</h1>
                 </div>
-            </md-toolbar>
-            <md-list>
-                <md-item>
-                    <md-button class="md-primary" ng-click="navigateTo('Home')">Home</md-button>
-                </md-item>
-                <md-divider></md-divider>
-                <md-item>
-                    <md-button class="md-primary" ng-click="navigateTo('About')">About</md-button>
-                </md-item>
-                <md-divider></md-divider>
-                <md-item>
-                    <md-button class="md-primary" ng-click="navigateTo('Photos')">Photos</md-button>
-                </md-item>
-                <md-divider></md-divider>
-                <md-item>
-                    <md-button class="md-primary" ng-click="navigateTo('Gigs')">Gigs</md-button>
-                </md-item>
-                <md-divider></md-divider>
-                <md-item>
-                    <md-button class="md-primary" ng-click="navigateTo('Mixes')">Mixes</md-button>
-                </md-item>
-                <md-divider></md-divider>
-                <md-item>
-                    <md-button class="md-primary" ng-click="navigateTo('Contact')">Contact</md-button>
-                </md-item>
-                <md-divider></md-divider>
-            </md-list>
-        </md-sidenav>
+            </section>
+            <section flex="33">
+                <div>
+                    <h1>Section 2</h1>
+                </div>
+            </section>
+            <section flex="33">
+                <div>
+                    <h1>Section 3</h1>
+                </div>
+            </section>
+        </div>
+    </md-content>
 
-        <md-content flex id="content">
-            <div parallax-background parallax-ratio="0.4" class="photo home" id="Home">
-                <h1 style="text-align: center">HOME</h1>
-            </div>
-            <div parallax-background parallax-ratio="0.4" class="photo about" id="About">
-                <h1 style="text-align: center">About</h1>
-            </div>
-            <div parallax-background parallax-ratio="0.4" class="photo photos" id="Photos">
-                <h1 style="text-align: center">Photos</h1>
-            </div>
-            <div parallax-background parallax-ratio="0.4" class="photo gigs" id="Gigs">
-                <h1 style="text-align: center">Gigs</h1>
-            </div>
-            <div parallax-background parallax-ratio="0.4" class="photo contact" id="Contact">
-                <h1 style="text-align: center">Contact</h1>
-            </div>
-
-        </md-content>
-
-    </div>
 </div>
