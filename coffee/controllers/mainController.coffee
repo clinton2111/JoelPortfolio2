@@ -21,7 +21,7 @@ angular.module 'joelPortfolio.controller', []
 #        for example if the section height is 100 and you set add of 50,
 #        that means if 50% of the section is revealed
 #        on the bottom of viewport animate opacity
-      add=100
+      add=150
 
       $ 'section'
       .each ()->

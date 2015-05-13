@@ -9,8 +9,8 @@ angular.module 'joelPortfolio',['ui.router','ngMaterial','ngMdIcons','joelPortfo
   $mdThemingProvider.theme 'default'
   .primaryPalette 'grey',
     'default': '500'
-    'hue-1': '200'
-    'hue-2': '400'
+    'hue-1': '50'
+    'hue-2': '300'
     'hue-3': '900'
   .accentPalette 'amber',
     'default': '500'

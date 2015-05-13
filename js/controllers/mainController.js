@@ -13,7 +13,7 @@ angular.module('joelPortfolio.controller', []).controller('MainController', [
       var add, st, winH;
       st = $(this).scrollTop();
       winH = $(this).height();
-      add = 100;
+      add = 150;
       return $('section').each(function() {
         var pos;
         pos = $(this).position().top;

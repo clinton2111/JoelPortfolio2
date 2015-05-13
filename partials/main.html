@@ -28,10 +28,6 @@
             </md-item>
             <md-divider></md-divider>
             <md-item>
-                <md-button class="md-primary" ng-click="navigateTo('Photos')">Photos</md-button>
-            </md-item>
-            <md-divider></md-divider>
-            <md-item>
                 <md-button class="md-primary" ng-click="navigateTo('Gigs')">Gigs</md-button>
             </md-item>
             <md-divider></md-divider>
@@ -39,6 +35,12 @@
                 <md-button class="md-primary" ng-click="navigateTo('Mixes')">Mixes</md-button>
             </md-item>
             <md-divider></md-divider>
+            <md-item>
+                <md-button class="md-primary" ng-click="navigateTo('Photos')">Photos</md-button>
+            </md-item>
+            <md-divider></md-divider>
+
+
             <md-item>
                 <md-button class="md-primary" ng-click="navigateTo('Contact')">Contact</md-button>
             </md-item>
@@ -49,51 +51,75 @@
     <md-content flex id="content" class="menu-padding">
         <!--Keep background-attachment to fixed to achieve fixed scroll effect-->
 
-        <div parallax-background parallax-ratio="0.4" class="photo home" id="Home" layout="column"
-             layout-align="center center" flex>
+        <div parallax-background parallax-ratio="0.4" class="photo home" id="Home" flex>
+
+            <div style="text-align: center;padding-top: 25%">
+                <img src="../assets/images/joellogo.svg" style="width: 50%">
 
 
-            <object type="image/svg+xml"
-                    data="../assets/images/joellogo.svg" style="width: 100%"></object>
-
-            <div layout="row" layout-align="center center" flex>
-                <a>
-                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                </a>
-                <a>
-                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                </a>
-                <a>
-                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                </a>
-                <a>
-                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                </a>
-                <a>
-                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                </a>
-                <a>
-                    <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                </a>
+                <div>
+                    <a>
+                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                    </a>
+                    <a>
+                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                    </a>
+                    <a>
+                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                    </a>
+                    <a>
+                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                    </a>
+                    <a>
+                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                    </a>
+                    <a>
+                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
+                    </a>
+                </div>
             </div>
 
         </div>
-        <div class="about" id="About" layout="row" layout-align="center center" flex>
-            <section flex="33">
-                <div>
-                    <h1>Section 1</h1>
+
+        <div id="About" class="about">
+            <md-toolbar class="md-primary md-hue-3 md-whiteframe-z1">
+                <div class="md-toolbar-tools" layout layout-align="center center">
+                    <!--<span flex></span>-->
+                    <h1 class="md-headline">ABOUT</h1>
                 </div>
-            </section>
-            <section flex="33">
-                <div>
-                    <h1>Section 2</h1>
+            </md-toolbar>
+
+            <div class="about" layout="row" layout-align="center center" flex layout-sm="column">
+
+                <img ng-src="../assets/images/propic.jpg" class="image">
+
+                <section flex="66">
+                    <div>
+                        <h2>DJ Joel known as one of the most popular members of the Goa Party scene. Other than being
+                            the co
+                            owner of Bullfrog Goa, DJ Joel has played at many parties and events in Goa and Dubai.</h2>
+
+                        <h2>DJ Since: 1996</h2>
+
+                        <h2>Category: Club DJ / Event DJ</h2>
+
+                        <h2>Venues played: Sinq, Cape Town Cafe, The Observatory(Dubai)</h2>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="Gigs" class="gigs">
+            <md-toolbar class="md-primary md-hue-1 md-whiteframe-z1">
+                <div class="md-toolbar-tools" layout layout-align="center center">
+                    <h1 class="md-headline">GIGS</h1>
                 </div>
-            </section>
-            <section flex="33">
-                <div>
-                    <h1>Section 3</h1>
-                </div>
-            </section>
+            </md-toolbar>
+        </div>
+        <div class="gigs" layout="row" flex layout-sm="column">
+            <div flex="25" style="width: 100%;background-color: #509bef"></div>
+            <div flex="25" style="width: 100%;background-color: #001e4c"></div>
+            <div flex="25" style="width: 100%;background-color: #666666"></div>
+            <div flex="25" style="width: 100%;background-color: #ffff8d"></div>
         </div>
     </md-content>
 

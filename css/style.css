@@ -1,5 +1,5 @@
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto';
 }
 
 /* Sidenav area */
@@ -29,7 +29,7 @@ md-sidenav md-list {
 .photo {
     background-attachment: fixed;
     background-repeat: no-repeat;
-    min-height: 800px;
+    height: 800px;
     width: 100%;
     position: relative;
     background-position: 50% 0;
@@ -43,9 +43,17 @@ md-sidenav md-list {
 }
 
 .about {
-    background-color: #ffffff;
-    height: 800px;
-    text-align: center
+    background-color: #F5F5F5;
+    min-height: 600px;
+}
+
+.gigs {
+    background-color: #000000;
+
+}
+
+.image {
+    background: url(../assets/images/loading.svg);
 }
 
 .svg_header {
@@ -64,6 +72,7 @@ md-sidenav md-list {
     align-items: center;
     justify-content: center;
 }
-section{
+
+section {
     opacity: 0;
 }
