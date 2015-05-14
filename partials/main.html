@@ -1,126 +1,104 @@
-<div layout="column">
-    <md-toolbar class="md-primary md-hue-3 sticky">
-        <div class="md-toolbar-tools">
-            <md-button class="menu" ng-click="toggleNav()">
-                <ng-md-icon icon="menu" style="fill:white" size="32"></ng-md-icon>
-            </md-button>
-            <object class="flex svg_header" type="image/svg+xml" data="../assets/images/joellogo.svg"></object>
-        </div>
-    </md-toolbar>
+<div>
+    <!--Navigation Bar-->
+    <div class="navbar-fixed">
+        <nav class="blue-grey darken-2">
+            <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">DJ Joel</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a ng-click="navigateTo('About')">About</a></li>
+                    <li><a href="#">Gigs</a></li>
+                    <li><a href="#">Mixes</a></li>
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
 
-
-    <md-sidenav class="sticky" md-component-id="left">
-        <md-toolbar class="md-primary md-hue-3">
-            <div class="md-toolbar-tools">
-                <md-button class="menu" ng-click="toggleNav()">
-                    <ng-md-icon icon="arrow_back" style="fill:white" size="32"></ng-md-icon>
-                </md-button>
-                <object class="flex svg_header" type="image/svg+xml" data="../assets/images/joellogo.svg"></object>
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Gigs</a></li>
+                    <li><a href="#">Mixes</a></li>
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
             </div>
-        </md-toolbar>
-        <md-list>
-            <md-item>
-                <md-button class="md-primary" ng-click="navigateTo('Home')">Home</md-button>
-            </md-item>
-            <md-divider></md-divider>
-            <md-item>
-                <md-button class="md-primary" ng-click="navigateTo('About')">About</md-button>
-            </md-item>
-            <md-divider></md-divider>
-            <md-item>
-                <md-button class="md-primary" ng-click="navigateTo('Gigs')">Gigs</md-button>
-            </md-item>
-            <md-divider></md-divider>
-            <md-item>
-                <md-button class="md-primary" ng-click="navigateTo('Mixes')">Mixes</md-button>
-            </md-item>
-            <md-divider></md-divider>
-            <md-item>
-                <md-button class="md-primary" ng-click="navigateTo('Photos')">Photos</md-button>
-            </md-item>
-            <md-divider></md-divider>
+        </nav>
+    </div>
 
+    <!--Main Content-->
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot topPadding">
+            <div class="container ">
+                <br><br>
 
-            <md-item>
-                <md-button class="md-primary" ng-click="navigateTo('Contact')">Contact</md-button>
-            </md-item>
-            <md-divider></md-divider>
-        </md-list>
-    </md-sidenav>
+                <h1 class="header center white-text ">Hey There</h1>
 
-    <md-content flex id="content" class="menu-padding">
-        <!--Keep background-attachment to fixed to achieve fixed scroll effect-->
+                <div class="row center">
+                    <h5 class="header col s12 light blue-grey-text text-lighten-4">Welcome to DJ Joel's Website, The
+                        Most Happening Name on Goa's Party Scene.</h5>
+                </div>
+                <!--<div class="row center">-->
+                <!--<a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>-->
+                <!--</div>-->
+                <br><br>
 
-        <div parallax-background parallax-ratio="0.4" class="photo home" id="Home" flex>
+            </div>
+        </div>
+        <div class="parallax">
+            <img src="../assets/images/header1-optimized.jpg">
+        </div>
+    </div>
 
-            <div style="text-align: center;padding-top: 25%">
-                <img src="../assets/images/joellogo.svg" style="width: 50%">
-
-
-                <div>
-                    <a>
-                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                    </a>
-                    <a>
-                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                    </a>
-                    <a>
-                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                    </a>
-                    <a>
-                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                    </a>
-                    <a>
-                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                    </a>
-                    <a>
-                        <ng-md-icon icon="menu" style="fill:black" size="32"></ng-md-icon>
-                    </a>
+    <div class="container">
+        <!--About Section-->
+        <div class="section" id="About">
+            <h1 class="header">About</h1>
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4 l3">
+                    <img src="../assets/images/joelpropic.jpg" class="circle responsive-img">
+                </div>
+                <div class="col s12 m4 l9">
+                    <section>
+                        <p class="flow-text">DJ Joel known as one of the most popular names Goa Party scene. Other than
+                            being
+                            the co owner of Bullfrog Goa, DJ Joel has played at many parties and events in Goa and
+                            Dubai.</p>
+                    </section>
                 </div>
             </div>
 
-        </div>
+            <div class="row">
+                <section>
+                    <div class="col s12 m4 l4">
+                        <h5>DJ Since</h5>
 
-        <div id="About" class="about">
-            <md-toolbar class="md-primary md-hue-3 md-whiteframe-z1">
-                <div class="md-toolbar-tools" layout layout-align="center center">
-                    <!--<span flex></span>-->
-                    <h1 class="md-headline">ABOUT</h1>
-                </div>
-            </md-toolbar>
+                        <p>1996</p>
 
-            <div class="about" layout="row" layout-align="center center" flex layout-sm="column">
+                        <h5>Category</h5>
 
-                <img ng-src="../assets/images/propic.jpg" class="image">
+                        <p>Club/ Event DJ</p>
 
-                <section flex="66">
-                    <div>
-                        <h2>DJ Joel known as one of the most popular members of the Goa Party scene. Other than being
-                            the co
-                            owner of Bullfrog Goa, DJ Joel has played at many parties and events in Goa and Dubai.</h2>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <h5>Equipment</h5>
 
-                        <h2>DJ Since: 1996</h2>
+                        <p>Technics SL-1210 MK2, Allen & Heath Xone:92, Pioneer CDJ-2000 NXS, Pioneer EFX-1000, Pioneer
+                            RMX-1000
+                        </p>
+                        <h5>Residency</h5>
 
-                        <h2>Category: Club DJ / Event DJ</h2>
+                        <p>Indian</p>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <h5>Venues played</h5>
 
-                        <h2>Venues played: Sinq, Cape Town Cafe, The Observatory(Dubai)</h2>
+                        <p>Sinq, Cape Town Cafe, The Observartory(Dubai)</p>
+
+                        <h5>Set duration</h5>
+
+                        <p>3-6 hours</p>
                     </div>
                 </section>
             </div>
         </div>
-        <div id="Gigs" class="gigs">
-            <md-toolbar class="md-primary md-hue-1 md-whiteframe-z1">
-                <div class="md-toolbar-tools" layout layout-align="center center">
-                    <h1 class="md-headline">GIGS</h1>
-                </div>
-            </md-toolbar>
-        </div>
-        <div class="gigs" layout="row" flex layout-sm="column">
-            <div flex="25" style="width: 100%;background-color: #509bef"></div>
-            <div flex="25" style="width: 100%;background-color: #001e4c"></div>
-            <div flex="25" style="width: 100%;background-color: #666666"></div>
-            <div flex="25" style="width: 100%;background-color: #ffff8d"></div>
-        </div>
-    </md-content>
-
+    </div>
 </div>

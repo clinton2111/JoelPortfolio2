@@ -1,9 +1,11 @@
 angular.module('joelPortfolio.controller', []).controller('MainController', [
-  '$scope', '$q', '$timeout', '$mdSidenav', '$location', '$anchorScroll', function($scope, $q, $timeout, $mdSidenav, $location, $anchorScroll) {
-    $scope.toggleNav = function() {
-      console.log('Toggled');
-      return $mdSidenav('left').toggle();
+  '$scope', '$q', '$timeout', '$location', '$anchorScroll', function($scope, $q, $timeout, $mdSidenav, $location, $anchorScroll) {
+    var onLoadComplete;
+    onLoadComplete = function() {
+      $(".button-collapse").sideNav();
+      return $('.parallax').parallax();
     };
+    $scope.$on('$viewContentLoaded', onLoadComplete);
     $scope.navigateTo = function(id) {
       console.log('Navigate to ' + id);
       $location.hash(id);

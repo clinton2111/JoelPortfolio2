@@ -1,10 +1,19 @@
 angular.module 'joelPortfolio.controller', []
-.controller 'MainController', ['$scope', '$q', '$timeout', '$mdSidenav', '$location', '$anchorScroll',
+.controller 'MainController', ['$scope', '$q', '$timeout','$location', '$anchorScroll',
   ($scope, $q, $timeout, $mdSidenav, $location, $anchorScroll)->
-    $scope.toggleNav = ()->
-      console.log 'Toggled'
-      $mdSidenav 'left'
-      .toggle()
+
+
+
+    onLoadComplete=()->
+      $ ".button-collapse"
+      .sideNav();
+      $ '.parallax'
+      .parallax();
+
+    $scope.$on('$viewContentLoaded', onLoadComplete);
+
+
+
 
     $scope.navigateTo = (id)->
 #      Set div id to the id received by the function

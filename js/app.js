@@ -1,20 +1,10 @@
-angular.module('joelPortfolio', ['ui.router', 'ngMaterial', 'ngMdIcons', 'joelPortfolio.controller', 'joelPortfolio.directives', 'angular-parallax']).config([
-  '$stateProvider', '$urlRouterProvider', '$httpProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider, $httpProvider, $mdThemingProvider) {
+angular.module('joelPortfolio', ['ui.router', 'ngMdIcons', 'joelPortfolio.controller', 'joelPortfolio.directives']).config([
+  '$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider.state('home', {
       url: '/home',
       templateUrl: 'partials/main.html',
       controller: 'MainController'
     });
-    $urlRouterProvider.otherwise('/home');
-    return $mdThemingProvider.theme('default').primaryPalette('grey', {
-      'default': '500',
-      'hue-1': '50',
-      'hue-2': '300',
-      'hue-3': '900'
-    }).accentPalette('amber', {
-      'default': '500'
-    }).warnPalette('red', {
-      'default': '500'
-    });
+    return $urlRouterProvider.otherwise('/home');
   }
 ]);
