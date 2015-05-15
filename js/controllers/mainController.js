@@ -1,9 +1,10 @@
 angular.module('joelPortfolio.controller', []).controller('MainController', [
-  '$scope', '$q', '$timeout', '$location', '$anchorScroll', function($scope, $q, $timeout, $mdSidenav, $location, $anchorScroll) {
+  '$scope', '$q', '$timeout', function($scope, $q, $timeout) {
     var onLoadComplete;
     onLoadComplete = function() {
       $(".button-collapse").sideNav();
-      return $('.parallax').parallax();
+      $('.parallax').parallax();
+      return $('.materialboxed').materialbox();
     };
     $scope.$on('$viewContentLoaded', onLoadComplete);
     return $(window).scroll(function() {

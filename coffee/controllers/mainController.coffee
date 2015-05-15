@@ -1,12 +1,14 @@
 angular.module 'joelPortfolio.controller', []
-.controller 'MainController', ['$scope', '$q', '$timeout','$location', '$anchorScroll',
-  ($scope, $q, $timeout, $mdSidenav, $location, $anchorScroll)->
+.controller 'MainController', ['$scope', '$q', '$timeout',
+  ($scope, $q, $timeout)->
 
     onLoadComplete=()->
       $ ".button-collapse"
       .sideNav();
       $ '.parallax'
       .parallax();
+      $ '.materialboxed'
+      .materialbox();
 
     $scope.$on('$viewContentLoaded', onLoadComplete);
 
