@@ -18,7 +18,6 @@
     "angular-ui-router": "~0.2.13",
     "snap.svg": "~0.4.1",
     "underscore": "~1.8.3",
-    "angular-material-icons": "~0.4.0",
     "jquery": "~2.1.3",
     "jquery.adaptive-backgrounds": "~1.0.1",
     "materialize": "~0.96.1"

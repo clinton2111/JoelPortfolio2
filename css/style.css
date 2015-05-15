@@ -1,7 +1,12 @@
-.parallax-container {
-    height: 900px;
+.header-container {
+    min-height: 900px;
 
 }
-.topPadding{
+
+.topPadding {
     padding-top: 10%
+}
+
+.media-container{
+    height: auto;
 }

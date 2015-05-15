@@ -1,4 +1,4 @@
-angular.module 'joelPortfolio',['ui.router','ngMdIcons','joelPortfolio.controller','joelPortfolio.directives']
+angular.module 'joelPortfolio',['ui.router','joelPortfolio.controller','joelPortfolio.directives']
 .config ['$stateProvider', '$urlRouterProvider', '$httpProvider',($stateProvider,$urlRouterProvider,$httpProvider)->
   $stateProvider.state 'home',
     url:'/home'

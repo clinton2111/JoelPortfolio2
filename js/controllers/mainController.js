@@ -6,11 +6,6 @@ angular.module('joelPortfolio.controller', []).controller('MainController', [
       return $('.parallax').parallax();
     };
     $scope.$on('$viewContentLoaded', onLoadComplete);
-    $scope.navigateTo = function(id) {
-      console.log('Navigate to ' + id);
-      $location.hash(id);
-      return $anchorScroll();
-    };
     return $(window).scroll(function() {
       var add, st, winH;
       st = $(this).scrollTop();

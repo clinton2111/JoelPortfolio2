@@ -1,104 +1,208 @@
 <div>
-    <!--Navigation Bar-->
-    <div class="navbar-fixed">
-        <nav class="blue-grey darken-2">
-            <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">DJ Joel</a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a ng-click="navigateTo('About')">About</a></li>
-                    <li><a href="#">Gigs</a></li>
-                    <li><a href="#">Mixes</a></li>
-                    <li><a href="#">Photos</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
+<!--Navigation Bar-->
+<div class="navbar-fixed">
+    <nav class="blue-grey darken-2">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">DJ Joel</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a scroll-to='Home'>Home</a></li>
+                <li><a scroll-to='About'>About</a></li>
+                <li><a scroll-to='Gigs'>Gigs</a></li>
+                <li><a scroll-to='Mixes'>Mixes</a></li>
+                <li><a scroll-to='Photos'>Photos</a></li>
+                <li><a scroll-to='Contact'>Contact</a></li>
+            </ul>
 
-                <ul id="nav-mobile" class="side-nav">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Gigs</a></li>
-                    <li><a href="#">Mixes</a></li>
-                    <li><a href="#">Photos</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-            </div>
-        </nav>
-    </div>
-
-    <!--Main Content-->
-    <div id="index-banner" class="parallax-container">
-        <div class="section no-pad-bot topPadding">
-            <div class="container ">
-                <br><br>
-
-                <h1 class="header center white-text ">Hey There</h1>
-
-                <div class="row center">
-                    <h5 class="header col s12 light blue-grey-text text-lighten-4">Welcome to DJ Joel's Website, The
-                        Most Happening Name on Goa's Party Scene.</h5>
-                </div>
-                <!--<div class="row center">-->
-                <!--<a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>-->
-                <!--</div>-->
-                <br><br>
-
-            </div>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a scroll-to='Home'>Home</a></li>
+                <li><a scroll-to='About'>About</a></li>
+                <li><a scroll-to='Gigs'>Gigs</a></li>
+                <li><a scroll-to='Mixes'>Mixes</a></li>
+                <li><a scroll-to='Photos'>Photos</a></li>
+                <li><a scroll-to='Contact'>Contact</a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         </div>
-        <div class="parallax">
-            <img src="../assets/images/header1-optimized.jpg">
+    </nav>
+</div>
+
+<!--Main Content-->
+<div id="Home" class="parallax-container header-container">
+    <div class="section no-pad-bot topPadding">
+        <div class="container ">
+            <br><br>
+
+            <h1 class="header center white-text ">Hey There</h1>
+
+            <div class="row center">
+                <h5 class="header col s12 light blue-grey-text text-lighten-4">Welcome to DJ Joel's Official
+                    Website, The
+                    Most Happening Name on Goa's Party Scene.</h5>
+            </div>
+
         </div>
     </div>
+    <div class="parallax">
+        <img src="../assets/images/header1-optimized.jpg">
+    </div>
+</div>
 
-    <div class="container">
-        <!--About Section-->
-        <div class="section" id="About">
-            <h1 class="header">About</h1>
-            <!--   Icon Section   -->
-            <div class="row">
-                <div class="col s12 m4 l3">
-                    <img src="../assets/images/joelpropic.jpg" class="circle responsive-img">
-                </div>
-                <div class="col s12 m4 l9">
-                    <section>
-                        <p class="flow-text">DJ Joel known as one of the most popular names Goa Party scene. Other than
-                            being
-                            the co owner of Bullfrog Goa, DJ Joel has played at many parties and events in Goa and
-                            Dubai.</p>
-                    </section>
-                </div>
+<!--About Section-->
+<div class="container" id="About">
+
+    <div class="section">
+        <h1 class="header">About</h1>
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m4 l3">
+                <img src="../assets/images/joelpropic.jpg" class="circle responsive-img z-depth-3">
             </div>
-
-            <div class="row">
+            <div class="col s12 m4 l9">
                 <section>
-                    <div class="col s12 m4 l4">
-                        <h5>DJ Since</h5>
-
-                        <p>1996</p>
-
-                        <h5>Category</h5>
-
-                        <p>Club/ Event DJ</p>
-
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <h5>Equipment</h5>
-
-                        <p>Technics SL-1210 MK2, Allen & Heath Xone:92, Pioneer CDJ-2000 NXS, Pioneer EFX-1000, Pioneer
-                            RMX-1000
-                        </p>
-                        <h5>Residency</h5>
-
-                        <p>Indian</p>
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <h5>Venues played</h5>
-
-                        <p>Sinq, Cape Town Cafe, The Observartory(Dubai)</p>
-
-                        <h5>Set duration</h5>
-
-                        <p>3-6 hours</p>
-                    </div>
+                    <p class="flow-text">DJ Joel known as one of the most popular names Goa Party scene. Other than
+                        being
+                        the co owner of Bullfrog Goa, DJ Joel has played at many parties and events in Goa and
+                        Dubai.</p>
                 </section>
             </div>
         </div>
+
+        <div class="row">
+            <section>
+                <div class="col s12 m4 l4">
+                    <h5>DJ Since</h5>
+
+                    <p>1996</p>
+
+                    <h5>Category</h5>
+
+                    <p>Club/ Event DJ</p>
+
+                </div>
+                <div class="col s12 m4 l4">
+                    <h5>Equipment</h5>
+
+                    <p>Technics SL-1210 MK2, Allen & Heath Xone:92, Pioneer CDJ-2000 NXS, Pioneer EFX-1000, Pioneer
+                        RMX-1000
+                    </p>
+                    <h5>Residency</h5>
+
+                    <p>Indian</p>
+                </div>
+                <div class="col s12 m4 l4">
+                    <h5>Venues played</h5>
+
+                    <p>Sinq, Cape Town Cafe, The Observartory(Dubai)</p>
+
+                    <h5>Set duration</h5>
+
+                    <p>3-6 hours</p>
+                </div>
+            </section>
+        </div>
     </div>
+
+
+</div>
+
+<!--Gigs Section-->
+<div class="parallax-container media-container" id="Gigs">
+    <div class="container">
+        <h1 class="header white-text">Gigs</h1>
+
+        <p class="thin white-text flow-text">Here are some of the events il be playing at in the coming days.</p>
+
+        <div class="row">
+            <div class="col s12 m3 l3">
+                <div class="card medium z-depth-3">
+                    <div class="card-image">
+                        <img class="responsive-img" ng-src="../assets/images/gig1.jpg">
+                    </div>
+                    <div class="card-content">
+                        <p>Cosmo Ladies Nite</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="amber-text">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3 l3">
+                <div class="card medium z-depth-3">
+                    <div class="card-image">
+                        <img class="responsive-img" ng-src="../assets/images/gig2.jpg">
+                    </div>
+                    <div class="card-content">
+                        <p>Big Bang Friday</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="amber-text">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3 l3">
+                <div class="card medium z-depth-3">
+                    <div class="card-image">
+                        <img class="responsive-img" ng-src="../assets/images/gig3.jpg">
+                    </div>
+                    <div class="card-content">
+                        <p>Retro Saturdays</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="amber-text">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3 l3">
+                <div class="card medium z-depth-3">
+                    <div class="card-image">
+                        <img class="responsive-img" ng-src="../assets/images/gig4.jpg">
+                    </div>
+                    <div class="card-content">
+                        <p>Final Wave Indivibe</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="amber-text">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3 l3">
+                <div class="card medium z-depth-3">
+                    <div class="card-image">
+                        <img class="responsive-img" ng-src="../assets/images/gig5.jpg">
+                    </div>
+                    <div class="card-content">
+                        <p>Homegrown 2.0</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="amber-text">More Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax">
+        <img src="../assets/images/header1.jpg">
+    </div>
+
+</div>
+
+<!--Mixes Section-->
+<div class="container" id="Mixes">
+    <div class="section">
+        <h1 class="header">Mixes</h1>
+
+        <div class="row">
+            <div class="col s12 m3 l3">
+                <section><p class="flow-text">My beats vary from House to Electronic and even to Dubstep</p><br>
+
+                    <p class="flow-text">Follow me on SoundCloud to keep up with my latest beats</p></section>
+            </div>
+            <div class="col s12 m9 l9">
+                <iframe class="z-depth-3" id="sc-widget"
+                        src="https://w.soundcloud.com/player/?url=https://soundcloud.com/clinton_dsouza/sets/my-plays"
+                        width="100%" height="500" scrolling="no" frameborder="no"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
