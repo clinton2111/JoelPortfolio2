@@ -31,6 +31,4 @@ angular.module 'joelPortfolio.controller', []
         else
           $(this).stop().animate({opacity:0, marginTop:0},'fast');
 
-
-
 ]
