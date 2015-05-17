@@ -1,8 +1,9 @@
-angular.module 'joelPortfolio.controller', []
-.controller 'MainController', ['$scope', '$q', '$timeout',
-  ($scope, $q, $timeout)->
+angular.module 'joelPortfolio'
+.controller 'MainController', ['$scope', '$q', '$timeout','mainServices',
+  ($scope, $q, $timeout, mainServices)->
 
     onLoadComplete=()->
+      console.log 'Called'
       $ ".button-collapse"
       .sideNav();
       $ '.parallax'
@@ -30,5 +31,12 @@ angular.module 'joelPortfolio.controller', []
           $(this).stop().animate({opacity:1, marginTop:10},'fast');
         else
           $(this).stop().animate({opacity:0, marginTop:0},'fast');
+
+    $scope.gigs=mainServices.getGigs();
+    $scope.photos=mainServices.getPics();
+    $scope.sendEmail=()->
+      console.log $scope.email;
+      mainServices.sendEmail()
+
 
 ]

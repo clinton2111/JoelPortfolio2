@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="parallax">
-        <img src="../assets/images/header1-optimized.jpg">
+        <img ng-src="../assets/images/header1-optimized.jpg">
     </div>
 </div>
 
@@ -112,65 +112,13 @@
         <p class="thin white-text flow-text">Here are some of the events il be playing at in the coming days.</p>
 
         <div class="row">
-            <div class="col s6 m3 l3">
+            <div class="col s6 m3 l3" ng-repeat="gig in gigs">
                 <div class="card medium z-depth-3">
                     <div class="card-image">
-                        <img class="responsive-img" ng-src="../assets/images/gig1.jpg">
+                        <img class="responsive-img" ng-src="{{gig.gigPosterURL}}">
                     </div>
                     <div class="card-content">
-                        <p>Cosmo Ladies Nite</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#" class="amber-text">More Info</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s6 m3 l3">
-                <div class="card medium z-depth-3">
-                    <div class="card-image">
-                        <img class="responsive-img" ng-src="../assets/images/gig2.jpg">
-                    </div>
-                    <div class="card-content">
-                        <p>Big Bang Friday</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#" class="amber-text">More Info</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s6 m3 l3">
-                <div class="card medium z-depth-3">
-                    <div class="card-image">
-                        <img class="responsive-img" ng-src="../assets/images/gig3.jpg">
-                    </div>
-                    <div class="card-content">
-                        <p>Retro Saturdays</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#" class="amber-text">More Info</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s6 m3 l3">
-                <div class="card medium z-depth-3">
-                    <div class="card-image">
-                        <img class="responsive-img" ng-src="../assets/images/gig4.jpg">
-                    </div>
-                    <div class="card-content">
-                        <p>Final Wave Indivibe</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#" class="amber-text">More Info</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s6 m3 l3">
-                <div class="card medium z-depth-3">
-                    <div class="card-image">
-                        <img class="responsive-img" ng-src="../assets/images/gig5.jpg">
-                    </div>
-                    <div class="card-content">
-                        <p>Homegrown 2.0</p>
+                        <p>{{gig.gigName}}</p>
                     </div>
                     <div class="card-action">
                         <a href="#" class="amber-text">More Info</a>
@@ -210,38 +158,18 @@
     <div class="container">
         <h1 class="header white-text">Photos</h1>
 
-        <div class="row">
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic1.jpg">
+        <div class="row" ng-repeat="photo in photos" ng-if="$index % 4 === 0" on-finish-render>
+            <div class="col s6 m3 l3" ng-if="$index < photos.length">
+                <img class=" responsive-img materialboxed z-depth-3" ng-src="{{photos[$index].photoURL}}"/>
             </div>
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic2.jpg">
+            <div class="col s6 m3 l3" ng-if="$index + 1 < photos.length">
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{photos[$index + 1].photoURL}}"/>
             </div>
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic3.jpg">
+            <div class="col s6 m3 l3" ng-if="$index + 2 < photos.length">
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{photos[$index + 2].photoURL}}"/>
             </div>
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic4.jpg">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic5.jpg">
-            </div>
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic6.jpg">
-            </div>
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic7.jpg">
-            </div>
-
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic8.jpg">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s6 m3 l3">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="../assets/images/photos/pic9.jpg">
+            <div class="col s6 m3 l3" ng-if="$index + 3 < photos.length">
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{photos[$index + 3].photoURL}}"/>
             </div>
         </div>
     </div>
@@ -249,7 +177,7 @@
         <img src="../assets/images/gig_bg.jpg">
     </div>
 </div>
-</div>
+
 
 <!--Contact Section-->
 <div class="container" id="Contact">
@@ -263,26 +191,26 @@
 
             <div class="col  s12 m4 l8 offset-m2 offset-l2">
 
-                <form class="col s12">
+                <form class="col s12" ng-submit="sendEmail()">
                     <div class="row">
                         <input-field class="input-field col s12">
                             <i class="mdi-social-person prefix"></i>
-                            <input id="name" type="text" class="validate" required="true">
+                            <input id="name" type="text" class="validate" required="true" ng-model="email.name">
                             <label for="name">Name</label>
                         </input-field>
                     </div>
                     <div class="row">
                         <input-field class="input-field col s12">
                             <i class="mdi-communication-email prefix"></i>
-                            <input id="email" type="email" class="validate" required="true">
+                            <input id="email" type="email" class="validate" required="true" ng-model="email.address">
                             <label for="email">Email</label>
                         </input-field>
                     </div>
                     <div class="row">
                         <input-field class="input-field col s12">
                             <i class="mdi-communication-message prefix"></i>
-                            <textarea id="message" class="materialize-textarea" required="true"></textarea>
-                            <label for="message" >Message</label>
+                            <textarea id="message" class="materialize-textarea" required="true" ng-model="email.msg"></textarea>
+                            <label for="message">Message</label>
                         </input-field>
                     </div>
                     <div class="row center">

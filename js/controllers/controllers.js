@@ -1,13 +1,14 @@
-angular.module('joelPortfolio.controller', []).controller('MainController', [
-  '$scope', '$q', '$timeout', function($scope, $q, $timeout) {
+angular.module('joelPortfolio').controller('MainController', [
+  '$scope', '$q', '$timeout', 'mainServices', function($scope, $q, $timeout, mainServices) {
     var onLoadComplete;
     onLoadComplete = function() {
+      console.log('Called');
       $(".button-collapse").sideNav();
       $('.parallax').parallax();
       return $('.materialboxed').materialbox();
     };
     $scope.$on('$viewContentLoaded', onLoadComplete);
-    return $(window).scroll(function() {
+    $(window).scroll(function() {
       var add, st, winH;
       st = $(this).scrollTop();
       winH = $(this).height();
@@ -28,5 +29,11 @@ angular.module('joelPortfolio.controller', []).controller('MainController', [
         }
       });
     });
+    $scope.gigs = mainServices.getGigs();
+    $scope.photos = mainServices.getPics();
+    return $scope.sendEmail = function() {
+      console.log($scope.email);
+      return mainServices.sendEmail();
+    };
   }
 ]);
