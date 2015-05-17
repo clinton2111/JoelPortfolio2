@@ -35,7 +35,6 @@ angular.module 'joelPortfolio'
     $scope.gigs=mainServices.getGigs();
     $scope.photos=mainServices.getPics();
     $scope.sendEmail=()->
-      console.log $scope.email;
       mainServices.sendEmail()
 
 

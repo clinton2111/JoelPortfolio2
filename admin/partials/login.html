@@ -3,31 +3,55 @@
         <h1 class="header">Login</h1>
 
         <div class="row">
-
             <div class="col s12 m6 l6 offset-m3 offset-l3">
+                <!--Login Form-->
+                <div ng-hide="forgotPassword">
+                    <form class="col s12" ng-submit="login()">
+                        <div class="row">
+                            <input-field class="input-field col s11">
+                                <input id="email" type="email" class="validate" required="true" ng-model="user.email">
+                                <label for="email">Email</label>
+                            </input-field>
+                        </div>
+                        <div class="row">
+                            <input-field class="input-field col s12">
+                                <a ng-click="toggleShowPassword()" class="right col s1 amber-text"><i
+                                        class="{{passIcon}} small"></i></a>
+                                <input id="password" type="{{passType}}" class="validate col s11" required="true"
+                                       ng-model="user.password">
+                                <label for="password">Password</label>
+                            </input-field>
 
-                <form class="col s12">
-                    <div class="row">
-                        <input-field class="input-field col s12">
-                            <input id="email" type="email" class="validate" required="true">
-                            <label for="email">Email</label>
-                        </input-field>
-                    </div>
-                    <div class="row">
-                        <input-field class="input-field col s12">
+                        </div>
+                        <div class="row center">
+                            <button class="btn waves-effect waves-light blue-grey" type="submit">Login
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </form>
 
-                            <input id="password" type="password" class="validate" required="true">
-                            <label for="password">Password</label>
-                        </input-field>
-                    </div>
-                    <div class="row center">
-                        <button class="btn waves-effect waves-light blue-grey" type="submit">Login
-                            <i class="mdi-content-send right"></i>
-                        </button>
-                    </div>
-                </form>
+                    <a class="right amber-text" ng-click="toggleForgotPass()">Forgot Password</a>
+                </div>
 
-                <a class="right">Forgot Password</a>
+                <!--Recovery Password Section-->
+                <div ng-show="forgotPassword">
+                    <form class="col s12" ng-submit="recoverPassword()">
+                        <div class="row">
+                            <input-field class="input-field col s11">
+                                <input id="email" type="email" class="validate" required="true" ng-model="recoveryEmail">
+                                <label for="email">Email</label>
+                            </input-field>
+                        </div>
+                        <div class="row center">
+                            <button class="btn waves-effect waves-light blue-grey" type="submit">Send Recovery Mail
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <a class="right amber-text" ng-click="toggleForgotPass()"><i class="mdi-hardware-keyboard-backspace"></i>Go Back</a>
+
+                </div>
 
             </div>
         </div>

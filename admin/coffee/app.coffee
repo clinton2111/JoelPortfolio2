@@ -1,9 +1,9 @@
-angular.module 'joelDashBoard',['ui.router']
+angular.module 'joelDashBoard',['ui.router','joelDashBoard.loginController']
 .config ['$stateProvider', '$urlRouterProvider', '$httpProvider',($stateProvider,$urlRouterProvider,$httpProvider)->
   $stateProvider.state 'login',
     url:'/login'
     templateUrl:'partials/login.html'
-#    controller:'MainController'
+    controller:'loginController'
   $urlRouterProvider.otherwise '/login'
 
 
