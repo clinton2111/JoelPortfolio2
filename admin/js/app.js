@@ -1,4 +1,4 @@
-angular.module('joelDashBoard', ['ui.router', 'joelDashBoard.loginController']).config([
+angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login']).config([
   '$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider.state('login', {
       url: '/login',
@@ -7,4 +7,6 @@ angular.module('joelDashBoard', ['ui.router', 'joelDashBoard.loginController']).
     });
     return $urlRouterProvider.otherwise('/login');
   }
-]);
+]).constant('API', {
+  url: '../api/source/'
+});

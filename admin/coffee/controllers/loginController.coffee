@@ -1,5 +1,5 @@
-angular.module 'joelDashBoard.loginController', []
-.controller 'loginController', ['$scope', ($scope)->
+angular.module 'joelDashBoard.login', []
+.controller 'loginController', ['$scope', 'Auth', 'jwtHelper', 'store', ($scope, Auth, jwtHelper, store)->
   $scope.forgotPassword = false
   $scope.viewPass = false
   $scope.passType = 'password'
@@ -15,7 +15,22 @@ angular.module 'joelDashBoard.loginController', []
       $scope.passIcon = 'mdi-action-visibility-off'
 
   $scope.login = ->
-    console.log $scope.user
+    Auth.signIn($scope.user)
+    .then (userdata)->
+      if userdata.status is 'Error'
+        Materialize.toast userdata.message, '4000'
+      else
+        userObj =
+          token: userdata.token
+          username: userdata.username
+          lastUpdate: moment().format('DD-MM-YYYY')
+        store.set 'user', userObj
+        console.log store.get 'user'
+        Materialize.toast userdata.message, '4000'
+    , (error)->
+      console.log 'Error'
+    .finally ()->
+
 
   $scope.recoverPassword = ->
     console.log $scope.recoveryEmail

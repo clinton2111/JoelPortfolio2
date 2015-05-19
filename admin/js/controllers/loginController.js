@@ -1,5 +1,5 @@
-angular.module('joelDashBoard.loginController', []).controller('loginController', [
-  '$scope', function($scope) {
+angular.module('joelDashBoard.login', []).controller('loginController', [
+  '$scope', 'Auth', 'jwtHelper', 'store', function($scope, Auth, jwtHelper, store) {
     $scope.forgotPassword = false;
     $scope.viewPass = false;
     $scope.passType = 'password';
@@ -16,7 +16,23 @@ angular.module('joelDashBoard.loginController', []).controller('loginController'
       }
     };
     $scope.login = function() {
-      return console.log($scope.user);
+      return Auth.signIn($scope.user).then(function(userdata) {
+        var userObj;
+        if (userdata.status === 'Error') {
+          return Materialize.toast(userdata.message, '4000');
+        } else {
+          userObj = {
+            token: userdata.token,
+            username: userdata.username,
+            lastUpdate: moment().format('DD-MM-YYYY')
+          };
+          store.set('user', userObj);
+          console.log(store.get('user'));
+          return Materialize.toast(userdata.message, '4000');
+        }
+      }, function(error) {
+        return console.log('Error');
+      })["finally"](function() {});
     };
     $scope.recoverPassword = function() {
       return console.log($scope.recoveryEmail);
