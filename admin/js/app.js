@@ -14,12 +14,23 @@ angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
     return $urlRouterProvider.otherwise('/login');
   }
 ]).run([
-  '$rootScope', '$state', 'store', 'jwtHelper', function($rootScope, $state, store, jwtHelper) {
+  '$rootScope', '$state', 'store', 'jwtHelper', '$http', 'API', '$q', function($rootScope, $state, store, jwtHelper, $http, API, $q) {
     return $rootScope.$on('$stateChangeStart', function(e, to) {
-      var lastUpdate, refreshTokenFlag, user;
+      var lastUpdate, refreshToken, refreshTokenFlag, user;
+      refreshToken = function(token) {
+        var q;
+        q = $q.defer();
+        $http.post(API.url + 'refreshToken.php', token).then(function(data) {
+          console.log(data);
+          return q.resolve(data.data);
+        }, function(error) {
+          console.log('Error');
+          return q.reject(data);
+        });
+        return q.promise;
+      };
       user = store.get('user');
       if (to.data && to.data.requiresLogin) {
-        user = store.get('user');
         if (_.isNull(user) || _.isUndefined(user) || jwtHelper.isTokenExpired(user.token)) {
           e.preventDefault();
           return $state.go('login');
@@ -27,7 +38,18 @@ angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
           lastUpdate = moment(user.lastUpdate, 'DD-MM-YYYY');
           refreshTokenFlag = moment().isSame(moment(lastUpdate), 'day');
           if (!refreshTokenFlag) {
-            return console.log('Token needs to be Refreshed');
+            return refreshToken(user.token).then(function(data) {
+              var tokenData, userObj;
+              tokenData = data;
+              userObj = {
+                token: tokenData.token,
+                username: tokenData.username,
+                lastUpdate: moment().format('DD-MM-YYYY')
+              };
+              return store.set('user', userObj);
+            }, function(error) {
+              return e.preventDefault();
+            });
           } else {
             return console.log('in Sync');
           }
