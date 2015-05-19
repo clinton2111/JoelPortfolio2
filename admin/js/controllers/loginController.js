@@ -27,7 +27,6 @@ angular.module('joelDashBoard.login', []).controller('loginController', [
             lastUpdate: moment().format('DD-MM-YYYY')
           };
           store.set('user', userObj);
-          console.log(store.get('user'));
           return Materialize.toast(userdata.message, '4000');
         }
       }, function(error) {

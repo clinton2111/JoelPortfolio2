@@ -25,7 +25,6 @@ angular.module 'joelDashBoard.login', []
           username: userdata.username
           lastUpdate: moment().format('DD-MM-YYYY')
         store.set 'user', userObj
-        console.log store.get 'user'
         Materialize.toast userdata.message, '4000'
     , (error)->
       console.log 'Error'
