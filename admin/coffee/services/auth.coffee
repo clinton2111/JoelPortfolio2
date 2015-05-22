@@ -7,6 +7,7 @@ angular.module 'joelDashBoard.login'
         url: API.url + 'login.php'
         method: 'POST'
         data: userCredentials
+        skipAuthorization: true
       .then (data)->
         q.resolve data.data
       , (error)->

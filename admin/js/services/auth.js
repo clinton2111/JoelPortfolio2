@@ -7,7 +7,8 @@ angular.module('joelDashBoard.login').factory('Auth', [
         $http({
           url: API.url + 'login.php',
           method: 'POST',
-          data: userCredentials
+          data: userCredentials,
+          skipAuthorization: true
         }).then(function(data) {
           return q.resolve(data.data);
         }, function(error) {

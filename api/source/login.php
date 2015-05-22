@@ -30,19 +30,18 @@ if (isset($data->email) && isset($data->password)) {
             'id' => $row['id'],
             'username' => $row['username'],
             'email' => $email,
-            'exp'=>strtotime('+3 days')
+            'exp' => strtotime('+3 days')
         );
 
         $response['status'] = 'Success';
         $response['message'] = 'User Verified';
         $response['token'] = $JWT->encode($claim, $key, $alg);
-        $response['username']=$claim['username'];
+        $response['username'] = $claim['username'];
+        $response['id'] = $claim['id'];
 
     } else {
         $response['status'] = 'Error';
         $response['message'] = 'Invalid Login Details';
     }
     echo json_encode($response);
-//    $token=$JWT->decode($token,$key,array($alg));
-
 }

@@ -21,6 +21,7 @@ angular.module 'joelDashBoard.login', []
         Materialize.toast userdata.message, '4000'
       else
         userObj =
+          id:userdata.id
           token: userdata.token
           username: userdata.username
           lastUpdate: moment().format('DD-MM-YYYY')
