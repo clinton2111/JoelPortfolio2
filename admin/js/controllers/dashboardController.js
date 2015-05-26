@@ -3,7 +3,8 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
     var onLoadComplete;
     onLoadComplete = function() {
       $(".button-collapse").sideNav();
-      return $('.materialboxed').materialbox();
+      $('.materialboxed').materialbox();
+      return $('.modal-trigger').leanModal();
     };
     $scope.$on('$viewContentLoaded', onLoadComplete);
     $scope.user = store.get('user');
@@ -45,6 +46,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
             id: response.id,
             caption: pic.Caption
           });
+          $scope.pic = {};
           return Materialize.toast(response.status + " - " + response.message, 4000);
         } else {
           return Materialize.toast(response.status + " - " + response.message, 4000);
@@ -93,8 +95,8 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         return Materialize.toast('Something went wrong', 4000);
       });
     };
-    return $scope.$watch($scope.photos, function() {
+    return $scope.$watchCollection('photos', function() {
       return $scope.$apply;
-    }, true);
+    }, false);
   }
 ]);

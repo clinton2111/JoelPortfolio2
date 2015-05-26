@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6a2f4b6-b991-4345-8695-0899ff119961" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/coffee/app.coffee" afterPath="$PROJECT_DIR$/admin/coffee/app.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/app.js" afterPath="$PROJECT_DIR$/admin/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/partials/dashboard.html" afterPath="$PROJECT_DIR$/admin/partials/dashboard.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/coffee/controllers/dashboardController.coffee" afterPath="$PROJECT_DIR$/admin/coffee/controllers/dashboardController.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/controllers/dashboardController.js" afterPath="$PROJECT_DIR$/admin/js/controllers/dashboardController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/index.html" afterPath="$PROJECT_DIR$/admin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/source/login.php" afterPath="$PROJECT_DIR$/api/source/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/partials/photos.html" afterPath="$PROJECT_DIR$/admin/partials/photos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/source/pic.php" afterPath="$PROJECT_DIR$/api/source/pic.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/source/refreshToken.php" afterPath="$PROJECT_DIR$/api/source/refreshToken.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/source/insert.php" afterPath="$PROJECT_DIR$/api/source/insert.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Github Projects\JoelPortfolio\api\source\connection.php" afterPath="$PROJECT_DIR$/api/source/connection.config.php" />
     </list>
     <ignored path="JoelPortfolio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -92,36 +82,34 @@
       <file leaf-file-name="photos.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/partials/photos.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5185184" vertical-offset="175" max-vertical-offset="1656">
-              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1350">
+              <caret line="43" column="71" selection-start-line="43" selection-start-column="68" selection-end-line="43" selection-end-column="71" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="tag#div#2;tag#div#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboardController.coffee" pinned="false" current-in-tab="true">
+      <file leaf-file-name="insert.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/source/insert.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24827586" vertical-offset="198" max-vertical-offset="1494">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+              <folding>
+                <marker date="1432659479010" expanded="true" signature="1694:1779" placeholder="INSERT INTO ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboardController.coffee" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/coffee/controllers/dashboardController.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37723213" vertical-offset="544" max-vertical-offset="1800">
-              <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1836">
+              <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="delete.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/source/delete.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.333334" vertical-offset="18" max-vertical-offset="936">
-              <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
-              <folding>
-                <marker date="1432621995962" expanded="true" signature="787:815" placeholder="DELETE FROM ..." />
-                <marker date="1432621995962" expanded="true" signature="787:816" placeholder="DELETE FROM ..." />
-                <marker date="1432621995962" expanded="true" signature="787:821" placeholder="DELETE FROM ..." />
-                <marker date="1432621995962" expanded="true" signature="793:794" placeholder="UPDATE photo..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -131,25 +119,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="454" max-vertical-offset="1350">
               <caret line="54" column="16" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="16" />
-              <folding>
-                <marker date="1432622066497" expanded="true" signature="950:1219" placeholder="updateCaption: (data)-&gt;&#10;      data.location = 'photos'&#10;&#10;      q = $q.defer();&#10;      $http&#10;        url: API.url + 'update.php'&#10;        data: data&#10;        method: 'post'&#10;      .then (data)-&gt;&#10;        q.resolve data&#10;      , (error)-&gt;&#10;        q.reject(error)&#10;      q.promise..." />
-                <marker date="1432622066497" expanded="true" signature="980:1219" placeholder="..." />
-                <marker date="1432622066497" expanded="true" signature="1245:1573" placeholder="[...]" />
-                <marker date="1432622066497" expanded="true" signature="1289:1571" placeholder="..." />
-                <marker date="1432622066497" expanded="true" signature="1301:1567" placeholder="deletePhoto: (data)-&gt;&#10;      data.location = 'photos'&#10;      q = $q.defer();&#10;      $http&#10;        url: API.url + 'delete.php'&#10;        data: data&#10;        method: 'post'&#10;      .then (data)-&gt;&#10;        q.resolve data&#10;      , (error)-&gt;&#10;        q.reject(error)&#10;      q.promise..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="joel_portfolio.photos" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/d00da5f1/63c6ecd9-3b9b-43ed-afe1-cf5927e95296/joel_portfolio..photos">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -202,14 +171,16 @@
         <option value="$PROJECT_DIR$/api/source/refreshToken.php" />
         <option value="$PROJECT_DIR$/admin/coffee/directives/dashboardDirectives.coffee" />
         <option value="$PROJECT_DIR$/admin/index.html" />
-        <option value="$PROJECT_DIR$/api/source/insert.php" />
         <option value="$PROJECT_DIR$/api/source/search.php" />
         <option value="$PROJECT_DIR$/api/source/login.php" />
-        <option value="$PROJECT_DIR$/admin/partials/photos.html" />
         <option value="$PROJECT_DIR$/api/source/update.php" />
         <option value="$PROJECT_DIR$/api/source/delete.php" />
         <option value="$PROJECT_DIR$/admin/coffee/services/dashboardServices.coffee" />
+        <option value="$PROJECT_DIR$/api/source/image_compressor.php" />
+        <option value="$PROJECT_DIR$/admin/partials/photos.html" />
+        <option value="$PROJECT_DIR$/api/source/imageCompressor.php" />
         <option value="$PROJECT_DIR$/admin/coffee/controllers/dashboardController.coffee" />
+        <option value="$PROJECT_DIR$/api/source/insert.php" />
       </list>
     </option>
   </component>
@@ -286,6 +257,9 @@
       <recent name="D:\Github Projects\JoelPortfolio\api\source" />
       <recent name="D:\Github Projects\JoelPortfolio\assets\images" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github Projects\JoelPortfolio\api" />
+    </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration default="false" name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/JoelPortfolio/index.html">
@@ -356,7 +330,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16897655" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17324094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17324094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="SvgViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -402,17 +376,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/admin/coffee/services/dashboardServices.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="648">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="454" max-vertical-offset="1350">
+          <caret line="54" column="16" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -529,13 +497,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/images/loading.svg">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04157044" vertical-offset="0" max-vertical-offset="866">
           <caret line="2" column="113" selection-start-line="2" selection-start-column="113" selection-end-line="2" selection-end-column="113" />
         </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="dbDummy://db-console:/d00da5f1/63c6ecd9-3b9b-43ed-afe1-cf5927e95296/">
@@ -588,13 +556,13 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/d00da5f1/63c6ecd9-3b9b-43ed-afe1-cf5927e95296/joel_portfolio..users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/partials/gigs.html">
@@ -700,7 +668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1188">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -718,47 +685,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/source/insert.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6375144" vertical-offset="94" max-vertical-offset="990">
-          <caret line="36" column="57" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
-          <folding>
-            <marker date="1432617960686" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/source/update.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8964327" vertical-offset="49" max-vertical-offset="954">
           <caret line="46" column="5" selection-start-line="29" selection-start-column="4" selection-end-line="46" selection-end-column="5" />
-          <folding>
-            <marker date="1432621087020" expanded="true" signature="-1:-1" placeholder="UPDATE photo..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/d00da5f1/63c6ecd9-3b9b-43ed-afe1-cf5927e95296/joel_portfolio..photos">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/source/delete.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.333334" vertical-offset="18" max-vertical-offset="936">
+        <state vertical-scroll-proportion="0.7446808" vertical-offset="18" max-vertical-offset="936">
           <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
-          <folding>
-            <marker date="1432621995962" expanded="true" signature="787:815" placeholder="DELETE FROM ..." />
-            <marker date="1432621995962" expanded="true" signature="787:816" placeholder="DELETE FROM ..." />
-            <marker date="1432621995962" expanded="true" signature="787:821" placeholder="DELETE FROM ..." />
-            <marker date="1432621995962" expanded="true" signature="793:794" placeholder="UPDATE photo..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -766,31 +703,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="454" max-vertical-offset="1350">
           <caret line="54" column="16" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="16" />
-          <folding>
-            <marker date="1432622066497" expanded="true" signature="950:1219" placeholder="updateCaption: (data)-&gt;&#10;      data.location = 'photos'&#10;&#10;      q = $q.defer();&#10;      $http&#10;        url: API.url + 'update.php'&#10;        data: data&#10;        method: 'post'&#10;      .then (data)-&gt;&#10;        q.resolve data&#10;      , (error)-&gt;&#10;        q.reject(error)&#10;      q.promise..." />
-            <marker date="1432622066497" expanded="true" signature="980:1219" placeholder="..." />
-            <marker date="1432622066497" expanded="true" signature="1245:1573" placeholder="[...]" />
-            <marker date="1432622066497" expanded="true" signature="1289:1571" placeholder="..." />
-            <marker date="1432622066497" expanded="true" signature="1301:1567" placeholder="deletePhoto: (data)-&gt;&#10;      data.location = 'photos'&#10;      q = $q.defer();&#10;      $http&#10;        url: API.url + 'delete.php'&#10;        data: data&#10;        method: 'post'&#10;      .then (data)-&gt;&#10;        q.resolve data&#10;      , (error)-&gt;&#10;        q.reject(error)&#10;      q.promise..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/partials/photos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5185184" vertical-offset="175" max-vertical-offset="1044">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1350">
+          <caret line="43" column="71" selection-start-line="43" selection-start-column="68" selection-end-line="43" selection-end-column="71" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="tag#div#2;tag#div#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/d00da5f1/63c6ecd9-3b9b-43ed-afe1-cf5927e95296/joel_portfolio..photos">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/source/imageCompressor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39355582" vertical-offset="0" max-vertical-offset="869">
+          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/coffee/controllers/dashboardController.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37723213" vertical-offset="544" max-vertical-offset="1800">
-          <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1836">
+          <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/source/insert.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24827586" vertical-offset="198" max-vertical-offset="1494">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding>
+            <marker date="1432659479010" expanded="true" signature="1694:1779" placeholder="INSERT INTO ..." />
+          </folding>
         </state>
       </provider>
     </entry>

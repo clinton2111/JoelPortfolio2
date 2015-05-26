@@ -22,8 +22,35 @@ try {
 function insertPhotos($data)
 {
     $response = array();
-    $image = addslashes(file_get_contents($_FILES['file']['tmp_name']));
-    $caption = addslashes($data->caption);
+    $image=null;
+    $fileTempName=($_FILES['file']['tmp_name']);
+    $fileName=($_FILES['file']['name']);
+    $caption = null;
+    if(isset($data->caption)){
+        $caption=addslashes($data->caption);
+    }else{
+        $caption='';
+    }
+    $fileSize = $_FILES['file']['size'];
+    if ($fileSize > 1000000) {
+        include 'imageCompressor.php';
+        try {
+            $moveResult=move_uploaded_file($fileTempName,"../uploads/$fileName");
+            if($moveResult == true){
+                $source="../uploads/$fileName";
+                $destination="../uploads/resized_$fileName";
+                $image=compress_image($source,$destination,60); //change last parameter to change quality
+                unlink($source);
+                unlink($destination);
+            }
+
+        } catch (exception $e) {
+            $response['status'] = 'Error';
+            $response['message'] = $e;
+            echo json_encode($response);
+            die();
+        }
+    }
     try {
         $insert = "INSERT INTO photos (photo_image,caption) VALUES ('" . $image . "','" . $caption . "')";
         $result = mysql_query($insert) or die(mysql_error());
@@ -41,6 +68,7 @@ function insertPhotos($data)
         $response['status'] = 'Error';
         $response['message'] = $e;
         echo json_encode($response);
+        die();
     }
 }
 

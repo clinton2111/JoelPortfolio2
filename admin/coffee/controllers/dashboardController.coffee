@@ -6,6 +6,7 @@ angular.module 'joelDashBoard.DashCtrl', []
       .sideNav();
       $ '.materialboxed'
       .materialbox();
+      $('.modal-trigger').leanModal();
 
 
     $scope.$on('$viewContentLoaded', onLoadComplete);
@@ -48,6 +49,7 @@ angular.module 'joelDashBoard.DashCtrl', []
             id: response.id
             caption: pic.Caption
           })
+          $scope.pic={};
           Materialize.toast response.status + " - " + response.message, 4000
         else
           Materialize.toast response.status + " - " + response.message, 4000
@@ -88,8 +90,8 @@ angular.module 'joelDashBoard.DashCtrl', []
         Materialize.toast('Something went wrong', 4000);
 
 
-    $scope.$watch $scope.photos, ()->
+    $scope.$watchCollection 'photos', ()->
       $scope.$apply
-    , true
+    ,false
 
 ]
