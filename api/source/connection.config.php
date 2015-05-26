@@ -1,4 +1,7 @@
 <?php
+$key = md5('mySecretKey');
+$alg = 'HS512';
+
 define("DB_HOST", "localhost");
 // set database host
 define("DB_USER", "root");

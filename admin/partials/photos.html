@@ -1,5 +1,86 @@
-<div>
+<div ng-init="fetchPhotos()">
     <div class="container">
         <h1 class="header amber-text thin">Photos</h1>
+
+        <div class="section">
+            <div class="row">
+                <div class="col s6 m3 l3" ng-repeat="photo in photos">
+                    <div class="card medium z-depth-3">
+                        <div class="card-image ">
+                            <img class="responsive-img" ng-src="{{picUrl+photo.id}}">
+                        </div>
+                        <div class="card-content">
+                            <p>{{photo.caption}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a ng-click="openCaptionModal($index)" href="#" class="amber-text">Edit Caption</a>
+                            <a ng-click="deletePhoto($index)" href="#" class="amber-text">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                <a class="btn-floating btn-large amber z-depth-3" ng-click="openPhotoModal()">
+                    <i class="large mdi-image-add-to-photos"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--Add new photo modal-->
+    <div id="photoModal" class="modal bottom-sheet">
+        <form class="col s12" ng-submit="uploadPhoto(pic)">
+            <div class="modal-content">
+                <h4 class="header thin">Upload Photo</h4>
+
+
+                <div class="row">
+                    <div class="file-field input-field">
+                        <input class="file-path validate" type="text" value={{pic.File[0].name}} readonly/>
+
+                        <div class="btn blue-grey">
+                            <span>File</span>
+                            <input type="file" ngf-select ng-model="pic.File" name="file" accept="image/*"
+                                   required="true"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="caption" type="text" ng-model="pic.Caption">
+                        <label for="caption">Caption</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button class="modal-action modal-close btn waves-effect waves-light blue-grey" type="submit">Upload
+                    <i class="mdi-file-file-upload right"></i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+    <!--Update Caption-->
+    <div id="updateCaption" class="modal">
+        <div class="modal-content">
+            <h4>Enter new Caption</h4>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input ng-model="currentPic.Caption" id="new_caption" type="text" class="validate">
+                    <label class="active" for="new_caption">Caption</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class=" modal-action modal-close waves-effect waves-light btn-flat">Cancel</a>
+            <a ng-click="editCaption(currentPic.Index)" href="#"
+               class=" modal-action modal-close waves-effect waves-light btn-flat">Update Caption</a>
+
+        </div>
     </div>
 </div>

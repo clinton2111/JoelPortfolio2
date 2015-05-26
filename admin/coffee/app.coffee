@@ -1,4 +1,4 @@
-angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login','joelDashBoard.DashCtrl']
+angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login','joelDashBoard.DashCtrl','ngFileUpload']
 .config ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'jwtInterceptorProvider',
   ($stateProvider, $urlRouterProvider, $httpProvider, jwtInterceptorProvider)->
     $stateProvider
@@ -54,7 +54,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
         q = $q.defer()
         $http.post API.url + 'refreshToken.php', null
         .then (data)->
-          console.log(data)
+#          console.log(data)
           q.resolve(data.data)
         , (error)->
           console.log 'Error'
@@ -76,6 +76,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
               tokenData = data
               if !(_.isNull(tokenData.token)) || !(_.isUndefined(tokenData.token))
                 userObj =
+                  id:tokenData.id
                   token: tokenData.token
                   username: tokenData.username
                   lastUpdate: moment().format('DD-MM-YYYY')
