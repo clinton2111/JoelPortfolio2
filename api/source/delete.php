@@ -40,7 +40,29 @@ function deletePhoto($data)
         echo json_encode($response);
     } catch (Exception $e) {
         $response['status'] = 'Error';
-        $response['message'] = $e;
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
+        die();
+    }
+}
+
+function deleteGig($data)
+{
+    $response = array();
+    try {
+        $sql = "DELETE FROM gigs WHERE id=$data->id";
+        $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
+        if ($result == 1) {
+            $response['status'] = 'Success';
+            $response['message'] = 'Gig Deleted';
+        } else {
+            $response['status'] = 'Error';
+            $response['message'] = 'Something went wrong try again';
+        }
+        echo json_encode($response);
+    } catch (Exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e->getMessage();
         echo json_encode($response);
         die();
     }

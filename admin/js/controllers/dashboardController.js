@@ -3,14 +3,19 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
     var onLoadComplete;
     onLoadComplete = function() {
       $(".button-collapse").sideNav();
-      return $('.materialboxed').materialbox();
+      $('.materialboxed').materialbox();
+      return $('.collapsible').collapsible({
+        accordion: false
+      });
     };
     $scope.gPlace;
-    $scope.place;
     $scope.$on('$viewContentLoaded', onLoadComplete);
     $scope.user = store.get('user');
     $scope.dpUrl = API.url + 'pic.php?id=' + $scope.user.id + '&&from=users';
-    $scope.picUrl = API.url + 'pic.php?from=photos&&id=';
+    $scope.picUrl = {
+      photo: API.url + 'pic.php?from=photos&&id=',
+      gig: API.url + 'pic.php?from=gigs&&id='
+    };
     $scope.fetchPhotos = function() {
       return Search.fetchPhotos().then(function(data) {
         var response;
@@ -22,8 +27,16 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         return console.log(error);
       });
     };
-    $scope.test = function(loc) {
-      return console.log(loc);
+    $scope.fetchGigs = function() {
+      return Search.fetchGigs().then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          return $scope.gigs = response.results;
+        }
+      }, function(error) {
+        return console.log(error);
+      });
     };
     $scope.openPhotoModal = function() {
       $('input#caption').characterCounter();
@@ -38,15 +51,18 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       });
       return $('#gigModal').openModal();
     };
-    $scope.openCaptionModal = function(index) {
-      var caption;
+    $scope.openCaptionModal = function(id) {
+      var caption, index;
+      index = _.findIndex($scope.photos, {
+        id: id
+      });
       caption = $scope.photos[index].caption;
       if (caption === "") {
         caption = null;
       }
       $scope.currentPic = {
         Caption: caption,
-        Index: index
+        Id: id
       };
       return $('#updateCaption').openModal();
     };
@@ -88,6 +104,15 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         var response;
         response = data.data;
         if (response.status === 'Success') {
+          $scope.gigs.unshift({
+            id: response.id,
+            title: gig.title,
+            address: gig.place,
+            latitude: gig.placeDetails.geometry.location.lat(),
+            longitude: gig.placeDetails.geometry.location.lng(),
+            event_date: date,
+            fb_link: gig.fbLink
+          });
           $scope.gig = {};
           return Materialize.toast(response.status + " - " + response.message, 4000);
         } else {
@@ -97,9 +122,78 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         return console.log(error);
       });
     };
-    $scope.editCaption = function(index) {
-      var data, id, new_caption;
-      id = $scope.photos[index].id;
+    $scope.deletePhoto = function(id) {
+      var data, index;
+      index = _.findIndex($scope.photos, {
+        id: id
+      });
+      data = {
+        id: id
+      };
+      return Delete.deletePhoto(data).then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          $scope.photos.splice(index, 1);
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        } else {
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        }
+      }, function(error) {
+        return Materialize.toast('Something went wrong', 4000);
+      });
+    };
+    $scope.deleteGig = function(id) {
+      var data, index;
+      index = _.findIndex($scope.gigs, {
+        id: id
+      });
+      data = {
+        id: id
+      };
+      return Delete.deleteGig(data).then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          $scope.gigs.splice(index, 1);
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        } else {
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        }
+      }, function(error) {
+        return Materialize.toast('Something went wrong', 4000);
+      });
+    };
+    $scope.updatePoster = function(id, poster) {
+      var data, file, index;
+      if (!_.isUndefined(poster.File[0])) {
+        index = _.findIndex($scope.gigs, {
+          id: id
+        });
+        file = poster.File[0];
+        data = {
+          updateType: 'poster',
+          id: id
+        };
+        return Update.updateGig(data, file).then(function(data) {
+          var response;
+          response = data.data;
+          if (response.status === 'Success') {
+            $scope.gigs[index].id = id;
+            return Materialize.toast(response.status + " - " + response.message, 4000);
+          } else {
+            return Materialize.toast(response.status + " - " + response.message, 4000);
+          }
+        }, function(error) {
+          return Materialize.toast('Something went wrong', 4000);
+        });
+      }
+    };
+    $scope.editCaption = function(id) {
+      var data, index, new_caption;
+      index = _.findIndex($scope.photos, {
+        id: id
+      });
       new_caption = $scope.currentPic.Caption;
       data = {
         caption: new_caption,
@@ -118,26 +212,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         return Materialize.toast('Something went wrong', 4000);
       });
     };
-    $scope.deletePhoto = function(index) {
-      var data, id;
-      id = $scope.photos[index].id;
-      data = {
-        id: id
-      };
-      return Delete.deletePhoto(data).then(function(data) {
-        var response;
-        response = data.data;
-        if (response.status === 'Success') {
-          $scope.photos.splice(index, 1);
-          return Materialize.toast(response.status + " - " + response.message, 4000);
-        } else {
-          return Materialize.toast(response.status + " - " + response.message, 4000);
-        }
-      }, function(error) {
-        return Materialize.toast('Something went wrong', 4000);
-      });
-    };
-    return $scope.$watchCollection('photos', function() {
+    return $scope.$watchCollection(['photos', 'gigs'], function() {
       return $scope.$apply;
     }, false);
   }

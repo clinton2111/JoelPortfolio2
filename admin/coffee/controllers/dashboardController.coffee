@@ -5,16 +5,20 @@ angular.module 'joelDashBoard.DashCtrl', []
       $ ".button-collapse"
       .sideNav();
       $ '.materialboxed'
-      .materialbox();
+      .materialbox()
+      $ '.collapsible'
+      .collapsible
+          accordion: false
 
 
     $scope.gPlace;
-    $scope.place
     $scope.$on('$viewContentLoaded', onLoadComplete);
 
     $scope.user = store.get 'user'
     $scope.dpUrl = API.url + 'pic.php?id=' + $scope.user.id + '&&from=users'
-    $scope.picUrl = API.url + 'pic.php?from=photos&&id='
+    $scope.picUrl =
+      photo: API.url + 'pic.php?from=photos&&id='
+      gig: API.url + 'pic.php?from=gigs&&id='
 
     $scope.fetchPhotos = ->
       Search.fetchPhotos()
@@ -25,8 +29,15 @@ angular.module 'joelDashBoard.DashCtrl', []
       , (error)->
         console.log error
 
-    $scope.test = (loc)->
-      console.log loc
+    $scope.fetchGigs = ->
+      Search.fetchGigs()
+      .then (data)->
+        response = data.data
+        if response.status is 'Success'
+          $scope.gigs = response.results
+      , (error)->
+        console.log error
+
 
     $scope.openPhotoModal = ()->
       $ 'input#caption'
@@ -46,12 +57,13 @@ angular.module 'joelDashBoard.DashCtrl', []
       $ '#gigModal'
       .openModal();
 
-    $scope.openCaptionModal = (index)->
+    $scope.openCaptionModal = (id)->
+      index=_.findIndex($scope.photos, { id: id });
       caption = $scope.photos[index].caption;
       if caption is "" then caption = null
       $scope.currentPic = {
         Caption: caption
-        Index: index
+        Id: id
       }
       $ '#updateCaption'
       .openModal();
@@ -91,10 +103,15 @@ angular.module 'joelDashBoard.DashCtrl', []
       .then (data)->
         response = data.data
         if response.status is 'Success'
-#          $scope.photos.unshift({
-#            id: response.id
-#            caption: pic.Caption
-#          })
+          $scope.gigs.unshift({
+            id: response.id
+            title: gig.title
+            address:gig.place
+            latitude: gig.placeDetails.geometry.location.lat()
+            longitude: gig.placeDetails.geometry.location.lng()
+            event_date:date
+            fb_link: gig.fbLink
+          })
           $scope.gig = {};
           Materialize.toast response.status + " - " + response.message, 4000
         else
@@ -103,8 +120,60 @@ angular.module 'joelDashBoard.DashCtrl', []
         console.log error
 
 
-    $scope.editCaption = (index)->
-      id = $scope.photos[index].id
+
+
+
+    $scope.deletePhoto = (id)->
+      index=_.findIndex($scope.photos, { id: id });
+      data =
+        id: id
+      Delete.deletePhoto(data)
+      .then (data)->
+        response = data.data
+        if response.status is 'Success'
+          $scope.photos.splice(index, 1);
+          Materialize.toast response.status + " - " + response.message, 4000
+        else
+          Materialize.toast response.status + " - " + response.message, 4000
+      , (error)->
+        Materialize.toast('Something went wrong', 4000);
+
+    $scope.deleteGig=(id)->
+      index=_.findIndex($scope.gigs, { id: id });
+      data =
+        id: id
+      Delete.deleteGig(data)
+      .then (data)->
+        response = data.data
+        if response.status is 'Success'
+          $scope.gigs.splice(index, 1);
+          Materialize.toast response.status + " - " + response.message, 4000
+        else
+          Materialize.toast response.status + " - " + response.message, 4000
+      , (error)->
+        Materialize.toast('Something went wrong', 4000);
+
+    $scope.updatePoster = (id, poster)->
+      if !_.isUndefined poster.File[0]
+        index=_.findIndex($scope.gigs, { id: id });
+        file=poster.File[0]
+        data=
+          updateType : 'poster'
+          id:id
+
+        Update.updateGig(data,file)
+        .then (data)->
+          response = data.data
+          if response.status is 'Success'
+            $scope.gigs[index].id=id;
+            Materialize.toast response.status + " - " + response.message, 4000
+          else
+            Materialize.toast response.status + " - " + response.message, 4000
+        , (error)->
+          Materialize.toast('Something went wrong', 4000);
+
+    $scope.editCaption = (id)->
+      index=_.findIndex($scope.photos, { id: id });
       new_caption = $scope.currentPic.Caption
       data =
         caption: new_caption
@@ -120,25 +189,9 @@ angular.module 'joelDashBoard.DashCtrl', []
       , (error)->
         Materialize.toast('Something went wrong', 4000);
 
-
-    $scope.deletePhoto = (index)->
-      id = $scope.photos[index].id
-      data =
-        id: id
-      Delete.deletePhoto(data)
-      .then (data)->
-        response = data.data
-        if response.status is 'Success'
-          $scope.photos.splice(index, 1);
-          Materialize.toast response.status + " - " + response.message, 4000
-        else
-          Materialize.toast response.status + " - " + response.message, 4000
-      , (error)->
-        Materialize.toast('Something went wrong', 4000);
-
-
-    $scope.$watchCollection 'photos', ()->
+    $scope.$watchCollection ['photos', 'gigs'], ()->
       $scope.$apply
     , false
+
 
 ]

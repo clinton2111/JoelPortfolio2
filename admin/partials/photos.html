@@ -4,17 +4,17 @@
 
         <div class="section">
             <div class="row">
-                <div class="col s6 m3 l3" ng-repeat="photo in photos">
+                <div class="col s6 m3 l3" ng-repeat="photo in photos" on-finish-render>
                     <div class="card medium z-depth-3">
                         <div class="card-image ">
-                            <img class="responsive-img" ng-src="{{picUrl+photo.id}}">
+                            <img class="responsive-img" ng-src="{{picUrl.photo+photo.id}}">
                         </div>
                         <div class="card-content">
                             <p>{{photo.caption}}</p>
                         </div>
                         <div class="card-action">
-                            <a ng-click="openCaptionModal($index)" href="#" class="amber-text">Edit Caption</a>
-                            <a ng-click="deletePhoto($index)" href="#" class="amber-text">Delete</a>
+                            <a ng-click="openCaptionModal(photo.id)"  class="amber-text">Edit Caption</a>
+                            <a ng-click="deletePhoto(photo.id)"  class="amber-text">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -81,9 +81,9 @@
         </div>
         <div class="modal-footer">
 
-            <a ng-click="editCaption(currentPic.Index)" href="#"
+            <a ng-click="editCaption(currentPic.Id)"
                class=" modal-action modal-close waves-effect waves-light btn-flat">Update Caption</a>
-            <a href="#" class=" modal-action modal-close waves-effect waves-light btn-flat">Cancel</a>
+            <a  class=" modal-action modal-close waves-effect waves-light btn-flat">Cancel</a>
 
         </div>
     </div>

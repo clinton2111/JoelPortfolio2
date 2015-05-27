@@ -46,7 +46,7 @@ function insertPhotos($data)
 
         } catch (exception $e) {
             $response['status'] = 'Error';
-            $response['message'] = $e;
+            $response['message'] = $e->getMessage();
             echo json_encode($response);
             die();
         }
@@ -68,7 +68,7 @@ function insertPhotos($data)
         echo json_encode($response);
     } catch (Exception $e) {
         $response['status'] = 'Error';
-        $response['message'] = $e;
+        $response['message'] = $e->getMessage();
         echo json_encode($response);
         die();
     }
@@ -95,7 +95,7 @@ function insertGig($data)
 
         } catch (exception $e) {
             $response['status'] = 'Error';
-            $response['message'] = $e;
+            $response['message'] = $e->getMessage();
             echo json_encode($response);
             die();
         }
@@ -117,7 +117,7 @@ function insertGig($data)
         echo json_encode($response);
     } catch (Exception $e) {
         $response['status'] = 'Error';
-        $response['message'] = $e;
+        $response['message'] = $e->getMessage();
         echo json_encode($response);
         die();
     }

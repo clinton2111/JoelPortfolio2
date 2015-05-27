@@ -61,11 +61,27 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
           return q.reject(error);
         });
         return q.promise;
+      },
+      fetchGigs: function() {
+        var q;
+        q = $q.defer();
+        $http({
+          url: API.url + 'search.php',
+          data: {
+            'location': 'gigs'
+          },
+          method: 'post'
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
       }
     };
   }
 ]).factory('Update', [
-  '$http', '$q', 'API', function($http, $q, API) {
+  '$http', '$q', 'API', 'Upload', function($http, $q, API, Upload) {
     return {
       updateCaption: function(data) {
         var q;
@@ -81,6 +97,25 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
           return q.reject(error);
         });
         return q.promise;
+      },
+      updateGig: function(data, file) {
+        var q;
+        data.location = 'gigs';
+        q = $q.defer();
+        Upload.upload({
+          url: API.url + 'update.php',
+          data: data,
+          method: 'post',
+          headers: {
+            'Content-Type': file.type
+          },
+          file: file
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
       }
     };
   }
@@ -90,6 +125,21 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
       deletePhoto: function(data) {
         var q;
         data.location = 'photos';
+        q = $q.defer();
+        $http({
+          url: API.url + 'delete.php',
+          data: data,
+          method: 'post'
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
+      },
+      deleteGig: function(data) {
+        var q;
+        data.location = 'gigs';
         q = $q.defer();
         $http({
           url: API.url + 'delete.php',

@@ -48,9 +48,22 @@ angular.module 'joelDashBoard.DashCtrl'
       , (error)->
         q.reject(error)
       q.promise
+
+    fetchGigs: ()->
+      q = $q.defer();
+      $http
+        url: API.url + 'search.php'
+        data:
+          'location': 'gigs'
+        method: 'post'
+      .then (data)->
+        q.resolve data
+      , (error)->
+        q.reject(error)
+      q.promise
   )
 ]
-.factory 'Update', ['$http', '$q', 'API', ($http, $q, API)->
+.factory 'Update', ['$http', '$q', 'API', 'Upload', ($http, $q, API, Upload)->
   return(
     updateCaption: (data)->
       data.location = 'photos'
@@ -65,12 +78,40 @@ angular.module 'joelDashBoard.DashCtrl'
       , (error)->
         q.reject(error)
       q.promise
+
+    updateGig: (data, file)->
+      data.location = 'gigs'
+      q = $q.defer();
+      Upload.upload
+        url: API.url + 'update.php'
+        data: data
+        method: 'post'
+        headers: {'Content-Type': file.type}
+        file: file
+      .then (data)->
+        q.resolve data
+      , (error)->
+        q.reject(error)
+      q.promise
   )
 ]
 .factory 'Delete', ['$http', '$q', 'API', ($http, $q, API)->
   return(
     deletePhoto: (data)->
       data.location = 'photos'
+      q = $q.defer();
+      $http
+        url: API.url + 'delete.php'
+        data: data
+        method: 'post'
+      .then (data)->
+        q.resolve data
+      , (error)->
+        q.reject(error)
+      q.promise
+
+    deleteGig: (data)->
+      data.location = 'gigs'
       q = $q.defer();
       $http
         url: API.url + 'delete.php'

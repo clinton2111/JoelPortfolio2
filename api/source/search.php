@@ -46,7 +46,7 @@ function fetchPhotos($data)
         echo json_encode($response);
     } catch (exception $e) {
         $response['status'] = 'Error';
-        $response['message'] = $e;
+        $response['message'] = $e->getMessage();
         echo json_encode($response);
         die();
     }
@@ -55,5 +55,28 @@ function fetchPhotos($data)
 
 function fetchGigs($data)
 {
-
+    $response = array();
+    try {
+        $returnedData = array();
+        $sql = "SELECT id,title,address,latitude,longitude,event_date,fb_link FROM gigs ORDER BY event_date DESC";
+        $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
+        $gigCount = mysql_num_rows($result);
+        if ($gigCount > 0) {
+            while ($row = mysql_fetch_assoc($result)) {
+                $returnedData[] = $row;
+            }
+            $response['status'] = 'Success';
+            $response['message'] = 'Data present';
+            $response['results'] = $returnedData;
+        } else {
+            $response['status'] = 'Error';
+            $response['message'] = 'No Gigs found';
+        }
+        echo json_encode($response);
+    } catch (exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
+        die();
+    }
 }
