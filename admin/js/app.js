@@ -71,7 +71,7 @@ angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
       };
       user = store.get('user');
       if (to.data && to.data.requiresLogin) {
-        if (_.isNull(user) || _.isUndefined(user) || jwtHelper.isTokenExpired(user.token)) {
+        if (_.isNull(user) && _.isUndefined(user) && jwtHelper.isTokenExpired(user.token)) {
           e.preventDefault();
           return $state.go('login');
         } else {
@@ -81,7 +81,7 @@ angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
             return refreshToken().then(function(data) {
               var tokenData, userObj;
               tokenData = data;
-              if (!(_.isNull(tokenData.token)) || !(_.isUndefined(tokenData.token))) {
+              if (!(_.isNull(tokenData.token) && _.isUndefined(tokenData.token))) {
                 userObj = {
                   id: tokenData.id,
                   token: tokenData.token,

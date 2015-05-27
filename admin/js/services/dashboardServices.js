@@ -21,6 +21,25 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
           return q.reject(error);
         });
         return q.promise;
+      },
+      uploadGig: function(data, file) {
+        var q;
+        data.location = 'gigs';
+        q = $q.defer();
+        Upload.upload({
+          url: API.url + 'insert.php',
+          data: data,
+          method: 'post',
+          headers: {
+            'Content-Type': file.type
+          },
+          file: file
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
       }
     };
   }

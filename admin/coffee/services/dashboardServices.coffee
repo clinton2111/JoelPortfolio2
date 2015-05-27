@@ -16,6 +16,21 @@ angular.module 'joelDashBoard.DashCtrl'
       , (error)->
         q.reject(error)
       q.promise
+
+    uploadGig: (data, file)->
+      data.location = 'gigs'
+      q = $q.defer();
+      Upload.upload
+        url: API.url + 'insert.php'
+        data: data
+        method: 'post'
+        headers: {'Content-Type': file.type}
+        file: file
+      .then (data)->
+        q.resolve data
+      , (error)->
+        q.reject(error)
+      q.promise
   )
 ]
 

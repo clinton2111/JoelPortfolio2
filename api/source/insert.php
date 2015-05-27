@@ -22,24 +22,24 @@ try {
 function insertPhotos($data)
 {
     $response = array();
-    $image=null;
-    $fileTempName=($_FILES['file']['tmp_name']);
-    $fileName=($_FILES['file']['name']);
+    $image = null;
+    $fileTempName = ($_FILES['file']['tmp_name']);
+    $fileName = ($_FILES['file']['name']);
     $caption = null;
-    if(isset($data->caption)){
-        $caption=addslashes($data->caption);
-    }else{
-        $caption='';
+    if (isset($data->caption)) {
+        $caption = addslashes($data->caption);
+    } else {
+        $caption = '';
     }
     $fileSize = $_FILES['file']['size'];
     if ($fileSize > 1000000) {
         include 'imageCompressor.php';
         try {
-            $moveResult=move_uploaded_file($fileTempName,"../uploads/$fileName");
-            if($moveResult == true){
-                $source="../uploads/$fileName";
-                $destination="../uploads/resized_$fileName";
-                $image=compress_image($source,$destination,60); //change last parameter to change quality
+            $moveResult = move_uploaded_file($fileTempName, "../uploads/$fileName");
+            if ($moveResult == true) {
+                $source = "../assets/temp_images/$fileName";
+                $destination = "../assets/temp_images/resized_$fileName";
+                $image = compress_image($source, $destination, 60); //change last parameter to change quality
                 unlink($source);
                 unlink($destination);
             }
@@ -50,6 +50,8 @@ function insertPhotos($data)
             echo json_encode($response);
             die();
         }
+    } else {
+        $image = addslashes(file_get_contents($_FILES['file']['tmp_name']));
     }
     try {
         $insert = "INSERT INTO photos (photo_image,caption) VALUES ('" . $image . "','" . $caption . "')";
@@ -72,7 +74,51 @@ function insertPhotos($data)
     }
 }
 
-function insertGig()
+function insertGig($data)
 {
-    echo 'inside Gig function';
+    $response = array();
+    $image = null;
+    $fileTempName = ($_FILES['file']['tmp_name']);
+    $fileName = ($_FILES['file']['name']);
+    $fileSize = $_FILES['file']['size'];
+    if ($fileSize > 1000000) {
+        include 'imageCompressor.php';
+        try {
+            $moveResult = move_uploaded_file($fileTempName, "../uploads/$fileName");
+            if ($moveResult == true) {
+                $source = "../assets/temp_images/$fileName";
+                $destination = "../assets/temp_images/resized_$fileName";
+                $image = compress_image($source, $destination, 60); //change last parameter to change quality
+                unlink($source);
+                unlink($destination);
+            }
+
+        } catch (exception $e) {
+            $response['status'] = 'Error';
+            $response['message'] = $e;
+            echo json_encode($response);
+            die();
+        }
+    } else {
+        $image = addslashes(file_get_contents($_FILES['file']['tmp_name']));
+    }
+    try {
+        $insert = "INSERT INTO gigs (title,address,latitude,longitude,event_date,fb_link,photo_image) VALUES ('" . $data->title . "','" . $data->address . "','" . $data->lat . "','" . $data->lng . "','" . $data->date . "','" . $data->fbLink . "','" . $image . "')";
+        $result = mysql_query($insert) or die(mysql_error());
+        $id = mysql_insert_id();
+        if ($result == 1) {
+            $response['status'] = 'Success';
+            $response['message'] = 'Gig Data uploaded successfully';
+            $response['id'] = $id;
+        } else {
+            $response['status'] = 'Error';
+            $response['message'] = 'Gig upload failed';
+        }
+        echo json_encode($response);
+    } catch (Exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e;
+        echo json_encode($response);
+        die();
+    }
 }

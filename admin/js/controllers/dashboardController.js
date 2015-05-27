@@ -3,9 +3,10 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
     var onLoadComplete;
     onLoadComplete = function() {
       $(".button-collapse").sideNav();
-      $('.materialboxed').materialbox();
-      return $('.modal-trigger').leanModal();
+      return $('.materialboxed').materialbox();
     };
+    $scope.gPlace;
+    $scope.place;
     $scope.$on('$viewContentLoaded', onLoadComplete);
     $scope.user = store.get('user');
     $scope.dpUrl = API.url + 'pic.php?id=' + $scope.user.id + '&&from=users';
@@ -21,9 +22,21 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         return console.log(error);
       });
     };
+    $scope.test = function(loc) {
+      return console.log(loc);
+    };
     $scope.openPhotoModal = function() {
       $('input#caption').characterCounter();
       return $('#photoModal').openModal();
+    };
+    $scope.openGigModal = function() {
+      $('.datepicker').pickadate({
+        container: 'body',
+        selectMonths: true,
+        selectYears: 15,
+        format: 'dd-mm-yyyy'
+      });
+      return $('#gigModal').openModal();
     };
     $scope.openCaptionModal = function(index) {
       var caption;
@@ -47,6 +60,35 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
             caption: pic.Caption
           });
           $scope.pic = {};
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        } else {
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        }
+      }, function(error) {
+        return console.log(error);
+      });
+    };
+    $scope.uploadGig = function(gig) {
+      var data, date, file;
+      date = document.getElementById("date").value;
+      if (!(_.isNull(gig.fbLink) && _.isUndefined(gig.fbLink) && _.isEmpty(gig.fbLink))) {
+        gig.fbLink = '#';
+      }
+      data = {
+        title: gig.title,
+        date: date,
+        address: gig.place,
+        lat: gig.placeDetails.geometry.location.lat(),
+        lng: gig.placeDetails.geometry.location.lng(),
+        fbLink: gig.fbLink
+      };
+      file = gig.File[0];
+      $('#photoModal').closeModal();
+      return Insert.uploadGig(data, file).then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          $scope.gig = {};
           return Materialize.toast(response.status + " - " + response.message, 4000);
         } else {
           return Materialize.toast(response.status + " - " + response.message, 4000);

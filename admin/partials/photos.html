@@ -21,7 +21,7 @@
             </div>
 
             <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-                <a class="btn-floating btn-large amber z-depth-3" ng-click="openPhotoModal()">
+                <a class="btn-floating btn-large amber z-depth-3 modal-trigger" ng-click="openPhotoModal()">
                     <i class="large mdi-image-add-to-photos"></i>
                 </a>
             </div>
@@ -60,6 +60,9 @@
                 <button class="modal-action modal-close btn waves-effect waves-light blue-grey" type="submit">Upload
                     <i class="mdi-file-file-upload right"></i>
                 </button>
+                <button class="modal-action modal-close btn waves-effect waves-light blue-grey">Close
+                    <i class="mdi-navigation-close right"></i>
+                </button>
             </div>
         </form>
 
@@ -77,9 +80,10 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#" class=" modal-action modal-close waves-effect waves-light btn-flat">Cancel</a>
+
             <a ng-click="editCaption(currentPic.Index)" href="#"
                class=" modal-action modal-close waves-effect waves-light btn-flat">Update Caption</a>
+            <a href="#" class=" modal-action modal-close waves-effect waves-light btn-flat">Cancel</a>
 
         </div>
     </div>

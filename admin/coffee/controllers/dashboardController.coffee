@@ -6,9 +6,10 @@ angular.module 'joelDashBoard.DashCtrl', []
       .sideNav();
       $ '.materialboxed'
       .materialbox();
-      $('.modal-trigger').leanModal();
 
 
+    $scope.gPlace;
+    $scope.place
     $scope.$on('$viewContentLoaded', onLoadComplete);
 
     $scope.user = store.get 'user'
@@ -24,10 +25,25 @@ angular.module 'joelDashBoard.DashCtrl', []
       , (error)->
         console.log error
 
+    $scope.test = (loc)->
+      console.log loc
+
     $scope.openPhotoModal = ()->
       $ 'input#caption'
       .characterCounter()
       $ '#photoModal'
+      .openModal();
+
+    $scope.openGigModal = ()->
+      $ '.datepicker'
+      .pickadate
+          container: 'body'
+          selectMonths: true,
+          selectYears: 15
+          format: 'dd-mm-yyyy'
+
+
+      $ '#gigModal'
       .openModal();
 
     $scope.openCaptionModal = (index)->
@@ -49,12 +65,43 @@ angular.module 'joelDashBoard.DashCtrl', []
             id: response.id
             caption: pic.Caption
           })
-          $scope.pic={};
+          $scope.pic = {};
           Materialize.toast response.status + " - " + response.message, 4000
         else
           Materialize.toast response.status + " - " + response.message, 4000
       , (error)->
         console.log error
+
+    $scope.uploadGig = (gig)->
+      date = document.getElementById("date").value
+      if !(_.isNull(gig.fbLink) and _.isUndefined(gig.fbLink) and _.isEmpty(gig.fbLink)) then gig.fbLink = '#'
+
+      data =
+        title: gig.title
+        date: date
+        address: gig.place
+        lat: gig.placeDetails.geometry.location.lat()
+        lng: gig.placeDetails.geometry.location.lng()
+        fbLink: gig.fbLink
+
+      file = gig.File[0]
+      $ '#photoModal'
+      .closeModal();
+      Insert.uploadGig(data, file)
+      .then (data)->
+        response = data.data
+        if response.status is 'Success'
+#          $scope.photos.unshift({
+#            id: response.id
+#            caption: pic.Caption
+#          })
+          $scope.gig = {};
+          Materialize.toast response.status + " - " + response.message, 4000
+        else
+          Materialize.toast response.status + " - " + response.message, 4000
+      , (error)->
+        console.log error
+
 
     $scope.editCaption = (index)->
       id = $scope.photos[index].id
@@ -82,7 +129,7 @@ angular.module 'joelDashBoard.DashCtrl', []
       .then (data)->
         response = data.data
         if response.status is 'Success'
-          $scope.photos.splice(index,1);
+          $scope.photos.splice(index, 1);
           Materialize.toast response.status + " - " + response.message, 4000
         else
           Materialize.toast response.status + " - " + response.message, 4000
@@ -92,6 +139,6 @@ angular.module 'joelDashBoard.DashCtrl', []
 
     $scope.$watchCollection 'photos', ()->
       $scope.$apply
-    ,false
+    , false
 
 ]
