@@ -16,6 +16,30 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       photo: API.url + 'pic.php?from=photos&&id=',
       gig: API.url + 'pic.php?from=gigs&&id='
     };
+    $scope.toggleEdit = function(id) {
+      var gig, index;
+      index = _.findIndex($scope.gigs, {
+        id: id
+      });
+      $('.datepicker').pickadate({
+        container: 'body',
+        selectMonths: true,
+        selectYears: 15,
+        format: 'dd-mm-yyyy'
+      });
+      gig = $scope.gigs[index];
+      if (gig.fb_link === '#') {
+        gig.fb_link = '';
+      }
+      $scope["new"] = {
+        title: gig.title,
+        place: gig.address,
+        fbLink: gig.fb_link,
+        lat: gig.lat,
+        lng: gig.lng
+      };
+      return document.getElementById('new_date-' + id).value = moment(gig.event_date, "DD-MM-YYYY").format("DD-MM-YYYY");
+    };
     $scope.fetchPhotos = function() {
       return Search.fetchPhotos().then(function(data) {
         var response;
@@ -175,7 +199,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
           updateType: 'poster',
           id: id
         };
-        return Update.updateGig(data, file).then(function(data) {
+        return Update.updateGigPoster(data, file).then(function(data) {
           var response;
           response = data.data;
           if (response.status === 'Success') {
@@ -189,7 +213,56 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         });
       }
     };
-    $scope.editCaption = function(id) {
+    $scope.updateGig = function(id, newdata) {
+      var data, date, index, lat, lng;
+      date = document.getElementById('new_date-' + id).value;
+      index = _.findIndex($scope.gigs, {
+        id: id
+      });
+      if (!(_.isNull(newdata.fbLink) && _.isUndefined(newdata.fbLink) && _.isEmpty(newdata.fbLink))) {
+        newdata.fbLink = '#';
+      }
+      if (typeof newdata.placeDetails === 'undefined') {
+        lat = $scope.gigs[index].latitude;
+        lng = $scope.gigs[index].longitude;
+        console.log(lat + ' ' + lng);
+      } else {
+        lat = newdata.placeDetails.geometry.location.lat();
+        lng = newdata.placeDetails.geometry.location.lng();
+        console.log('there');
+      }
+      data = {
+        title: newdata.title,
+        date: date,
+        address: newdata.place,
+        lat: lat,
+        lng: lng,
+        fbLink: newdata.fbLink,
+        id: id
+      };
+      return Update.updateGigInfo(data).then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          $scope.gigs[index] = {
+            id: id,
+            title: newdata.title,
+            address: newdata.place,
+            latitude: lat,
+            longitude: lng,
+            event_date: date,
+            fb_link: newdata.fbLink
+          };
+          $scope.fetchGigs();
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        } else {
+          return Materialize.toast(response.status + " - " + response.message, 4000);
+        }
+      }, function(error) {
+        return console.log(error);
+      });
+    };
+    $scope.updateCaption = function(id) {
       var data, index, new_caption;
       index = _.findIndex($scope.photos, {
         id: id

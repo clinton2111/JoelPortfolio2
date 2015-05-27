@@ -4,21 +4,24 @@
 
         <div class="section">
             <ul class="collapsible popout" data-collapsible="accordion">
-                <li ng-repeat="gig in gigs" on-finish-render>
+                <li ng-repeat="gig in gigs" on-finish-render ng-init="editMode=false">
                     <div class="collapsible-header"><i class="mdi-action-event"></i>{{gig.title}}
                         <span class="right">
-                            <a ng-click="" class="amber-text">Edit</a>
-                            <a ng-click="deleteGig(gig.id)" class="amber-text">Delete</a>
+
+                           <a ng-click="deleteGig(gig.id)" class="amber-text" ><i class="mdi-action-delete left"></i>Delete</a>
                         </span>
                     </div>
                     <div class="collapsible-body">
+                        <div class="row right-align ">
+                         <a ng-click="toggleEdit(gig.id);editMode=true" class="btn-flat waves-light" ng-hide="editMode"><i class="mdi-editor-mode-edit left"></i>Edit</a>
+                        </div>
                         <div class="row container">
                             <div class="col s12 m4 l4 ">
 
                                 <img ng-src="{{ picUrl.gig+gig.id}}" class="responsive-img ">
 
 
-                                <div class="file-field input-field " style="padding-bottom: 10%">
+                                <div class="file-field input-field " style="padding-bottom: 10%" ng-hide="editMode">
                                     <div class="btn blue-grey">
                                         <span>Upload new Poster</span>
                                         <input type="file" ngf-select ng-model="poster.File" name="file"
@@ -27,19 +30,69 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col s12 m8 l8 ">
-                                <p class="flow-text"> </p>
+                            <div class="col s12 m8 l8 " ng-hide="editMode">
+                                <p class="flow-text"></p>
+
                                 <p class="flow-text no-padding">Name: {{gig.title}}</p>
+
+                                <p class="flow-text no-padding">Date: {{gig.event_date}}</p>
 
                                 <p class="flow-text no-padding">Location: {{gig.address}}</p>
 
-                                <p class="flow-text no-padding">Date: {{gig.event_date}}</p>
 
                                 <p class="flow-text no-padding" ng-if="gig.fb_link!='#'">Facebook Page: <a
                                         href="{{gig.fb_link}}" target="_blank">{{gig.fb_link}}</a></p>
 
                                 <p class="flow-text no-padding" ng-if="gig.fb_link=='#'">Facebook Page: No Facebook page
                                     associated with this event</p>
+                            </div>
+                            <div class="col s12 m8 l8" ng-show="editMode">
+                                <form ng-submit="updateGig(gig.id,new)">
+                                    <h4 class="header thin">Update Gig Details</h4>
+
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="new_title" type="text" class="validate" ng-model="new.title"
+                                                   required="true">
+                                            <label for="new_title">Title</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="{{ 'new_date-' + gig.id }}" type="date" class="datepicker"
+                                                   ng-value="new.eventDate"
+                                                   required/>
+                                            <label for="{{ 'new_date-' + gig.id }}">Date</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="new_location" placeholder='' type="text" class="validate"
+                                                   ng-model="new.place"
+                                                   details="new.placeDetails" googleplace required="true"
+                                                    >
+                                            <label for="new_location">Location</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="new_fbLink" type="text" class="validate" ng-model="new.fbLink"
+                                                    >
+                                            <label for="new_fbLink">Facebook page URL</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="btn waves-effect waves-light blue-grey"
+                                                type="submit">Update
+                                            <i class="mdi-file-file-upload right"></i>
+                                        </button>
+                                        <button class="btn waves-effect waves-light blue-grey"
+                                                ng-click="editMode=false">
+                                            Cancel
+                                            <i class="mdi-navigation-close right"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

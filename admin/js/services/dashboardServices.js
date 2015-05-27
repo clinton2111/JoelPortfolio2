@@ -98,7 +98,7 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
         });
         return q.promise;
       },
-      updateGig: function(data, file) {
+      updateGigPoster: function(data, file) {
         var q;
         data.location = 'gigs';
         q = $q.defer();
@@ -110,6 +110,22 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
             'Content-Type': file.type
           },
           file: file
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
+      },
+      updateGigInfo: function(data) {
+        var q;
+        data.location = 'gigs';
+        data.updateType = 'info';
+        q = $q.defer();
+        $http({
+          url: API.url + 'update.php',
+          data: data,
+          method: 'post'
         }).then(function(data) {
           return q.resolve(data);
         }, function(error) {

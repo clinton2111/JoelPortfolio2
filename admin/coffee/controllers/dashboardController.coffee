@@ -20,6 +20,25 @@ angular.module 'joelDashBoard.DashCtrl', []
       photo: API.url + 'pic.php?from=photos&&id='
       gig: API.url + 'pic.php?from=gigs&&id='
 
+    $scope.toggleEdit = (id)->
+      index = _.findIndex($scope.gigs, {id: id});
+      $ '.datepicker'
+      .pickadate
+          container: 'body'
+          selectMonths: true,
+          selectYears: 15
+          format: 'dd-mm-yyyy'
+      gig = $scope.gigs[index]
+      if gig.fb_link is '#' then gig.fb_link = ''
+      $scope.new = {
+        title: gig.title
+        place: gig.address
+        fbLink: gig.fb_link
+        lat: gig.lat
+        lng: gig.lng
+      }
+      document.getElementById('new_date-' + id).value = moment(gig.event_date, "DD-MM-YYYY").format("DD-MM-YYYY")
+
     $scope.fetchPhotos = ->
       Search.fetchPhotos()
       .then (data)->
@@ -58,7 +77,7 @@ angular.module 'joelDashBoard.DashCtrl', []
       .openModal();
 
     $scope.openCaptionModal = (id)->
-      index=_.findIndex($scope.photos, { id: id });
+      index = _.findIndex($scope.photos, {id: id});
       caption = $scope.photos[index].caption;
       if caption is "" then caption = null
       $scope.currentPic = {
@@ -106,10 +125,10 @@ angular.module 'joelDashBoard.DashCtrl', []
           $scope.gigs.unshift({
             id: response.id
             title: gig.title
-            address:gig.place
+            address: gig.place
             latitude: gig.placeDetails.geometry.location.lat()
             longitude: gig.placeDetails.geometry.location.lng()
-            event_date:date
+            event_date: date
             fb_link: gig.fbLink
           })
           $scope.gig = {};
@@ -119,12 +138,8 @@ angular.module 'joelDashBoard.DashCtrl', []
       , (error)->
         console.log error
 
-
-
-
-
     $scope.deletePhoto = (id)->
-      index=_.findIndex($scope.photos, { id: id });
+      index = _.findIndex($scope.photos, {id: id});
       data =
         id: id
       Delete.deletePhoto(data)
@@ -138,8 +153,8 @@ angular.module 'joelDashBoard.DashCtrl', []
       , (error)->
         Materialize.toast('Something went wrong', 4000);
 
-    $scope.deleteGig=(id)->
-      index=_.findIndex($scope.gigs, { id: id });
+    $scope.deleteGig = (id)->
+      index = _.findIndex($scope.gigs, {id: id});
       data =
         id: id
       Delete.deleteGig(data)
@@ -155,25 +170,66 @@ angular.module 'joelDashBoard.DashCtrl', []
 
     $scope.updatePoster = (id, poster)->
       if !_.isUndefined poster.File[0]
-        index=_.findIndex($scope.gigs, { id: id });
-        file=poster.File[0]
-        data=
-          updateType : 'poster'
-          id:id
+        index = _.findIndex($scope.gigs, {id: id});
+        file = poster.File[0]
+        data =
+          updateType: 'poster'
+          id: id
 
-        Update.updateGig(data,file)
+        Update.updateGigPoster(data, file)
         .then (data)->
           response = data.data
           if response.status is 'Success'
-            $scope.gigs[index].id=id;
+            $scope.gigs[index].id = id;
             Materialize.toast response.status + " - " + response.message, 4000
           else
             Materialize.toast response.status + " - " + response.message, 4000
         , (error)->
           Materialize.toast('Something went wrong', 4000);
 
-    $scope.editCaption = (id)->
-      index=_.findIndex($scope.photos, { id: id });
+    $scope.updateGig = (id, newdata)->
+      date = document.getElementById('new_date-' + id).value
+      index = _.findIndex($scope.gigs, {id: id});
+      if !(_.isNull(newdata.fbLink) and _.isUndefined(newdata.fbLink) and _.isEmpty(newdata.fbLink)) then newdata.fbLink = '#'
+      if (typeof newdata.placeDetails is 'undefined')
+        lat=$scope.gigs[index].latitude
+        lng=$scope.gigs[index].longitude
+        console.log lat+' '+lng
+      else
+        lat=newdata.placeDetails.geometry.location.lat()
+        lng=newdata.placeDetails.geometry.location.lng()
+        console.log 'there'
+      data =
+        title: newdata.title
+        date: date
+        address: newdata.place
+        lat: lat
+        lng: lng
+        fbLink: newdata.fbLink
+        id: id
+      Update.updateGigInfo(data)
+      .then (data)->
+        response = data.data
+        if response.status is 'Success'
+          $scope.gigs[index] = ({
+            id: id
+            title: newdata.title
+            address: newdata.place
+            latitude: lat
+            longitude: lng
+            event_date: date
+            fb_link: newdata.fbLink
+          })
+          $scope.fetchGigs()
+          Materialize.toast response.status + " - " + response.message, 4000
+        else
+          Materialize.toast response.status + " - " + response.message, 4000
+      , (error)->
+        console.log error
+
+
+    $scope.updateCaption = (id)->
+      index = _.findIndex($scope.photos, {id: id});
       new_caption = $scope.currentPic.Caption
       data =
         caption: new_caption

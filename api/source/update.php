@@ -100,3 +100,25 @@ function updateGigPoster()
     }
 
 }
+
+function updateGigsInfo($data)
+{
+    $response = array();
+    try {
+        $sql = "UPDATE gigs SET title='$data->title',address='$data->address',latitude='$data->lat',longitude='$data->lng',event_date='$data->date',fb_link='$data->fbLink' WHERE id=$data->id";
+        $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
+        if ($result == 1) {
+            $response['status'] = 'Success';
+            $response['message'] = 'Caption Updated';
+        } else {
+            $response['status'] = 'Error';
+            $response['message'] = 'Something went wrong try again';
+        }
+        echo json_encode($response);
+    } catch (Exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
+        die();
+    }
+}

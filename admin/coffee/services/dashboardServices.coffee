@@ -63,6 +63,7 @@ angular.module 'joelDashBoard.DashCtrl'
       q.promise
   )
 ]
+
 .factory 'Update', ['$http', '$q', 'API', 'Upload', ($http, $q, API, Upload)->
   return(
     updateCaption: (data)->
@@ -79,7 +80,7 @@ angular.module 'joelDashBoard.DashCtrl'
         q.reject(error)
       q.promise
 
-    updateGig: (data, file)->
+    updateGigPoster: (data, file)->
       data.location = 'gigs'
       q = $q.defer();
       Upload.upload
@@ -88,6 +89,20 @@ angular.module 'joelDashBoard.DashCtrl'
         method: 'post'
         headers: {'Content-Type': file.type}
         file: file
+      .then (data)->
+        q.resolve data
+      , (error)->
+        q.reject(error)
+      q.promise
+
+    updateGigInfo: (data)->
+      data.location = 'gigs'
+      data.updateType='info'
+      q = $q.defer();
+      $http
+        url: API.url + 'update.php'
+        data: data
+        method: 'post'
       .then (data)->
         q.resolve data
       , (error)->
