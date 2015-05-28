@@ -1,5 +1,5 @@
 angular.module 'joelPortfolio'
-.factory 'mainServices',['$http','$q',($http,$q)->
+.factory 'mainServices',['$http','$q','API',($http,$q,API)->
   events=[
     {
       gigName:'Cosmo Ladies Nite'
@@ -52,11 +52,35 @@ angular.module 'joelPortfolio'
     }
   ]
   return(
-    getGigs:()->
-      events
+    getGigs:(offset)->
+      q=$q.defer()
+      $http
+        url:API.url+'public.php'
+        data:
+          offset:offset
+          fetch:'gigs'
+        method:'POST'
+      .then (data)->
+        q.resolve(data)
+      ,(error)->
+        q.reject(error)
+      q.promise
 
-    getPics:()->
-      photos
+
+    getPics:(offset)->
+      q=$q.defer()
+      $http
+        url:API.url+'public.php'
+        data:
+          offset:offset
+          fetch:'photos'
+        method:'POST'
+      .then (data)->
+        q.resolve(data)
+      ,(error)->
+        q.reject(error)
+      q.promise
+
 
     sendEmail:()->
       Materialize.toast('Email Sent','4000')

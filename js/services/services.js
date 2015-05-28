@@ -1,5 +1,5 @@
 angular.module('joelPortfolio').factory('mainServices', [
-  '$http', '$q', function($http, $q) {
+  '$http', '$q', 'API', function($http, $q, API) {
     var events, photos;
     events = [
       {
@@ -41,11 +41,39 @@ angular.module('joelPortfolio').factory('mainServices', [
       }
     ];
     return {
-      getGigs: function() {
-        return events;
+      getGigs: function(offset) {
+        var q;
+        q = $q.defer();
+        $http({
+          url: API.url + 'public.php',
+          data: {
+            offset: offset,
+            fetch: 'gigs'
+          },
+          method: 'POST'
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
       },
-      getPics: function() {
-        return photos;
+      getPics: function(offset) {
+        var q;
+        q = $q.defer();
+        $http({
+          url: API.url + 'public.php',
+          data: {
+            offset: offset,
+            fetch: 'photos'
+          },
+          method: 'POST'
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
       },
       sendEmail: function() {
         return Materialize.toast('Email Sent', '4000');

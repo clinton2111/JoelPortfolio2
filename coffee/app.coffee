@@ -5,6 +5,6 @@ angular.module 'joelPortfolio',['ui.router']
     templateUrl:'partials/main.html'
     controller:'MainController'
   $urlRouterProvider.otherwise '/home'
-
-
 ]
+.constant 'API',
+  url: '../api/source/'

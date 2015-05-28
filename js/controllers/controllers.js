@@ -1,11 +1,14 @@
 angular.module('joelPortfolio').controller('MainController', [
-  '$scope', '$q', '$timeout', 'mainServices', function($scope, $q, $timeout, mainServices) {
+  '$scope', '$q', '$timeout', 'mainServices', 'API', function($scope, $q, $timeout, mainServices, API) {
     var onLoadComplete;
     onLoadComplete = function() {
-      console.log('Called');
       $(".button-collapse").sideNav();
       $('.parallax').parallax();
       return $('.materialboxed').materialbox();
+    };
+    $scope.picUrl = {
+      photo: API.url + 'pic.php?from=photos&&id=',
+      gig: API.url + 'pic.php?from=gigs&&id='
     };
     $scope.$on('$viewContentLoaded', onLoadComplete);
     $(window).scroll(function() {
@@ -29,11 +32,35 @@ angular.module('joelPortfolio').controller('MainController', [
         }
       });
     });
-    $scope.gigs = mainServices.getGigs();
-    $scope.photos = mainServices.getPics();
-    return $scope.sendEmail = function() {
-      console.log($scope.email);
+    $scope.fetchGigs = function(offset) {
+      if (offset == null) {
+        offset = 0;
+      }
+      return mainServices.getGigs(offset).then(function(data) {
+        var response;
+        response = data.data;
+        return $scope.gigs = response.results;
+      }, function(error) {
+        return console.log(error);
+      });
+    };
+    $scope.fetchPhotos = function(offset) {
+      if (offset == null) {
+        offset = 0;
+      }
+      return mainServices.getPics(offset).then(function(data) {
+        var response;
+        response = data.data;
+        return $scope.photos = response.results;
+      }, function(error) {
+        return console.log(error);
+      });
+    };
+    $scope.sendEmail = function() {
       return mainServices.sendEmail();
     };
+    return $scope.$watchCollection(['photos', 'gigs'], function() {
+      return $scope.$apply;
+    }, false);
   }
 ]);

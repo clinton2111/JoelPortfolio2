@@ -1,4 +1,4 @@
-<div>
+<div ng-init="fetchGigs();fetchPhotos()">
 <!--Main Content-->
 <div id="Home" class="parallax-container header-container">
     <div class="section no-pad-bot topPadding">
@@ -26,7 +26,7 @@
     <div class="section">
         <h1 class="header">About</h1>
         <!--   Icon Section   -->
-        <div class="row">
+        <div class="row ">
             <div class="col s12 m4 l3">
                 <img src="../assets/images/joelpropic.jpg" class="circle responsive-img z-depth-3">
             </div>
@@ -89,7 +89,7 @@
             <div class="col s6 m3 l3" ng-repeat="gig in gigs">
                 <div class="card medium z-depth-3">
                     <div class="card-image">
-                        <img class="responsive-img" ng-src="{{gig.gigPosterURL}}">
+                        <img class="responsive-img" ng-src="{{picUrl.gig+gig.id}}">
                     </div>
                     <div class="card-content">
                         <p>{{gig.gigName}}</p>
@@ -134,16 +134,16 @@
 
         <div class="row" ng-repeat="photo in photos" ng-if="$index % 4 === 0" on-finish-render>
             <div class="col s6 m3 l3" ng-if="$index < photos.length">
-                <img class=" responsive-img materialboxed z-depth-3" ng-src="{{photos[$index].photoURL}}"/>
+                <img class=" responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index].id}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 1 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{photos[$index + 1].photoURL}}"/>
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 1].id}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 2 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{photos[$index + 2].photoURL}}"/>
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 2].id}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 3 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{photos[$index + 3].photoURL}}"/>
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 3].id}}"/>
             </div>
         </div>
     </div>
@@ -165,7 +165,7 @@
 
             <div class="col  s12 m4 l8 offset-m2 offset-l2">
 
-                <form class="col s12" ng-submit="sendEmail()">
+                <form class="col s12 " ng-submit="sendEmail()">
                     <div class="row">
                         <input-field class="input-field col s12">
                             <i class="mdi-social-person prefix"></i>

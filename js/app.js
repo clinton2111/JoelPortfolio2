@@ -7,4 +7,6 @@ angular.module('joelPortfolio', ['ui.router']).config([
     });
     return $urlRouterProvider.otherwise('/home');
   }
-]);
+]).constant('API', {
+  url: '../api/source/'
+});
