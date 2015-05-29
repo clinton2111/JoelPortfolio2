@@ -1,5 +1,6 @@
 {
     "require":{
-        "firebase/php-jwt": "dev-master"
+        "firebase/php-jwt": "dev-master",
+	"phpmailer/phpmailer": "dev-master"
     }
 }

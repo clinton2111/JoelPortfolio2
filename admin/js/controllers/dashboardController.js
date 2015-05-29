@@ -1,5 +1,5 @@
 angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
-  '$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete', function($scope, store, API, Insert, Search, Update, Delete) {
+  '$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete', '$state', function($scope, store, API, Insert, Search, Update, Delete, $state) {
     var onLoadComplete;
     onLoadComplete = function() {
       $(".button-collapse").sideNav();
@@ -284,6 +284,10 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       }, function(error) {
         return Materialize.toast('Something went wrong', 4000);
       });
+    };
+    $scope.logout = function() {
+      store.remove('user');
+      return $state.go('login');
     };
     return $scope.$watchCollection(['photos', 'gigs'], function() {
       return $scope.$apply;

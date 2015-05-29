@@ -12,31 +12,31 @@ angular.module 'joelPortfolio'
       mapOptions =
         zoom: 16
         mapTypeId: google.maps.MapTypeId.ROADMAP
-        styles:[
+        styles: [
           {
             'featureType': 'all'
             'stylers': [
-              { 'saturation': 0 }
-              { 'hue': '#e7ecf0' }
+              {'saturation': 0}
+              {'hue': '#e7ecf0'}
             ]
           }
           {
             'featureType': 'road'
-            'stylers': [ { 'saturation': -70 } ]
+            'stylers': [{'saturation': -70}]
           }
           {
             'featureType': 'transit'
-            'stylers': [ { 'visibility': 'off' } ]
+            'stylers': [{'visibility': 'off'}]
           }
           {
             'featureType': 'poi'
-            'stylers': [ { 'visibility': 'off' } ]
+            'stylers': [{'visibility': 'off'}]
           }
           {
             'featureType': 'water'
             'stylers': [
-              { 'visibility': 'simplified' }
-              { 'saturation': -60 }
+              {'visibility': 'simplified'}
+              {'saturation': -60}
             ]
           }
         ]
@@ -44,8 +44,7 @@ angular.module 'joelPortfolio'
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 
-
-    markers=[]
+    markers = []
     $scope.picUrl =
       photo: API.url + 'pic.php?from=photos&&id=',
       gig: API.url + 'pic.php?from=gigs&&id='
@@ -100,9 +99,9 @@ angular.module 'joelPortfolio'
         lat: gig.latitude
         lng: gig.longitude
 
-      if markers.length>0
+      if markers.length > 0
         markers[0].setMap null
-        markers=[]
+        markers = []
 
       map_center = new google.maps.LatLng Number(gig.latitude), Number(gig.longitude)
       infowindow = new google.maps.InfoWindow();
@@ -117,13 +116,13 @@ angular.module 'joelPortfolio'
         position: map_center,
         icon: img
 
-      google.maps.event.addListener marker,'mouseover',()->
-        infowindow.setContent(gig.title+' - '+gig.address);
+      google.maps.event.addListener marker, 'mouseover', ()->
+        infowindow.setContent(gig.title + ' - ' + gig.address);
         infowindow.open($scope.map, this);
         marker.setMap($scope.map)
 
 
-      google.maps.event.addListener marker,'mouseout',()->
+      google.maps.event.addListener marker, 'mouseout', ()->
       infowindow.close()
 
       $ '#gigInfo'
@@ -134,7 +133,14 @@ angular.module 'joelPortfolio'
       markers.push marker
 
     $scope.sendEmail = ()->
-      mainServices.sendEmail()
+      mainServices.sendEmail($scope.email)
+      .then (data)->
+        response = data.data;
+        if response.status is 'Success' then Materialize.toast(response.status+' - '+response.message,4000)
+        else
+          Materialize.toast(response.status+' - '+response.message,4000)
+      , (error)->
+        Materialize.toast('Opps something went wrong.', 4000)
 
     $scope.$watchCollection ['photos', 'gigs'], ()->
       $scope.$apply

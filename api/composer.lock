@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c2301e81db2e2fc9abf530e66e30fbb0",
+    "hash": "8000b9007f3c68f6d0c35a10c805237b",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "652f3c62094b2447a0c4cad6b11541bef19ebfaa"
+                "reference": "30a066878c44ad9676f87edf373cc7b74f0192b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/652f3c62094b2447a0c4cad6b11541bef19ebfaa",
-                "reference": "652f3c62094b2447a0c4cad6b11541bef19ebfaa",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/30a066878c44ad9676f87edf373cc7b74f0192b7",
+                "reference": "30a066878c44ad9676f87edf373cc7b74f0192b7",
                 "shasum": ""
             },
             "require": {
@@ -48,14 +48,70 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2015-04-13 18:10:21"
+            "time": "2015-05-20 19:22:10"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "199bd9698b9b2b2c6b09e046fd12118fd10a7f73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/199bd9698b9b2b2c6b09e046fd12118fd10a7f73",
+                "reference": "199bd9698b9b2b2c6b09e046fd12118fd10a7f73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "*",
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "class.phpmailer.php",
+                    "class.smtp.php",
+                    "class.pop3.php",
+                    "extras/EasyPeasyICS.php",
+                    "extras/ntlm_sasl_client.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2015-05-21 15:05:57"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "firebase/php-jwt": 20
+        "firebase/php-jwt": 20,
+        "phpmailer/phpmailer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -25,6 +25,7 @@
     "angular-jwt": "~0.0.7",
     "moment": "~2.10.3",
     "ng-file-upload": "~4.2.1",
-    "angular-adaptive-backgrounds": "https://github.com/brandly/angular-adaptive-backgrounds.git#~0.2.3"
+    "angular-adaptive-backgrounds": "https://github.com/brandly/angular-adaptive-backgrounds.git#~0.2.3",
+    "components-font-awesome": "~4.3.0"
   }
 }

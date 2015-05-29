@@ -1,89 +1,50 @@
 angular.module 'joelPortfolio'
-.factory 'mainServices',['$http','$q','API',($http,$q,API)->
-  events=[
-    {
-      gigName:'Cosmo Ladies Nite'
-      gigPosterURL:'../assets/images/gig1.jpg'
-    }
-    {
-      gigName:'Big Bang Friday'
-      gigPosterURL:'../assets/images/gig2.jpg'
-    }
-    {
-      gigName:'Retro Saturdays'
-      gigPosterURL:'../assets/images/gig3.jpg'
-    }
-    {
-      gigName:'Final Wave Indivibe'
-      gigPosterURL:'../assets/images/gig4.jpg'
-    }
-    {
-      gigName:'Homegrown 2.0'
-      gigPosterURL:'../assets/images/gig5.jpg'
-    }
-  ]
-  photos=[
-    {
-      photoURL:'../assets/images/photos/pic1.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic2.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic3.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic4.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic5.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic6.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic7.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic8.jpg'
-    }
-    {
-      photoURL:'../assets/images/photos/pic9.jpg'
-    }
-  ]
+.factory 'mainServices', ['$http', '$q', 'API', ($http, $q, API)->
   return(
-    getGigs:(offset)->
-      q=$q.defer()
+    getGigs: (offset)->
+      q = $q.defer()
       $http
-        url:API.url+'public.php'
+        url: API.url + 'public.php'
         data:
-          offset:offset
-          fetch:'gigs'
-        method:'POST'
+          offset: offset
+          fetch: 'gigs'
+        method: 'POST'
       .then (data)->
         q.resolve(data)
-      ,(error)->
+      , (error)->
         q.reject(error)
       q.promise
 
 
-    getPics:(offset)->
-      q=$q.defer()
+    getPics: (offset)->
+      q = $q.defer()
       $http
-        url:API.url+'public.php'
+        url: API.url + 'public.php'
         data:
-          offset:offset
-          fetch:'photos'
-        method:'POST'
+          offset: offset
+          fetch: 'photos'
+        method: 'POST'
       .then (data)->
         q.resolve(data)
-      ,(error)->
+      , (error)->
         q.reject(error)
       q.promise
 
 
-    sendEmail:()->
-      Materialize.toast('Email Sent','4000')
+    sendEmail: (emailData)->
+      emailData.type = 'contact'
+      q = $q.defer()
+      $http
+        url: API.url + 'mailer.php'
+        data: emailData
+        method: 'post'
+      .then (data)->
+        q.resolve data
+      , (error)->
+        q.reject error
+      q.promise
+
+
   )
 
 ]

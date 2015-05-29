@@ -39,11 +39,13 @@ if (isset($data->email) && isset($data->password)) {
             $response['id'] = $claim['id'];
 
         } else {
+            header('HTTP/1.0 401 Unauthorized');
             $response['status'] = 'Error';
             $response['message'] = 'Invalid Login Details';
         }
         echo json_encode($response);
     } catch (exception $e) {
+        header('HTTP/1.0 401 Unauthorized');
         $response['status'] = 'Error';
         $response['message'] = $e;
         echo json_encode($response);

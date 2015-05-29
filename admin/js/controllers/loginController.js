@@ -1,5 +1,5 @@
 angular.module('joelDashBoard.login', []).controller('loginController', [
-  '$scope', 'Auth', 'jwtHelper', 'store', function($scope, Auth, jwtHelper, store) {
+  '$scope', 'Auth', 'jwtHelper', 'store', '$state', function($scope, Auth, jwtHelper, store, $state) {
     $scope.forgotPassword = false;
     $scope.viewPass = false;
     $scope.passType = 'password';
@@ -16,22 +16,24 @@ angular.module('joelDashBoard.login', []).controller('loginController', [
       }
     };
     $scope.login = function() {
-      return Auth.signIn($scope.user).then(function(userdata) {
-        var userObj;
-        if (userdata.status === 'Error') {
-          return Materialize.toast(userdata.message, '4000');
+      return Auth.signIn($scope.user).then(function(data) {
+        var userData, userObj;
+        userData = data.data;
+        if (userData.status === 'Error') {
+          return Materialize.toast(userData.message, '4000');
         } else {
           userObj = {
-            id: userdata.id,
-            token: userdata.token,
-            username: userdata.username,
+            id: userData.id,
+            token: userData.token,
+            username: userData.username,
             lastUpdate: moment().format('DD-MM-YYYY')
           };
           store.set('user', userObj);
-          return Materialize.toast(userdata.message, '4000');
+          Materialize.toast(userData.message, '4000');
+          return $state.go('dashboard.home');
         }
       }, function(error) {
-        return console.log('Error');
+        return Materialize.toast(error.data.message, '4000');
       })["finally"](function() {});
     };
     $scope.recoverPassword = function() {

@@ -1,5 +1,5 @@
 angular.module 'joelDashBoard.login', []
-.controller 'loginController', ['$scope', 'Auth', 'jwtHelper', 'store', ($scope, Auth, jwtHelper, store)->
+.controller 'loginController', ['$scope', 'Auth', 'jwtHelper', 'store', '$state',($scope, Auth, jwtHelper, store,$state)->
   $scope.forgotPassword = false
   $scope.viewPass = false
   $scope.passType = 'password'
@@ -16,19 +16,21 @@ angular.module 'joelDashBoard.login', []
 
   $scope.login = ->
     Auth.signIn($scope.user)
-    .then (userdata)->
-      if userdata.status is 'Error'
-        Materialize.toast userdata.message, '4000'
+    .then (data)->
+      userData=data.data
+      if userData.status is 'Error'
+        Materialize.toast userData.message, '4000'
       else
         userObj =
-          id:userdata.id
-          token: userdata.token
-          username: userdata.username
+          id:userData.id
+          token: userData.token
+          username: userData.username
           lastUpdate: moment().format('DD-MM-YYYY')
         store.set 'user', userObj
-        Materialize.toast userdata.message, '4000'
+        Materialize.toast userData.message, '4000'
+        $state.go 'dashboard.home'
     , (error)->
-      console.log 'Error'
+        Materialize.toast error.data.message, '4000'
     .finally ()->
 
 

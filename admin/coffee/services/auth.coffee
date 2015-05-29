@@ -9,9 +9,9 @@ angular.module 'joelDashBoard.login'
         data: userCredentials
         skipAuthorization: true
       .then (data)->
-        q.resolve data.data
+        q.resolve data
       , (error)->
-        q.reject(data)
+        q.reject(error)
 
       q.promise
   )

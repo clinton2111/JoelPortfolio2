@@ -1,6 +1,6 @@
 angular.module 'joelDashBoard.DashCtrl', []
-.controller 'dashboardController', ['$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete',
-  ($scope, store, API, Insert, Search, Update, Delete)->
+.controller 'dashboardController', ['$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete', '$state'
+  ($scope, store, API, Insert, Search, Update, Delete, $state)->
     onLoadComplete = ()->
       $ ".button-collapse"
       .sideNav();
@@ -192,12 +192,12 @@ angular.module 'joelDashBoard.DashCtrl', []
       index = _.findIndex($scope.gigs, {id: id});
       if !(_.isNull(newdata.fbLink) and _.isUndefined(newdata.fbLink) and _.isEmpty(newdata.fbLink)) then newdata.fbLink = '#'
       if (typeof newdata.placeDetails is 'undefined')
-        lat=$scope.gigs[index].latitude
-        lng=$scope.gigs[index].longitude
-        console.log lat+' '+lng
+        lat = $scope.gigs[index].latitude
+        lng = $scope.gigs[index].longitude
+        console.log lat + ' ' + lng
       else
-        lat=newdata.placeDetails.geometry.location.lat()
-        lng=newdata.placeDetails.geometry.location.lng()
+        lat = newdata.placeDetails.geometry.location.lat()
+        lng = newdata.placeDetails.geometry.location.lng()
         console.log 'there'
       data =
         title: newdata.title
@@ -245,6 +245,9 @@ angular.module 'joelDashBoard.DashCtrl', []
       , (error)->
         Materialize.toast('Something went wrong', 4000);
 
+    $scope.logout = ->
+      store.remove 'user'
+      $state.go 'login'
     $scope.$watchCollection ['photos', 'gigs'], ()->
       $scope.$apply
     , false

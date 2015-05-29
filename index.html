@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
     <!--<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
 
     <!--Plugins-->
     <script src="bower_components/angular/angular.min.js"></script>
@@ -19,7 +20,6 @@
     <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
     <script src="bower_components/underscore/underscore-min.js"></script>
     <script src="bower_components/angular-adaptive-backgrounds/dist/angular-adaptive-backgrounds.min.js"></script>
-
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
@@ -35,7 +35,13 @@
 <!--Navigation Bar-->
 <div class="navbar-fixed">
     <nav class="blue-grey darken-2">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">DJ Joel</a>
+        <div class="nav-wrapper container">
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <a class="brand-logo">
+                <img src="../assets/images/joellogo.svg" class="responsive-img" style="vertical-align: middle;">
+            </a>
+
+
             <ul class="right hide-on-med-and-down">
                 <li><a scroll-to='Home'>Home</a></li>
                 <li><a scroll-to='About'>About</a></li>
@@ -53,7 +59,7 @@
                 <li><a scroll-to='Photos'>Photos</a></li>
                 <li><a scroll-to='Contact'>Contact</a></li>
             </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+
         </div>
     </nav>
 </div>

@@ -10,9 +10,9 @@ angular.module('joelDashBoard.login').factory('Auth', [
           data: userCredentials,
           skipAuthorization: true
         }).then(function(data) {
-          return q.resolve(data.data);
+          return q.resolve(data);
         }, function(error) {
-          return q.reject(data);
+          return q.reject(error);
         });
         return q.promise;
       }

@@ -54,7 +54,6 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
         q = $q.defer()
         $http.post API.url + 'refreshToken.php', null
         .then (data)->
-#          console.log(data)
           q.resolve(data.data)
         , (error)->
           console.log 'Error'
@@ -63,7 +62,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
 
       user = store.get 'user'
       if to.data && to.data.requiresLogin
-        if _.isNull(user) and _.isUndefined(user) and jwtHelper.isTokenExpired(user.token)
+        if (_.isNull(user) or _.isUndefined(user) or jwtHelper.isTokenExpired(user.token))
           e.preventDefault();
           $state.go 'login'
         else
@@ -88,8 +87,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
               e.preventDefault();
 
           else
-            console.log 'in Sync'
-
+#            console.log 'in Sync'
 
 ]
 .constant 'API',

@@ -148,7 +148,17 @@ angular.module('joelPortfolio').controller('MainController', [
       return markers.push(marker);
     };
     $scope.sendEmail = function() {
-      return mainServices.sendEmail();
+      return mainServices.sendEmail($scope.email).then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          return Materialize.toast(response.status + ' - ' + response.message, 4000);
+        } else {
+          return Materialize.toast(response.status + ' - ' + response.message, 4000);
+        }
+      }, function(error) {
+        return Materialize.toast('Opps something went wrong.', 4000);
+      });
     };
     return $scope.$watchCollection(['photos', 'gigs'], function() {
       return $scope.$apply;
