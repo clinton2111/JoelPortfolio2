@@ -1,15 +1,51 @@
 angular.module 'joelPortfolio'
-.controller 'MainController', ['$scope', '$q', '$timeout', 'mainServices','API'
-  ($scope, $q, $timeout, mainServices,API)->
+.controller 'MainController', ['$scope', '$q', '$timeout', 'mainServices', 'API'
+  ($scope, $q, $timeout, mainServices, API)->
     onLoadComplete = ()->
       $ ".button-collapse"
       .sideNav();
       $ '.parallax'
       .parallax();
-
       $ '.materialboxed'
       .materialbox();
 
+      mapOptions =
+        zoom: 16
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        styles:[
+          {
+            'featureType': 'all'
+            'stylers': [
+              { 'saturation': 0 }
+              { 'hue': '#e7ecf0' }
+            ]
+          }
+          {
+            'featureType': 'road'
+            'stylers': [ { 'saturation': -70 } ]
+          }
+          {
+            'featureType': 'transit'
+            'stylers': [ { 'visibility': 'off' } ]
+          }
+          {
+            'featureType': 'poi'
+            'stylers': [ { 'visibility': 'off' } ]
+          }
+          {
+            'featureType': 'water'
+            'stylers': [
+              { 'visibility': 'simplified' }
+              { 'saturation': -60 }
+            ]
+          }
+        ]
+
+      $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+
+    markers=[]
     $scope.picUrl =
       photo: API.url + 'pic.php?from=photos&&id=',
       gig: API.url + 'pic.php?from=gigs&&id='
@@ -50,6 +86,52 @@ angular.module 'joelPortfolio'
         $scope.photos = response.results
       , (error)->
         console.log error
+
+    $scope.getGigInfo = (id)->
+      index = _.findIndex($scope.gigs, {id: id});
+
+      gig = $scope.gigs[index]
+      $scope.gigInfo =
+        id: id
+        title: gig.title
+        address: gig.address
+        date: gig.event_date
+        fbLink: gig.fb_link
+        lat: gig.latitude
+        lng: gig.longitude
+
+      if markers.length>0
+        markers[0].setMap null
+        markers=[]
+
+      map_center = new google.maps.LatLng Number(gig.latitude), Number(gig.longitude)
+      infowindow = new google.maps.InfoWindow();
+
+
+      img =
+        url: '../assets/icons/map_pointer.svg'
+        origin: new google.maps.Point(0, 0)
+
+      marker = new google.maps.Marker
+        map: $scope.map,
+        position: map_center,
+        icon: img
+
+      google.maps.event.addListener marker,'mouseover',()->
+        infowindow.setContent(gig.title+' - '+gig.address);
+        infowindow.open($scope.map, this);
+        marker.setMap($scope.map)
+
+
+      google.maps.event.addListener marker,'mouseout',()->
+      infowindow.close()
+
+      $ '#gigInfo'
+      .openModal()
+
+      google.maps.event.trigger($scope.map, "resize");
+      $scope.map.setCenter(map_center);
+      markers.push marker
 
     $scope.sendEmail = ()->
       mainServices.sendEmail()

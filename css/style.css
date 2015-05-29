@@ -56,3 +56,8 @@ textarea:focus {
 .input-field .prefix.active {
     color: #607D8B;
 }
+#map-canvas {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}

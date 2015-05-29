@@ -28,7 +28,7 @@
         <!--   Icon Section   -->
         <div class="row ">
             <div class="col s12 m4 l3">
-                <img src="../assets/images/joelpropic.jpg" class="circle responsive-img z-depth-3">
+                <img ng-src="../assets/images/joelpropic.jpg" class="circle responsive-img z-depth-3">
             </div>
             <div class="col s12 m4 l9">
                 <section>
@@ -92,17 +92,38 @@
                         <img class="responsive-img" ng-src="{{picUrl.gig+gig.id}}">
                     </div>
                     <div class="card-content">
-                        <p>{{gig.gigName}}</p>
+                        <p>{{gig.title}}</p>
                     </div>
                     <div class="card-action">
-                        <a href="#" class="amber-text">More Info</a>
+                        <a ng-click="getGigInfo(gig.id)" class="amber-text">More Info</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="parallax">
-        <img src="../assets/images/header1.jpg">
+        <img ng-src="../assets/images/header1.jpg">
+    </div>
+    <div id="gigInfo" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <div class=" center-align" adaptive-background>
+                <img ng-src="{{picUrl.gig+gigInfo.id}}" width="350">
+            </div>
+            <div class="container">
+                <p class="flow-text">Title - {{gigInfo.title}}
+
+                <p class="flow-text">Venue - {{gigInfo.address}}</p>
+
+                <p class="flow-text">Date - {{gigInfo.date}}</p>
+
+                <p class="flow-text" ng-if="gigInfo.fbLink!='#'"><a
+                        href="{{gigInfo.fbLink}}" target="_blank">Check us out on Facebook</a></p>
+            </div>
+            <div id="map-canvas" style="height: 400px"></div>
+        </div>
+        <div class="modal-footer">
+            <a class=" modal-action modal-close waves-effect waves-light btn-flat">Close</a>
+        </div>
     </div>
 
 </div>
@@ -148,7 +169,7 @@
         </div>
     </div>
     <div class="parallax">
-        <img src="../assets/images/gig_bg.jpg">
+        <img ng-src="../assets/images/gig_bg.jpg">
     </div>
 </div>
 
@@ -183,7 +204,8 @@
                     <div class="row">
                         <input-field class="input-field col s12">
                             <i class="mdi-communication-message prefix"></i>
-                            <textarea id="message" class="materialize-textarea" required="true" ng-model="email.msg"></textarea>
+                            <textarea id="message" class="materialize-textarea" required="true"
+                                      ng-model="email.msg"></textarea>
                             <label for="message">Message</label>
                         </input-field>
                     </div>
