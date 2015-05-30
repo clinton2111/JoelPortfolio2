@@ -14,9 +14,9 @@ $data = json_decode($json);
 if (isset($data->email) && isset($data->password)) {
     $response = array();
     $email = mysql_real_escape_string($data->email);
-    $password = md5(mysql_real_escape_string($data->password));
+    $password = mysql_real_escape_string($data->password);
     try {
-        $sql = "SELECT id,username FROM users WHERE email='$email' and password='$password'";
+        $sql = "SELECT id,username FROM users WHERE BINARY email='$email' and password='$password'";
         $result = mysql_query($sql) or die(mysql_error());
         $count = mysql_num_rows($result);
 

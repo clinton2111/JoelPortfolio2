@@ -287,7 +287,12 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
     };
     $scope.logout = function() {
       store.remove('user');
-      return $state.go('login');
+      $state.go('auth', {
+        type: 'login',
+        email: null,
+        value: null
+      });
+      return Materialize.toast('You have been logged out', 4000);
     };
     return $scope.$watchCollection(['photos', 'gigs'], function() {
       return $scope.$apply;

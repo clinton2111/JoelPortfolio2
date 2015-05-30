@@ -1,8 +1,8 @@
-angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login', 'joelDashBoard.DashCtrl', 'ngFileUpload']).config([
+angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login', 'joelDashBoard.DashCtrl', 'ngFileUpload', 'angular-md5']).config([
   '$stateProvider', '$urlRouterProvider', '$httpProvider', 'jwtInterceptorProvider', function($stateProvider, $urlRouterProvider, $httpProvider, jwtInterceptorProvider) {
-    $stateProvider.state('login', {
-      url: '/login',
-      templateUrl: 'partials/login.html',
+    $stateProvider.state('auth', {
+      url: '/auth/:type/:email/:value',
+      templateUrl: 'partials/auth.html',
       controller: 'loginController'
     }).state('dashboard', {
       url: '/dashboard',
@@ -38,7 +38,7 @@ angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
       }
     });
     $urlRouterProvider.when('dashboard', 'dashboard.photos');
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/auth/login//');
     jwtInterceptorProvider.tokenGetter = [
       'config', 'store', function(config, store) {
         var user;
@@ -73,7 +73,11 @@ angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
       if (to.data && to.data.requiresLogin) {
         if (_.isNull(user) || _.isUndefined(user) || jwtHelper.isTokenExpired(user.token)) {
           e.preventDefault();
-          return $state.go('login');
+          return $state.go('auth', {
+            type: 'login',
+            email: null,
+            value: null
+          });
         } else {
           lastUpdate = moment(user.lastUpdate, 'DD-MM-YYYY');
           refreshTokenFlag = moment().isSame(moment(lastUpdate), 'day');
@@ -91,7 +95,11 @@ angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
                 return store.set('user', userObj);
               } else {
                 e.preventDefault();
-                return $state.go('login');
+                return $state.go('auth', {
+                  type: 'login',
+                  email: null,
+                  value: null
+                });
               }
             }, function(error) {
               return e.preventDefault();

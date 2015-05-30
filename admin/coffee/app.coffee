@@ -1,10 +1,10 @@
-angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login','joelDashBoard.DashCtrl','ngFileUpload']
+angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login','joelDashBoard.DashCtrl','ngFileUpload','angular-md5']
 .config ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'jwtInterceptorProvider',
   ($stateProvider, $urlRouterProvider, $httpProvider, jwtInterceptorProvider)->
     $stateProvider
-    .state 'login',
-      url: '/login'
-      templateUrl: 'partials/login.html'
+    .state 'auth',
+      url: '/auth/:type/:email/:value'
+      templateUrl: 'partials/auth.html'
       controller: 'loginController'
     .state 'dashboard',
       url: '/dashboard'
@@ -35,7 +35,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
         requiresLogin: true
 
     $urlRouterProvider.when('dashboard', 'dashboard.photos');
-    $urlRouterProvider.otherwise '/login'
+    $urlRouterProvider.otherwise '/auth/login//'
 
     jwtInterceptorProvider.tokenGetter = ['config', 'store', (config, store)->
       if config.url.substr(config.url.length - 5) is '.html'
@@ -64,7 +64,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
       if to.data && to.data.requiresLogin
         if (_.isNull(user) or _.isUndefined(user) or jwtHelper.isTokenExpired(user.token))
           e.preventDefault();
-          $state.go 'login'
+          $state.go 'auth',{type:'login',email:null,value:null}
         else
           lastUpdate = moment(user.lastUpdate, 'DD-MM-YYYY')
           refreshTokenFlag = moment().isSame(moment(lastUpdate), 'day')
@@ -82,7 +82,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
                 store.set 'user', userObj
               else
                 e.preventDefault()
-                $state.go 'login'
+                $state.go 'auth',{type:'login',email:null,value:null}
             , (error)->
               e.preventDefault();
 

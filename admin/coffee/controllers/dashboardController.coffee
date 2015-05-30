@@ -247,7 +247,8 @@ angular.module 'joelDashBoard.DashCtrl', []
 
     $scope.logout = ->
       store.remove 'user'
-      $state.go 'login'
+      $state.go 'auth',{type:'login',email:null,value:null}
+      Materialize.toast 'You have been logged out',4000
     $scope.$watchCollection ['photos', 'gigs'], ()->
       $scope.$apply
     , false
