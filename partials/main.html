@@ -98,7 +98,7 @@
             <div class="col s6 m3 l3" ng-repeat="gig in gigs">
                 <div class="card medium z-depth-3">
                     <div class="card-image">
-                        <img class="responsive-img" ng-src="{{picUrl.gig+gig.id}}">
+                        <img class="responsive-img" ng-src="{{picUrl.gig+gig.photo_image}}">
                     </div>
                     <div class="card-content">
                         <p>{{gig.title}}</p>
@@ -164,16 +164,16 @@
 
         <div class="row" ng-repeat="photo in photos" ng-if="$index % 4 === 0" on-finish-render>
             <div class="col s6 m3 l3" ng-if="$index < photos.length">
-                <img class=" responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index].id}}"/>
+                <img class=" responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index].photo_image}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 1 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 1].id}}"/>
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 1].photo_image}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 2 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 2].id}}"/>
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 2].photo_image}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 3 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 3].id}}"/>
+                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 3].photo_image}}"/>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@
  */
 include 'connection.config.php';
 require_once '../vendor/firebase/php-jwt/Authentication/JWT.php';
+include 'resourceCleaner.php';
 $json = file_get_contents('php://input');
 $data = json_decode($json);
 $JWT = new JWT;
@@ -54,39 +55,42 @@ function updatePhotoCaption($data)
 
 function updateGigPoster()
 {
+    require_once 'imageCompressor.php';
     $data = json_decode($_POST['data']);
     $response = array();
     $image = null;
     $fileTempName = ($_FILES['file']['tmp_name']);
     $fileName = ($_FILES['file']['name']);
     $fileSize = $_FILES['file']['size'];
-    if ($fileSize > 1000000) {
-        include 'imageCompressor.php';
-        try {
-            $moveResult = move_uploaded_file($fileTempName, "../uploads/$fileName");
-            if ($moveResult == true) {
-                $source = "../assets/temp_images/$fileName";
-                $destination = "../assets/temp_images/resized_$fileName";
-                $image = compress_image($source, $destination, 60); //change last parameter to change quality
-                unlink($source);
-                unlink($destination);
+    $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+    $mod_name = uniqid() . ".$ext";
+    try {
+        $moveResult = move_uploaded_file($fileTempName, "../assets/temp_images/$fileName");
+        if ($moveResult == true) {
+            $source = "../assets/temp_images/$fileName";
+            $destination = "../../assets/images/gigs/$mod_name";
+            if ($fileSize > 1000000) {
+                $quality = 60;
+            } else {
+                $quality = 90;
             }
-
-        } catch (exception $e) {
-            $response['status'] = 'Error';
-            $response['message'] = $e->getMessage();
-            echo json_encode($response);
-            die();
+            compress_image($source, $destination, $quality); //change last parameter to change quality
+            unlink($source);
         }
-    } else {
-        $image = addslashes(file_get_contents($_FILES['file']['tmp_name']));
+    } catch (exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
+        die();
     }
     try {
-        $sql = "UPDATE gigs SET photo_image='$image' WHERE id=$data->id";
+        gigCleanup($data->id);
+        $sql = "UPDATE gigs SET photo_image='$mod_name' WHERE id=$data->id";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         if ($result == 1) {
             $response['status'] = 'Success';
             $response['message'] = 'Poster Updated';
+            $response['imageName']=$mod_name;
         } else {
             $response['status'] = 'Error';
             $response['message'] = 'Something went wrong try again';

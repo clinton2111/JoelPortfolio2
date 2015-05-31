@@ -13,8 +13,8 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
     $scope.user = store.get('user');
     $scope.dpUrl = API.url + 'pic.php?id=' + $scope.user.id + '&&from=users';
     $scope.picUrl = {
-      photo: API.url + 'pic.php?from=photos&&id=',
-      gig: API.url + 'pic.php?from=gigs&&id='
+      photo: API.url + '../../assets/images/photos/',
+      gig: API.url + '../../assets/images/gigs/'
     };
     $scope.toggleEdit = function(id) {
       var gig, index;
@@ -48,7 +48,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
           return $scope.photos = response.results;
         }
       }, function(error) {
-        return console.log(error);
+        return Materialize.toast('Something went wrong', 4000);
       });
     };
     $scope.fetchGigs = function() {
@@ -59,7 +59,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
           return $scope.gigs = response.results;
         }
       }, function(error) {
-        return console.log(error);
+        return Materialize.toast('Something went wrong', 4000);
       });
     };
     $scope.openPhotoModal = function() {
@@ -105,7 +105,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
           return Materialize.toast(response.status + " - " + response.message, 4000);
         }
       }, function(error) {
-        return console.log(error);
+        return Materialize.toast('Something went wrong', 4000);
       });
     };
     $scope.uploadGig = function(gig) {
@@ -143,7 +143,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
           return Materialize.toast(response.status + " - " + response.message, 4000);
         }
       }, function(error) {
-        return console.log(error);
+        return Materialize.toast('Something went wrong', 4000);
       });
     };
     $scope.deletePhoto = function(id) {
@@ -203,7 +203,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
           var response;
           response = data.data;
           if (response.status === 'Success') {
-            $scope.gigs[index].id = id;
+            $scope.gigs[index].photo_image = response.imageName;
             return Materialize.toast(response.status + " - " + response.message, 4000);
           } else {
             return Materialize.toast(response.status + " - " + response.message, 4000);
@@ -259,7 +259,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
           return Materialize.toast(response.status + " - " + response.message, 4000);
         }
       }, function(error) {
-        return console.log(error);
+        return Materialize.toast('Something went wrong', 4000);
       });
     };
     $scope.updateCaption = function(id) {

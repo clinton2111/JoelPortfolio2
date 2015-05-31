@@ -3,9 +3,10 @@ angular.module('joelDashBoard.login').factory('Auth', [
     return {
       signIn: function(userCredentials) {
         var q;
+        userCredentials.type = 'login';
         q = $q.defer();
         $http({
-          url: API.url + 'login.php',
+          url: API.url + 'auth.php',
           method: 'POST',
           data: userCredentials,
           skipAuthorization: true
@@ -37,7 +38,7 @@ angular.module('joelDashBoard.login').factory('Auth', [
         passwordData.type = 'updatePassword';
         q = $q.defer();
         $http({
-          url: API.url + 'mailer.php',
+          url: API.url + 'auth.php',
           method: 'POST',
           data: passwordData,
           skipAuthorization: true

@@ -18,43 +18,43 @@ try {
     echo "Invalid token";
     exit();
 }
-
 function insertPhotos($data)
 {
+    include 'imageCompressor.php';
     $response = array();
-    $image = null;
     $fileTempName = ($_FILES['file']['tmp_name']);
     $fileName = ($_FILES['file']['name']);
     $caption = null;
+    $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+    $mod_name = uniqid() . ".$ext";
+    $fileSize = $_FILES['file']['size'];
     if (isset($data->caption)) {
         $caption = addslashes($data->caption);
     } else {
         $caption = '';
     }
-    $fileSize = $_FILES['file']['size'];
-    if ($fileSize > 1000000) {
-        include 'imageCompressor.php';
-        try {
-            $moveResult = move_uploaded_file($fileTempName, "../uploads/$fileName");
-            if ($moveResult == true) {
-                $source = "../assets/temp_images/$fileName";
-                $destination = "../assets/temp_images/resized_$fileName";
-                $image = compress_image($source, $destination, 60); //change last parameter to change quality
-                unlink($source);
-                unlink($destination);
-            }
-
-        } catch (exception $e) {
-            $response['status'] = 'Error';
-            $response['message'] = $e->getMessage();
-            echo json_encode($response);
-            die();
-        }
-    } else {
-        $image = addslashes(file_get_contents($_FILES['file']['tmp_name']));
-    }
     try {
-        $insert = "INSERT INTO photos (photo_image,caption) VALUES ('" . $image . "','" . $caption . "')";
+        $moveResult = move_uploaded_file($fileTempName, "../assets/temp_images/$fileName");
+        if ($moveResult == true) {
+            $source = "../assets/temp_images/$fileName";
+            $destination = "../../assets/images/photos/$mod_name";
+            if ($fileSize > 1000000) {
+                $quality = 60;
+            } else {
+                $quality = 90;
+            }
+            compress_image($source, $destination, $quality); //change last parameter to change quality
+            unlink($source);
+        }
+    } catch (exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
+        die();
+    }
+
+    try {
+        $insert = "INSERT INTO photos (photo_image,caption) VALUES ('" . $mod_name . "','" . $caption . "')";
         $result = mysql_query($insert) or die(mysql_error());
         $id = mysql_insert_id();
         if ($result == 1) {
@@ -76,34 +76,35 @@ function insertPhotos($data)
 
 function insertGig($data)
 {
+    include 'imageCompressor.php';
     $response = array();
     $image = null;
     $fileTempName = ($_FILES['file']['tmp_name']);
     $fileName = ($_FILES['file']['name']);
     $fileSize = $_FILES['file']['size'];
-    if ($fileSize > 1000000) {
-        include 'imageCompressor.php';
-        try {
-            $moveResult = move_uploaded_file($fileTempName, "../uploads/$fileName");
-            if ($moveResult == true) {
-                $source = "../assets/temp_images/$fileName";
-                $destination = "../assets/temp_images/resized_$fileName";
-                $image = compress_image($source, $destination, 60); //change last parameter to change quality
-                unlink($source);
-                unlink($destination);
+    $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+    $mod_name = uniqid() . ".$ext";
+    try {
+        $moveResult = move_uploaded_file($fileTempName, "../assets/temp_images/$fileName");
+        if ($moveResult == true) {
+            $source = "../assets/temp_images/$fileName";
+            $destination = "../../assets/images/gigs/$mod_name";
+            if ($fileSize > 1000000) {
+                $quality = 60;
+            } else {
+                $quality = 90;
             }
-
-        } catch (exception $e) {
-            $response['status'] = 'Error';
-            $response['message'] = $e->getMessage();
-            echo json_encode($response);
-            die();
+            compress_image($source, $destination, $quality); //change last parameter to change quality
+            unlink($source);
         }
-    } else {
-        $image = addslashes(file_get_contents($_FILES['file']['tmp_name']));
+    } catch (exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
+        die();
     }
     try {
-        $insert = "INSERT INTO gigs (title,address,latitude,longitude,event_date,fb_link,photo_image) VALUES ('" . $data->title . "','" . $data->address . "','" . $data->lat . "','" . $data->lng . "','" . $data->date . "','" . $data->fbLink . "','" . $image . "')";
+        $insert = "INSERT INTO gigs (title,address,latitude,longitude,event_date,fb_link,photo_image) VALUES ('" . $data->title . "','" . $data->address . "','" . $data->lat . "','" . $data->lng . "','" . $data->date . "','" . $data->fbLink . "','" . $mod_name . "')";
         $result = mysql_query($insert) or die(mysql_error());
         $id = mysql_insert_id();
         if ($result == 1) {

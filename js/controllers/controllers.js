@@ -56,8 +56,8 @@ angular.module('joelPortfolio').controller('MainController', [
     };
     markers = [];
     $scope.picUrl = {
-      photo: API.url + 'pic.php?from=photos&&id=',
-      gig: API.url + 'pic.php?from=gigs&&id='
+      photo: API.url + '../../assets/images/photos/',
+      gig: API.url + '../../assets/images/gigs/'
     };
     $scope.$on('$viewContentLoaded', onLoadComplete);
     $(window).scroll(function() {

@@ -19,7 +19,7 @@ if ($data->fetch == 'photos') {
     $response = array();
     try {
         $returnedData = array();
-        $sql = "SELECT id,caption FROM photos WHERE id < $baseLimit ORDER BY id DESC LIMIT 8";
+        $sql = "SELECT * FROM photos WHERE id < $baseLimit ORDER BY id DESC LIMIT 8";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         $photoCount = mysql_num_rows($result);
         if ($photoCount > 0) {
@@ -45,7 +45,7 @@ if ($data->fetch == 'photos') {
     $response = array();
     try {
         $returnedData = array();
-        $sql = "SELECT id,title,address,latitude,longitude,event_date,fb_link FROM gigs WHERE id < $baseLimit ORDER BY event_date DESC LIMIT 8";
+        $sql = "SELECT * FROM gigs WHERE id < $baseLimit ORDER BY event_date DESC LIMIT 8";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         $gigCount = mysql_num_rows($result);
         if ($gigCount > 0) {

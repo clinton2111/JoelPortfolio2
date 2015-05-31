@@ -17,8 +17,8 @@ angular.module 'joelDashBoard.DashCtrl', []
     $scope.user = store.get 'user'
     $scope.dpUrl = API.url + 'pic.php?id=' + $scope.user.id + '&&from=users'
     $scope.picUrl =
-      photo: API.url + 'pic.php?from=photos&&id='
-      gig: API.url + 'pic.php?from=gigs&&id='
+      photo: API.url + '../../assets/images/photos/'
+      gig: API.url + '../../assets/images/gigs/'
 
     $scope.toggleEdit = (id)->
       index = _.findIndex($scope.gigs, {id: id});
@@ -46,7 +46,7 @@ angular.module 'joelDashBoard.DashCtrl', []
         if response.status is 'Success'
           $scope.photos = response.results
       , (error)->
-        console.log error
+        Materialize.toast('Something went wrong', 4000);
 
     $scope.fetchGigs = ->
       Search.fetchGigs()
@@ -55,7 +55,7 @@ angular.module 'joelDashBoard.DashCtrl', []
         if response.status is 'Success'
           $scope.gigs = response.results
       , (error)->
-        console.log error
+        Materialize.toast('Something went wrong', 4000);
 
 
     $scope.openPhotoModal = ()->
@@ -101,7 +101,7 @@ angular.module 'joelDashBoard.DashCtrl', []
         else
           Materialize.toast response.status + " - " + response.message, 4000
       , (error)->
-        console.log error
+        Materialize.toast('Something went wrong', 4000);
 
     $scope.uploadGig = (gig)->
       date = document.getElementById("date").value
@@ -136,7 +136,7 @@ angular.module 'joelDashBoard.DashCtrl', []
         else
           Materialize.toast response.status + " - " + response.message, 4000
       , (error)->
-        console.log error
+        Materialize.toast('Something went wrong', 4000);
 
     $scope.deletePhoto = (id)->
       index = _.findIndex($scope.photos, {id: id});
@@ -180,7 +180,7 @@ angular.module 'joelDashBoard.DashCtrl', []
         .then (data)->
           response = data.data
           if response.status is 'Success'
-            $scope.gigs[index].id = id;
+            $scope.gigs[index].photo_image = response.imageName;
             Materialize.toast response.status + " - " + response.message, 4000
           else
             Materialize.toast response.status + " - " + response.message, 4000
@@ -220,12 +220,13 @@ angular.module 'joelDashBoard.DashCtrl', []
             event_date: date
             fb_link: newdata.fbLink
           })
+          #          Todo:Fix recalling function
           $scope.fetchGigs()
           Materialize.toast response.status + " - " + response.message, 4000
         else
           Materialize.toast response.status + " - " + response.message, 4000
       , (error)->
-        console.log error
+        Materialize.toast('Something went wrong', 4000);
 
 
     $scope.updateCaption = (id)->
@@ -247,8 +248,8 @@ angular.module 'joelDashBoard.DashCtrl', []
 
     $scope.logout = ->
       store.remove 'user'
-      $state.go 'auth',{type:'login',email:null,value:null}
-      Materialize.toast 'You have been logged out',4000
+      $state.go 'auth', {type: 'login', email: null, value: null}
+      Materialize.toast 'You have been logged out', 4000
     $scope.$watchCollection ['photos', 'gigs'], ()->
       $scope.$apply
     , false

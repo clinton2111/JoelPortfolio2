@@ -93,25 +93,4 @@ if ($data->type == 'contact') {
         echo json_encode($response);
     }
 
-} elseif ($data->type == 'updatePassword') {
-    include 'connection.config.php';
-    $response = array();
-    $email = $data->email;
-    $temp_pass = $data->value;
-    $password = $data->password;
-    $empty = "";
-    try {
-        $sql = "UPDATE users SET password='$password' WHERE email='$email' and temp_password='$temp_pass' ";
-        $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
-        $delete = "UPDATE users SET temp_password='$empty' WHERE email='$email'";
-        $result2 = mysql_query($delete) or die(mysql_error());
-        $response['status'] = 'Success';
-        $response['message'] = 'Password Updated';
-        echo json_encode($response);
-    } catch (excpetion $e) {
-        $response['status'] = 'Error';
-        $response['message'] = 'Something went wrong';
-        echo json_encode($response);
-    }
-
 }

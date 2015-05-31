@@ -7,6 +7,7 @@
  */
 include 'connection.config.php';
 require_once '../vendor/firebase/php-jwt/Authentication/JWT.php';
+include "resourceCleaner.php";
 $json = file_get_contents('php://input');
 $data = json_decode($json);
 $JWT = new JWT;
@@ -28,6 +29,7 @@ function deletePhoto($data)
 {
     $response = array();
     try {
+        imageCleanup($data->id);
         $sql = "DELETE FROM photos WHERE id=$data->id";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         if ($result == 1) {
@@ -50,6 +52,7 @@ function deleteGig($data)
 {
     $response = array();
     try {
+        gigCleanup($data->id);
         $sql = "DELETE FROM gigs WHERE id=$data->id";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         if ($result == 1) {

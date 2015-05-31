@@ -29,7 +29,7 @@ function fetchPhotos($data)
     $response = array();
     try {
         $returnedData = array();
-        $sql = "SELECT id,caption FROM photos ORDER BY id DESC";
+        $sql = "SELECT * FROM photos ORDER BY id DESC";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         $photoCount = mysql_num_rows($result);
         if ($photoCount > 0) {
@@ -58,7 +58,7 @@ function fetchGigs($data)
     $response = array();
     try {
         $returnedData = array();
-        $sql = "SELECT id,title,address,latitude,longitude,event_date,fb_link FROM gigs ORDER BY event_date DESC";
+        $sql = "SELECT * FROM gigs ORDER BY event_date DESC";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         $gigCount = mysql_num_rows($result);
         if ($gigCount > 0) {

@@ -15,9 +15,4 @@ function compress_image($source_url, $destination_url, $quality)
 
     //save file
     imagejpeg($image, $destination_url, $quality);
-
-    //return destination file
-    $instr = fopen($destination_url,"rb");
-    $new_image = addslashes(fread($instr,filesize($destination_url)));
-    return $new_image;
 }

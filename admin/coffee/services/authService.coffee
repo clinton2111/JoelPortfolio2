@@ -2,9 +2,10 @@ angular.module 'joelDashBoard.login'
 .factory 'Auth', ['$http', '$q', 'API', ($http, $q, API)->
   return(
     signIn: (userCredentials)->
+      userCredentials.type = 'login'
       q = $q.defer()
       $http
-        url: API.url + 'login.php'
+        url: API.url + 'auth.php'
         method: 'POST'
         data: userCredentials
         skipAuthorization: true
@@ -34,7 +35,7 @@ angular.module 'joelDashBoard.login'
       passwordData.type = 'updatePassword'
       q = $q.defer()
       $http
-        url: API.url + 'mailer.php'
+        url: API.url + 'auth.php'
         method: 'POST'
         data: passwordData
         skipAuthorization: true
