@@ -43,7 +43,8 @@ angular.module 'joelPortfolio'
 
       $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-
+    $scope.gigs = []
+    $scope.photos = []
     markers = []
     $scope.picUrl =
       photo: API.url + '../../assets/images/photos/'
@@ -71,25 +72,36 @@ angular.module 'joelPortfolio'
           $(this).stop().animate({opacity: 0, marginTop: 0}, 'fast');
 
     $scope.fetchGigs = (offset = 0)->
+      $scope.loadingGigs = true
       mainServices.getGigs(offset)
       .then (data)->
         response = data.data
-        $scope.gigs = response.results
+        _.each(response.results, (index)->
+          $scope.gigs.push(index)
+        )
       , (error)->
         console.log error
+      .finally ->
+        $scope.loadingGigs = false
 
     $scope.fetchPhotos = (offset = 0)->
+      $scope.loadingPhotos = true
       mainServices.getPics(offset)
       .then (data)->
         response = data.data
-        $scope.photos = response.results
+        response = data.data
+        _.each(response.results, (index)->
+          $scope.photos.push(index)
+        )
       , (error)->
         console.log error
+      .finally ->
+        $scope.loadingPhotos = false
 
     $scope.getGigInfo = (id)->
       index = _.findIndex($scope.gigs, {id: id});
-
       gig = $scope.gigs[index]
+
       $scope.gigInfo =
         id: id
         title: gig.title
@@ -98,6 +110,7 @@ angular.module 'joelPortfolio'
         fbLink: gig.fb_link
         lat: gig.latitude
         lng: gig.longitude
+        image: gig.photo_image
 
       if markers.length > 0
         markers[0].setMap null
@@ -136,11 +149,39 @@ angular.module 'joelPortfolio'
       mainServices.sendEmail($scope.email)
       .then (data)->
         response = data.data;
-        if response.status is 'Success' then Materialize.toast(response.status+' - '+response.message,4000)
+        if response.status is 'Success' then Materialize.toast(response.status + ' - ' + response.message, 4000)
         else
-          Materialize.toast(response.status+' - '+response.message,4000)
+          Materialize.toast(response.status + ' - ' + response.message, 4000)
       , (error)->
         Materialize.toast('Opps something went wrong.', 4000)
+
+    $scope.loadMoreGigs = ->
+      id = $scope.gigs[$scope.gigs.length - 1].id
+      mainServices.getGigs(id)
+      .then (data)->
+        response = data.data
+        if response.status is 'Success'
+          _.each(response.results, (index)->
+            $scope.gigs.push(index)
+          )
+        else
+          Materialize.toast response.message, 4000
+      , (error)->
+        console.log error
+
+    $scope.loadMorePhotos = ->
+      id = $scope.photos[$scope.photos.length - 1].id
+      mainServices.getPics(id)
+      .then (data)->
+        response = data.data
+        if response.status is 'Success'
+          _.each(response.results, (index)->
+            $scope.photos.push(index)
+          )
+        else
+          Materialize.toast response.message, 4000
+      , (error)->
+        console.log error
 
     $scope.$watchCollection ['photos', 'gigs'], ()->
       $scope.$apply

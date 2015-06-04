@@ -16,6 +16,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       photo: API.url + '../../assets/images/photos/',
       gig: API.url + '../../assets/images/gigs/'
     };
+    $scope.gigRefresh = false;
     $scope.toggleEdit = function(id) {
       var gig, index;
       index = _.findIndex($scope.gigs, {
@@ -56,7 +57,8 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         var response;
         response = data.data;
         if (response.status === 'Success') {
-          return $scope.gigs = response.results;
+          $scope.gigs = response.results;
+          return $scope.gigRefresh = true;
         }
       }, function(error) {
         return Materialize.toast('Something went wrong', 4000);
@@ -244,6 +246,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         var response;
         response = data.data;
         if (response.status === 'Success') {
+          $scope.gigRefresh = false;
           $scope.gigs[index] = {
             id: id,
             title: newdata.title,
@@ -251,9 +254,10 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
             latitude: lat,
             longitude: lng,
             event_date: date,
-            fb_link: newdata.fbLink
+            fb_link: newdata.fbLink,
+            photo_image: $scope.gigs[index].photo_image
           };
-          $scope.fetchGigs();
+          $scope.gigRefresh = true;
           return Materialize.toast(response.status + " - " + response.message, 4000);
         } else {
           return Materialize.toast(response.status + " - " + response.message, 4000);
@@ -294,8 +298,11 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       });
       return Materialize.toast('You have been logged out', 4000);
     };
-    return $scope.$watchCollection(['photos', 'gigs'], function() {
+    $scope.$watchCollection(['photos', 'gigs'], function() {
       return $scope.$apply;
+    }, false);
+    return $scope.$watch('gigRefresh', function() {
+      return $scope.apply;
     }, false);
   }
 ]);

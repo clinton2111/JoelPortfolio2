@@ -13,7 +13,7 @@ if ($data->offset == 0) {
     $id = mysql_result(mysql_query("SELECT MAX(id) FROM $data->fetch"), 0);
     $baseLimit = $id + 1;
 } else {
-    $baseLimit = $data->offset + 1;
+    $baseLimit = $data->offset;
 }
 if ($data->fetch == 'photos') {
     $response = array();
@@ -31,7 +31,7 @@ if ($data->fetch == 'photos') {
             $response['results'] = $returnedData;
         } else {
             $response['status'] = 'Error';
-            $response['message'] = 'No photos found';
+            $response['message'] = 'No More Photos to Display';
         }
         echo json_encode($response);
     } catch (exception $e) {
@@ -45,7 +45,7 @@ if ($data->fetch == 'photos') {
     $response = array();
     try {
         $returnedData = array();
-        $sql = "SELECT * FROM gigs WHERE id < $baseLimit ORDER BY event_date DESC LIMIT 8";
+        $sql = "SELECT * FROM gigs WHERE id < $baseLimit ORDER BY id DESC LIMIT 8";
         $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
         $gigCount = mysql_num_rows($result);
         if ($gigCount > 0) {
@@ -57,7 +57,7 @@ if ($data->fetch == 'photos') {
             $response['results'] = $returnedData;
         } else {
             $response['status'] = 'Error';
-            $response['message'] = 'No Gigs found';
+            $response['message'] = 'No More Gigs Found';
         }
         echo json_encode($response);
     } catch (exception $e) {

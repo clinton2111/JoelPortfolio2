@@ -37,7 +37,8 @@
         <!--   Icon Section   -->
         <div class="row ">
             <div class="col s12 m4 l3">
-                <img ng-src="../assets/images/joelpropic.jpg" class="circle responsive-img z-depth-3">
+                <img src='../assets/images/loading.svg'
+                     lazy-img="../assets/images/joelpropic.jpg" class="circle responsive-img z-depth-3">
             </div>
             <div class="col s12 m4 l9">
                 <section>
@@ -98,7 +99,8 @@
             <div class="col s6 m3 l3" ng-repeat="gig in gigs">
                 <div class="card medium z-depth-3">
                     <div class="card-image">
-                        <img class="responsive-img" ng-src="{{picUrl.gig+gig.photo_image}}">
+                        <img class="responsive-img" src='../assets/images/loading.svg'
+                             lazy-img="{{picUrl.gig+gig.photo_image}}">
                     </div>
                     <div class="card-content">
                         <p>{{gig.title}}</p>
@@ -109,14 +111,23 @@
                 </div>
             </div>
         </div>
+        <div class="row center-align" ng-show="loadingGigs">
+            <img src="../assets/images/loading.svg" height="150" class="loaderBackGround">
+        </div>
+        <div class="row center-align">
+            <button class="btn waves-effect waves-light blue-grey" ng-click="loadMoreGigs()">
+                Load More
+            </button>
+        </div>
     </div>
+
     <div class="parallax">
         <img ng-src="../assets/images/header1.jpg">
     </div>
     <div id="gigInfo" class="modal modal-fixed-footer">
         <div class="modal-content">
             <div class=" center-align" adaptive-background>
-                <img ng-src="{{picUrl.gig+gigInfo.id}}" width="350">
+                <img ng-src="{{picUrl.gig+gigInfo.image}}" width="350">
             </div>
             <div class="container">
                 <p class="flow-text">Title - {{gigInfo.title}}
@@ -164,17 +175,29 @@
 
         <div class="row" ng-repeat="photo in photos" ng-if="$index % 4 === 0" on-finish-render>
             <div class="col s6 m3 l3" ng-if="$index < photos.length">
-                <img class=" responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index].photo_image}}"/>
+                <img class=" responsive-img materialboxed z-depth-3" src='../assets/images/loading.svg'
+                     lazy-img="{{picUrl.photo+photos[$index].photo_image}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 1 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 1].photo_image}}"/>
+                <img class="responsive-img materialboxed z-depth-3" src='../assets/images/loading.svg'
+                     lazy-img="{{picUrl.photo+photos[$index + 1].photo_image}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 2 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 2].photo_image}}"/>
+                <img class="responsive-img materialboxed z-depth-3" src='../assets/images/loading.svg'
+                     lazy-img="{{picUrl.photo+photos[$index + 2].photo_image}}"/>
             </div>
             <div class="col s6 m3 l3" ng-if="$index + 3 < photos.length">
-                <img class="responsive-img materialboxed z-depth-3" ng-src="{{picUrl.photo+photos[$index + 3].photo_image}}"/>
+                <img class="responsive-img materialboxed z-depth-3" src='../assets/images/loading.svg'
+                     lazy-img="{{picUrl.photo+photos[$index + 3].photo_image}}"/>
             </div>
+        </div>
+        <div class="row center-align" ng-show="loadingPhotos">
+            <img src="../assets/images/loading.svg" height="150" class="loaderBackGround">
+        </div>
+        <div class="row center-align">
+            <button class="btn waves-effect waves-light blue-grey" ng-click="loadMorePhotos()">
+                Load More
+            </button>
         </div>
     </div>
     <div class="parallax">

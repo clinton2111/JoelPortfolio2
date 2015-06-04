@@ -54,6 +54,8 @@ angular.module('joelPortfolio').controller('MainController', [
       };
       return $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     };
+    $scope.gigs = [];
+    $scope.photos = [];
     markers = [];
     $scope.picUrl = {
       photo: API.url + '../../assets/images/photos/',
@@ -85,24 +87,35 @@ angular.module('joelPortfolio').controller('MainController', [
       if (offset == null) {
         offset = 0;
       }
+      $scope.loadingGigs = true;
       return mainServices.getGigs(offset).then(function(data) {
         var response;
         response = data.data;
-        return $scope.gigs = response.results;
+        return _.each(response.results, function(index) {
+          return $scope.gigs.push(index);
+        });
       }, function(error) {
         return console.log(error);
+      })["finally"](function() {
+        return $scope.loadingGigs = false;
       });
     };
     $scope.fetchPhotos = function(offset) {
       if (offset == null) {
         offset = 0;
       }
+      $scope.loadingPhotos = true;
       return mainServices.getPics(offset).then(function(data) {
         var response;
         response = data.data;
-        return $scope.photos = response.results;
+        response = data.data;
+        return _.each(response.results, function(index) {
+          return $scope.photos.push(index);
+        });
       }, function(error) {
         return console.log(error);
+      })["finally"](function() {
+        return $scope.loadingPhotos = false;
       });
     };
     $scope.getGigInfo = function(id) {
@@ -118,7 +131,8 @@ angular.module('joelPortfolio').controller('MainController', [
         date: gig.event_date,
         fbLink: gig.fb_link,
         lat: gig.latitude,
-        lng: gig.longitude
+        lng: gig.longitude,
+        image: gig.photo_image
       };
       if (markers.length > 0) {
         markers[0].setMap(null);
@@ -158,6 +172,40 @@ angular.module('joelPortfolio').controller('MainController', [
         }
       }, function(error) {
         return Materialize.toast('Opps something went wrong.', 4000);
+      });
+    };
+    $scope.loadMoreGigs = function() {
+      var id;
+      id = $scope.gigs[$scope.gigs.length - 1].id;
+      return mainServices.getGigs(id).then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          return _.each(response.results, function(index) {
+            return $scope.gigs.push(index);
+          });
+        } else {
+          return Materialize.toast(response.message, 4000);
+        }
+      }, function(error) {
+        return console.log(error);
+      });
+    };
+    $scope.loadMorePhotos = function() {
+      var id;
+      id = $scope.photos[$scope.photos.length - 1].id;
+      return mainServices.getPics(id).then(function(data) {
+        var response;
+        response = data.data;
+        if (response.status === 'Success') {
+          return _.each(response.results, function(index) {
+            return $scope.photos.push(index);
+          });
+        } else {
+          return Materialize.toast(response.message, 4000);
+        }
+      }, function(error) {
+        return console.log(error);
       });
     };
     return $scope.$watchCollection(['photos', 'gigs'], function() {

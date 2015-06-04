@@ -1,4 +1,4 @@
-angular.module('joelPortfolio', ['ui.router', 'mb-adaptive-backgrounds']).config([
+angular.module('joelPortfolio', ['ui.router', 'mb-adaptive-backgrounds', 'angularLazyImg']).config([
   '$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider.state('home', {
       url: '/home',

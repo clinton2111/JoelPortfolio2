@@ -3,7 +3,7 @@
         <h1 class="header amber-text thin">Gigs</h1>
 
         <div class="section">
-            <ul class="collapsible popout" data-collapsible="accordion">
+            <ul class="collapsible popout" data-collapsible="accordion" ng-if="gigRefresh">
                 <li ng-repeat="gig in gigs" on-finish-render ng-init="editMode=false">
                     <div class="collapsible-header"><i class="mdi-action-event"></i>{{gig.title}}
                         <span class="right">
