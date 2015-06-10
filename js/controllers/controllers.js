@@ -5,7 +5,6 @@ angular.module('joelPortfolio').controller('MainController', [
       var mapOptions;
       $(".button-collapse").sideNav();
       $('.parallax').parallax();
-      $('.materialboxed').materialbox();
       mapOptions = {
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -208,7 +207,7 @@ angular.module('joelPortfolio').controller('MainController', [
         return console.log(error);
       });
     };
-    return $scope.$watchCollection(['photos', 'gigs'], function() {
+    return $scope.$watchCollection(['photos', 'gigs', 'loadingPhotos', 'loadingGigs'], function() {
       return $scope.$apply;
     }, false);
   }

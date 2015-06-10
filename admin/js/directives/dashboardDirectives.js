@@ -5,7 +5,11 @@ angular.module('joelDashBoard.DashCtrl').directive('onFinishRender', [
       link: function(scope, element, attrs) {
         if (scope.$last === true) {
           return $timeout(function() {
-            return scope.$emit('$viewContentLoaded');
+            if (attrs['onFinishRender'] === 'Gigs') {
+              return $('.collapsible').collapsible({
+                accordion: false
+              });
+            }
           });
         }
       }

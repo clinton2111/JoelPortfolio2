@@ -6,8 +6,7 @@ angular.module 'joelPortfolio'
       .sideNav();
       $ '.parallax'
       .parallax();
-      $ '.materialboxed'
-      .materialbox();
+
 
       mapOptions =
         zoom: 16
@@ -183,7 +182,7 @@ angular.module 'joelPortfolio'
       , (error)->
         console.log error
 
-    $scope.$watchCollection ['photos', 'gigs'], ()->
+    $scope.$watchCollection ['photos', 'gigs', 'loadingPhotos', 'loadingGigs'], ()->
       $scope.$apply
     , false
 

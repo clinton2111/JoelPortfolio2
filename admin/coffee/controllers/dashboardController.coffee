@@ -6,9 +6,6 @@ angular.module 'joelDashBoard.DashCtrl', []
       .sideNav();
       $ '.materialboxed'
       .materialbox()
-      $ '.collapsible'
-      .collapsible
-          accordion: false
 
 
     $scope.gPlace;
@@ -19,7 +16,6 @@ angular.module 'joelDashBoard.DashCtrl', []
     $scope.picUrl =
       photo: API.url + '../../assets/images/photos/'
       gig: API.url + '../../assets/images/gigs/'
-    $scope.gigRefresh = false
     $scope.toggleEdit = (id)->
       index = _.findIndex($scope.gigs, {id: id});
       $ '.datepicker'
@@ -54,7 +50,6 @@ angular.module 'joelDashBoard.DashCtrl', []
         response = data.data
         if response.status is 'Success'
           $scope.gigs = response.results
-          $scope.gigRefresh = true
       , (error)->
         Materialize.toast('Something went wrong', 4000);
 
@@ -195,7 +190,6 @@ angular.module 'joelDashBoard.DashCtrl', []
       if (typeof newdata.placeDetails is 'undefined')
         lat = $scope.gigs[index].latitude
         lng = $scope.gigs[index].longitude
-        console.log lat + ' ' + lng
       else
         lat = newdata.placeDetails.geometry.location.lat()
         lng = newdata.placeDetails.geometry.location.lng()
@@ -212,7 +206,7 @@ angular.module 'joelDashBoard.DashCtrl', []
       .then (data)->
         response = data.data
         if response.status is 'Success'
-          $scope.gigRefresh = false
+
           $scope.gigs[index] = ({
             id: id
             title: newdata.title
@@ -223,7 +217,7 @@ angular.module 'joelDashBoard.DashCtrl', []
             fb_link: newdata.fbLink
             photo_image: $scope.gigs[index].photo_image
           })
-          $scope.gigRefresh = true
+
           Materialize.toast response.status + " - " + response.message, 4000
         else
           Materialize.toast response.status + " - " + response.message, 4000
@@ -255,9 +249,6 @@ angular.module 'joelDashBoard.DashCtrl', []
 
     $scope.$watchCollection ['photos', 'gigs'], ()->
       $scope.$apply
-    , false
-    $scope.$watch 'gigRefresh', ->
-      $scope.apply
     , false
 
 

@@ -4,8 +4,11 @@ angular.module 'joelDashBoard.DashCtrl'
   link: (scope, element, attrs)->
     if scope.$last is true
       $timeout ()->
-        scope.$emit('$viewContentLoaded');
-
+        if attrs['onFinishRender'] is 'Gigs'
+          $ '.collapsible'
+          .collapsible(
+              accordion: false
+          )
 ]
 
 .directive 'googleplace', [()->

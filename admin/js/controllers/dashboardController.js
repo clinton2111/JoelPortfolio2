@@ -3,10 +3,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
     var onLoadComplete;
     onLoadComplete = function() {
       $(".button-collapse").sideNav();
-      $('.materialboxed').materialbox();
-      return $('.collapsible').collapsible({
-        accordion: false
-      });
+      return $('.materialboxed').materialbox();
     };
     $scope.gPlace;
     $scope.$on('$viewContentLoaded', onLoadComplete);
@@ -16,7 +13,6 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       photo: API.url + '../../assets/images/photos/',
       gig: API.url + '../../assets/images/gigs/'
     };
-    $scope.gigRefresh = false;
     $scope.toggleEdit = function(id) {
       var gig, index;
       index = _.findIndex($scope.gigs, {
@@ -57,8 +53,7 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         var response;
         response = data.data;
         if (response.status === 'Success') {
-          $scope.gigs = response.results;
-          return $scope.gigRefresh = true;
+          return $scope.gigs = response.results;
         }
       }, function(error) {
         return Materialize.toast('Something went wrong', 4000);
@@ -227,7 +222,6 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       if (typeof newdata.placeDetails === 'undefined') {
         lat = $scope.gigs[index].latitude;
         lng = $scope.gigs[index].longitude;
-        console.log(lat + ' ' + lng);
       } else {
         lat = newdata.placeDetails.geometry.location.lat();
         lng = newdata.placeDetails.geometry.location.lng();
@@ -246,7 +240,6 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         var response;
         response = data.data;
         if (response.status === 'Success') {
-          $scope.gigRefresh = false;
           $scope.gigs[index] = {
             id: id,
             title: newdata.title,
@@ -257,7 +250,6 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
             fb_link: newdata.fbLink,
             photo_image: $scope.gigs[index].photo_image
           };
-          $scope.gigRefresh = true;
           return Materialize.toast(response.status + " - " + response.message, 4000);
         } else {
           return Materialize.toast(response.status + " - " + response.message, 4000);
@@ -298,11 +290,8 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       });
       return Materialize.toast('You have been logged out', 4000);
     };
-    $scope.$watchCollection(['photos', 'gigs'], function() {
+    return $scope.$watchCollection(['photos', 'gigs'], function() {
       return $scope.$apply;
-    }, false);
-    return $scope.$watch('gigRefresh', function() {
-      return $scope.apply;
     }, false);
   }
 ]);

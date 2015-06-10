@@ -96,7 +96,7 @@
         <p class="thin white-text flow-text">Here are some of the events il be playing at in the coming days.</p>
 
         <div class="row">
-            <div class="col s6 m3 l3" ng-repeat="gig in gigs">
+            <div class="col s6 m3 l3" ng-repeat="gig in gigs" on-finish-render='Gigs'>
                 <div class="card medium z-depth-3">
                     <div class="card-image">
                         <img class="responsive-img" src='../assets/images/loading.svg'
@@ -173,7 +173,7 @@
     <div class="container">
         <h1 class="header white-text">Photos</h1>
 
-        <div class="row" ng-repeat="photo in photos" ng-if="$index % 4 === 0" on-finish-render>
+        <div class="row" ng-repeat="photo in photos" on-finish-render='Photos' ng-if="$index % 4 === 0">
             <div class="col s6 m3 l3" ng-if="$index < photos.length">
                 <img class=" responsive-img materialboxed z-depth-3" src='../assets/images/loading.svg'
                      lazy-img="{{picUrl.photo+photos[$index].photo_image}}"/>
