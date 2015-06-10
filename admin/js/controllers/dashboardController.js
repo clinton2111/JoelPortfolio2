@@ -94,7 +94,8 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
         if (response.status === 'Success') {
           $scope.photos.unshift({
             id: response.id,
-            caption: pic.Caption
+            caption: pic.Caption,
+            photo_image: response.imageName
           });
           $scope.pic = {};
           return Materialize.toast(response.status + " - " + response.message, 4000);
@@ -132,7 +133,8 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
             latitude: gig.placeDetails.geometry.location.lat(),
             longitude: gig.placeDetails.geometry.location.lng(),
             event_date: date,
-            fb_link: gig.fbLink
+            fb_link: gig.fbLink,
+            photo_image: response.imageName
           });
           $scope.gig = {};
           return Materialize.toast(response.status + " - " + response.message, 4000);

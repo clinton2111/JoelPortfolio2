@@ -61,6 +61,7 @@ function insertPhotos($data)
             $response['status'] = 'Success';
             $response['message'] = 'Photo uploaded successfully';
             $response['id'] = $id;
+            $response['imageName'] = $mod_name;
         } else {
             $response['status'] = 'Error';
             $response['message'] = 'Photo upload failed';
@@ -111,6 +112,7 @@ function insertGig($data)
             $response['status'] = 'Success';
             $response['message'] = 'Gig Data uploaded successfully';
             $response['id'] = $id;
+            $response['imageName'] = $mod_name;
         } else {
             $response['status'] = 'Error';
             $response['message'] = 'Gig upload failed';

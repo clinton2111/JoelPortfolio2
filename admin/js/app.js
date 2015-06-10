@@ -1,4 +1,4 @@
-angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login', 'joelDashBoard.DashCtrl', 'ngFileUpload', 'angular-md5']).config([
+angular.module('joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login', 'joelDashBoard.DashCtrl', 'ngFileUpload', 'angular-md5', 'angularLazyImg']).config([
   '$stateProvider', '$urlRouterProvider', '$httpProvider', 'jwtInterceptorProvider', function($stateProvider, $urlRouterProvider, $httpProvider, jwtInterceptorProvider) {
     $stateProvider.state('auth', {
       url: '/auth/:type/:email/:value',

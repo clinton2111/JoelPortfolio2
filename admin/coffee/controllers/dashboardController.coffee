@@ -91,6 +91,7 @@ angular.module 'joelDashBoard.DashCtrl', []
           $scope.photos.unshift({
             id: response.id
             caption: pic.Caption
+            photo_image:response.imageName
           })
           $scope.pic = {};
           Materialize.toast response.status + " - " + response.message, 4000
@@ -126,6 +127,7 @@ angular.module 'joelDashBoard.DashCtrl', []
             longitude: gig.placeDetails.geometry.location.lng()
             event_date: date
             fb_link: gig.fbLink
+            photo_image:response.imageName
           })
           $scope.gig = {};
           Materialize.toast response.status + " - " + response.message, 4000

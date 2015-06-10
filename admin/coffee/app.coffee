@@ -1,4 +1,4 @@
-angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login','joelDashBoard.DashCtrl','ngFileUpload','angular-md5']
+angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login','joelDashBoard.DashCtrl','ngFileUpload','angular-md5','angularLazyImg']
 .config ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'jwtInterceptorProvider',
   ($stateProvider, $urlRouterProvider, $httpProvider, jwtInterceptorProvider)->
     $stateProvider
