@@ -1,6 +1,6 @@
 angular.module 'joelDashBoard.DashCtrl', []
-.controller 'dashboardController', ['$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete', '$state'
-  ($scope, store, API, Insert, Search, Update, Delete, $state)->
+.controller 'dashboardController', ['$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete', '$state', 'md5',
+  ($scope, store, API, Insert, Search, Update, Delete, $state, md5)->
     onLoadComplete = ()->
       $ ".button-collapse"
       .sideNav();
@@ -91,7 +91,7 @@ angular.module 'joelDashBoard.DashCtrl', []
           $scope.photos.unshift({
             id: response.id
             caption: pic.Caption
-            photo_image:response.imageName
+            photo_image: response.imageName
           })
           $scope.pic = {};
           Materialize.toast response.status + " - " + response.message, 4000
@@ -127,7 +127,7 @@ angular.module 'joelDashBoard.DashCtrl', []
             longitude: gig.placeDetails.geometry.location.lng()
             event_date: date
             fb_link: gig.fbLink
-            photo_image:response.imageName
+            photo_image: response.imageName
           })
           $scope.gig = {};
           Materialize.toast response.status + " - " + response.message, 4000
@@ -243,6 +243,24 @@ angular.module 'joelDashBoard.DashCtrl', []
           Materialize.toast response.status + " - " + response.message, 4000
       , (error)->
         Materialize.toast('Something went wrong', 4000);
+
+    $scope.updatePassword = (password)->
+      if password.new != password.confirm then Materialize.toast('New password and confirmation password do not match',
+        4000)
+      else
+        data =
+          currentPassword: md5.createHash(password.current || '')
+          newPassword: md5.createHash(password.new || '')
+          id:$scope.user.id
+        Update.updatePassword(data)
+        .then (data)->
+          response = data.data
+          if response.status is 'Success'
+            Materialize.toast response.status + " - " + response.message, 4000
+          else
+            Materialize.toast response.status + " - " + response.message, 4000
+        , (error)->
+          Materialize.toast('Something went wrong', 4000);
 
     $scope.logout = ->
       store.remove 'user'

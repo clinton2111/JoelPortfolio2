@@ -100,7 +100,7 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
       },
       updateGigPoster: function(data, file) {
         var q;
-        data.location = 'gigs';
+        data.location = 'gigPoster';
         q = $q.defer();
         Upload.upload({
           url: API.url + 'update.php',
@@ -121,6 +121,21 @@ angular.module('joelDashBoard.DashCtrl').factory('Insert', [
         var q;
         data.location = 'gigs';
         data.updateType = 'info';
+        q = $q.defer();
+        $http({
+          url: API.url + 'update.php',
+          data: data,
+          method: 'post'
+        }).then(function(data) {
+          return q.resolve(data);
+        }, function(error) {
+          return q.reject(error);
+        });
+        return q.promise;
+      },
+      updatePassword: function(data) {
+        var q;
+        data.location = 'password';
         q = $q.defer();
         $http({
           url: API.url + 'update.php',

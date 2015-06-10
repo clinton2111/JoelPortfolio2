@@ -1,5 +1,5 @@
 angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
-  '$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete', '$state', function($scope, store, API, Insert, Search, Update, Delete, $state) {
+  '$scope', 'store', 'API', 'Insert', 'Search', 'Update', 'Delete', '$state', 'md5', function($scope, store, API, Insert, Search, Update, Delete, $state, md5) {
     var onLoadComplete;
     onLoadComplete = function() {
       $(".button-collapse").sideNav();
@@ -282,6 +282,29 @@ angular.module('joelDashBoard.DashCtrl', []).controller('dashboardController', [
       }, function(error) {
         return Materialize.toast('Something went wrong', 4000);
       });
+    };
+    $scope.updatePassword = function(password) {
+      var data;
+      if (password["new"] !== password.confirm) {
+        return Materialize.toast('New password and confirmation password do not match', 4000);
+      } else {
+        data = {
+          currentPassword: md5.createHash(password.current || ''),
+          newPassword: md5.createHash(password["new"] || ''),
+          id: $scope.user.id
+        };
+        return Update.updatePassword(data).then(function(data) {
+          var response;
+          response = data.data;
+          if (response.status === 'Success') {
+            return Materialize.toast(response.status + " - " + response.message, 4000);
+          } else {
+            return Materialize.toast(response.status + " - " + response.message, 4000);
+          }
+        }, function(error) {
+          return Materialize.toast('Something went wrong', 4000);
+        });
+      }
     };
     $scope.logout = function() {
       store.remove('user');

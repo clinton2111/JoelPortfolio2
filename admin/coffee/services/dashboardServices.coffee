@@ -81,7 +81,7 @@ angular.module 'joelDashBoard.DashCtrl'
       q.promise
 
     updateGigPoster: (data, file)->
-      data.location = 'gigs'
+      data.location = 'gigPoster'
       q = $q.defer();
       Upload.upload
         url: API.url + 'update.php'
@@ -97,7 +97,20 @@ angular.module 'joelDashBoard.DashCtrl'
 
     updateGigInfo: (data)->
       data.location = 'gigs'
-      data.updateType='info'
+      data.updateType = 'info'
+      q = $q.defer();
+      $http
+        url: API.url + 'update.php'
+        data: data
+        method: 'post'
+      .then (data)->
+        q.resolve data
+      , (error)->
+        q.reject(error)
+      q.promise
+
+    updatePassword: (data)->
+      data.location = 'password'
       q = $q.defer();
       $http
         url: API.url + 'update.php'

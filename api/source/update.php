@@ -21,6 +21,8 @@ try {
             updatePhotoCaption($data);
         } else if ($data->location === 'gigs' && $data->updateType === 'info') {
             updateGigsInfo($data);
+        } else if ($data->location === 'password') {
+            updatePassword($data);
         }
     } elseif ($contentHeaders[0] == 'multipart/form-data') {
         updateGigPoster();
@@ -90,7 +92,7 @@ function updateGigPoster()
         if ($result == 1) {
             $response['status'] = 'Success';
             $response['message'] = 'Poster Updated';
-            $response['imageName']=$mod_name;
+            $response['imageName'] = $mod_name;
         } else {
             $response['status'] = 'Error';
             $response['message'] = 'Something went wrong try again';
@@ -117,6 +119,33 @@ function updateGigsInfo($data)
         } else {
             $response['status'] = 'Error';
             $response['message'] = 'Something went wrong try again';
+        }
+        echo json_encode($response);
+    } catch (Exception $e) {
+        $response['status'] = 'Error';
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
+        die();
+    }
+}
+
+function updatePassword($data)
+{
+    $response = array();
+    try {
+        $sql = "SELECT 1 FROM users WHERE BINARY id='$data->id' and password='$data->currentPassword'";
+        $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
+        $Count = mysql_num_rows($result);
+        if ($Count == 1) {
+            $sql2 = "UPDATE users SET password='$data->newPassword' WHERE id=$data->id";
+            $result2 = mysql_query($sql2) or trigger_error(mysql_error() . $sql2);
+            if ($result2 == 1) {
+                $response['status'] = 'Success';
+                $response['message'] = 'Password Updated';
+            }
+        } else {
+            $response['status'] = 'Error';
+            $response['message'] = 'Incorrect password. Please enter your current password';
         }
         echo json_encode($response);
     } catch (Exception $e) {
