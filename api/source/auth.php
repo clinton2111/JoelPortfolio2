@@ -49,7 +49,7 @@ if ($data->type == 'login') {
         } catch (exception $e) {
             header('HTTP/1.0 401 Unauthorized');
             $response['status'] = 'Error';
-            $response['message'] = $e;
+            $response['message'] = $e->getMessage();
             echo json_encode($response);
         }
     }
@@ -69,7 +69,7 @@ if ($data->type == 'login') {
         echo json_encode($response);
     } catch (excpetion $e) {
         $response['status'] = 'Error';
-        $response['message'] = 'Something went wrong';
+        $response['message'] = $e->getMessage();
         echo json_encode($response);
     }
 

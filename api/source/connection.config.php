@@ -2,6 +2,13 @@
 $key = md5('mySecretKey');
 $alg = 'HS512';
 
+$SMTPDetails = array();
+$SMTPDetails['Host'] = 'smtp.sendgrid.net';
+$SMTPDetails['Username'] = '';
+$SMTPDetails['Password'] = '';
+$SMTPDetails['SMTPSecure'] = 'ssl';
+$SMTPDetails['Port'] = 465;
+
 define("DB_HOST", "localhost");
 // set database host
 define("DB_USER", "root");

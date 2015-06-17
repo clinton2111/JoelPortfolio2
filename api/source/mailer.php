@@ -6,41 +6,37 @@
  * Time: 12:03 AM
  */
 require_once '../vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
+include 'connection.config.php';
 $json = file_get_contents('php://input');
 $data = json_decode($json);
+$response = array();
+$message = array();
+
+//SMTPSend($message, $SMTPDetails);
 if ($data->type == 'contact') {
-    $response = array();
-    $mail = new PHPMailer;
+    $message['From'] = 'noreply@djjoelgoa.in';
+    $message['FromName'] = $data->name . ' (via. djjoel.com - Website)';
 
-//From email address and name
-    $mail->From = $data->address;
-    $mail->FromName = $data->name;
+    $message['To'] = 'clinton92@gmail.com';
+    $message['ToName'] = 'Clinton D\'souza';
 
-//To address and name
-    $mail->addAddress("clinton92@gmail.com", "Clinton D'souza");
+    $message['Reply'] = trim($data->address);
+    $message['ReplyName'] = $data->name;
 
-//Address to which recipient will reply
-    $mail->addReplyTo($data->address, "Reply");
+    $message['Subject'] = $data->subject;
+    $message['Body'] = htmlentities($data->msg);
+    $message['AltBody'] = htmlentities($data->msg);
 
-//Send HTML or Plain Text email
-    $mail->isHTML(false);
+    $message['SuccessMessage']='Message Sent';
 
-    $mail->Subject = "Sent from djjoelgoa.com";
-    $mail->Body = htmlentities($data->msg);
-    $mail->AltBody = htmlentities($data->msg);
-
-    if (!$mail->send()) {
+    try {
+        SMTPSend($message, $SMTPDetails);
+    } catch (Exception $e) {
         $response['status'] = 'Error';
-        $response['message'] = $mail->ErrorInfo;
-    } else {
-        $response['status'] = 'Success';
-        $response['message'] = 'Message Sent';
+        $response['message'] = $e->getMessage();
+        echo json_encode($response);
     }
-    echo json_encode($response);
-} elseif ($data->type == 'recoverPassword') {
-    include 'connection.config.php';
-    $mail = new PHPMailer;
-    $response = array();
+}elseif ($data->type == 'recoverPassword') {
     $email = mysql_real_escape_string($data->email);
     try {
         $sql = "SELECT id,username FROM users WHERE BINARY email='$email'";
@@ -59,38 +55,95 @@ if ($data->type == 'contact') {
                 $randomString .= $characters[rand(0, $charactersLength - 1)];
             }
 
-            $mail->From = 'noreply@joel.com';
-            $mail->FromName = 'DJ Joel - Password Recovery';
-            $mail->Subject = "Password Recovery Link";
             $URL = "http://djjoel.com/admin/#/auth/recovery/" . $email . '/' . $randomString;
-            $message = 'Hello ' . $username . '<br> You have recently requested to retrieve your lost account password. Please click the link below to reset your password <br> <a href="' . $URL . '">Click Here</a>';
-            $mail->Body = $message;
-            $mail->addAddress($email, $username);
-            $mail->isHTML(true);
+            $msgStructure = 'Hello ' . $username . '<br> You have recently requested to retrieve your lost account password. Please click the link below to reset your password <br> <a href="' . $URL . '">Click Here</a>';
 
-            if (!$mail->send()) {
-                $response['status'] = 'Error';
-                $response['message'] = $mail->ErrorInfo;
-            } else {
+            $message['From'] = 'noreply@joel.com';
+            $message['FromName'] = 'DJ Joel - Password Recovery';
+
+            $message['To'] = $email;
+            $message['ToName'] = $username;
+
+            $message['Reply'] = null;
+            $message['ReplyName'] = null;
+
+            $message['Subject'] = 'Password Recovery Link';
+            $message['Body'] = $msgStructure;
+            $message['AltBody'] = htmlentities($msgStructure);
+
+            $message['SuccessMessage']='Message Sent. Please check your Inbox';
+
+            try {
+                SMTPSend($message, $SMTPDetails);
                 $sql = "UPDATE users SET temp_password='$randomString' WHERE id=$id";
                 $result = mysql_query($sql) or trigger_error(mysql_error() . $sql);
-                $response['status'] = 'Success';
-                $response['message'] = 'Message Sent. Please check your Inbox';
-                $response['url'] = $URL;
+            } catch (Exception $e) {
+                $response['status'] = 'Error';
+                $response['message'] = $e->getMessage();
+                echo json_encode($response);
             }
+
+
 
 
         } else {
             header('HTTP/1.0 401 Unauthorized');
             $response['status'] = 'Error';
             $response['message'] = 'No user registered with that email id';
+            echo json_encode($response);
         }
-        echo json_encode($response);
+
     } catch (exception $e) {
         header('HTTP/1.0 401 Unauthorized');
         $response['status'] = 'Error';
         $response['message'] = $e->getMessage();
         echo json_encode($response);
     }
+}
+
+function SMTPSend($message, $SMTPDetails)
+{
+    $response = array();
+    $mail = new PHPMailer();
+
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->CharSet = 'UTF-8';
+
+    $mail->Host = $SMTPDetails['Host'];
+    $mail->Username = $SMTPDetails['Username'];
+    $mail->Password = $SMTPDetails['Password'];
+
+    $mail->SMTPSecure = $SMTPDetails['SMTPSecure'];
+    $mail->Port = $SMTPDetails['Port'];
+
+    $mail->From = $message['From'];
+    $mail->FromName = $message['FromName'];
+
+    //To address and name
+    $mail->addAddress($message['To'], $message['ToName']);
+
+    //Address to which recipient will reply
+    $mail->addReplyTo($message['Reply'], $message['ReplyName']);
+
+    // indicates ReturnPath header
+    $mail->Sender = $message['Reply'];
+
+    $mail->Subject = $message['Subject'];
+    $mail->Body = $message['Body'];
+    $mail->AltBody = $message['AltBody'];
+
+    if (!$mail->send()) {
+        $response['status'] = 'Error';
+        $response['message'] = $mail->ErrorInfo;
+    } else {
+        $response['status'] = 'Success';
+        $response['message'] = $message['SuccessMessage'];
+    }
+    echo json_encode($response);
+
+//    echo '<pre>';
+//    var_dump($message);
+//    echo '</pre>';
 
 }
