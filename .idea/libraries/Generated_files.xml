@@ -2,6 +2,11 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/bower_components/angular/angular.min.js" />
+        <item url="file://$PROJECT_DIR$/bower_components/angular-materialize/js/app.min.js" />
+        <item url="file://$PROJECT_DIR$/bower_components/angular-scroll/angular-scroll.min.min.js" />
+        <item url="file://$PROJECT_DIR$/bower_components/angular-scroll/gulpfile.min.js" />
+        <item url="file://$PROJECT_DIR$/bower_components/angular-scroll/angular-scroll.min.js" />
         <item url="file://$PROJECT_DIR$/js/directives/directives.min.js" />
         <item url="file://$PROJECT_DIR$/js/controllers/controllers.min.js" />
         <item url="file://$PROJECT_DIR$/js/services/services.min.js" />
@@ -9,13 +14,12 @@
         <item url="file://$PROJECT_DIR$/bower_components/angular-jwt/index.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular/index.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular-jwt/karma-dist-minified.conf.min.js" />
-        <item url="file://$PROJECT_DIR$/bower_components/angular/angular.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular-jwt/karma-dist-concatenated.conf.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular-jwt/gulpfile.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular-jwt/karma-src.conf.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular-jwt/dist/angular-jwt.min.min.js" />
-        <item url="file://$PROJECT_DIR$/bower_components/angular-materialize/js/app.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular-jwt/dist/angular-jwt.min.js" />
+        <item url="file://$PROJECT_DIR$/bower_components/angular-materialize/js/app.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular/angular.min.min.js" />
         <item url="file://$PROJECT_DIR$/bower_components/angular-materialize/src/angular-materialize.min.js" />
         <item url="file://$PROJECT_DIR$/admin/js/controllers/dashboardController.min.js" />
@@ -28,20 +32,25 @@
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/coffee/app.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular-materialize/src/angular-materialize.min.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular/angular.min.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular-materialize/js/app.min.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular-scroll/angular-scroll.min.min.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular-scroll/gulpfile.min.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular-scroll/angular-scroll.min.js" />
       <root url="file://$PROJECT_DIR$/js/directives/directives.min.js" />
       <root url="file://$PROJECT_DIR$/js/controllers/controllers.min.js" />
       <root url="file://$PROJECT_DIR$/js/services/services.min.js" />
       <root url="file://$PROJECT_DIR$/js/app.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/index.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular/index.min.js" />
-      <root url="file://$PROJECT_DIR$/bower_components/angular/angular.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/karma-dist-minified.conf.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/karma-dist-concatenated.conf.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/gulpfile.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/karma-src.conf.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/dist/angular-jwt.min.min.js" />
-      <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/dist/angular-jwt.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-materialize/js/app.min.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular-jwt/dist/angular-jwt.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular/angular.min.min.js" />
       <root url="file://$PROJECT_DIR$/bower_components/angular-materialize/src/angular-materialize.min.js" />
       <root url="file://$PROJECT_DIR$/admin/js/controllers/dashboardController.min.js" />

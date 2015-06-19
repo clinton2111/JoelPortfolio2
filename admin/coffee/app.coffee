@@ -1,4 +1,5 @@
-angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login','joelDashBoard.DashCtrl','ngFileUpload','angular-md5','angularLazyImg']
+angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 'joelDashBoard.login',
+                                 'joelDashBoard.DashCtrl', 'ngFileUpload', 'angular-md5', 'angularLazyImg']
 .config ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'jwtInterceptorProvider',
   ($stateProvider, $urlRouterProvider, $httpProvider, jwtInterceptorProvider)->
     $stateProvider
@@ -8,29 +9,29 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
       controller: 'loginController'
     .state 'dashboard',
       url: '/dashboard'
-      abstract:true
+      abstract: true
       templateUrl: 'partials/dashboard.html'
-      controller:'dashboardController'
+      controller: 'dashboardController'
       data:
         requiresLogin: true
     .state 'dashboard.home',
-      url:''
-      templateUrl:'partials/home.html'
+      url: ''
+      templateUrl: 'partials/home.html'
       data:
         requiresLogin: true
     .state 'dashboard.photos',
-      url:'/photos'
-      templateUrl:'partials/photos.html'
+      url: '/photos'
+      templateUrl: 'partials/photos.html'
       data:
         requiresLogin: true
     .state 'dashboard.gigs',
-      url:'/gigs'
-      templateUrl:'partials/gigs.html'
+      url: '/gigs'
+      templateUrl: 'partials/gigs.html'
       data:
         requiresLogin: true
     .state 'dashboard.account',
-      url:'/account'
-      templateUrl:'partials/account.html'
+      url: '/account'
+      templateUrl: 'partials/account.html'
       data:
         requiresLogin: true
 
@@ -43,7 +44,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
       else
         user = store.get 'user'
         if !(_.isNull(user.token)) || !(_.isUndefined(user.token))
-          config.headers.Authorization =user.token;
+          config.headers.Authorization = user.token;
     ]
     $httpProvider.interceptors.push 'jwtInterceptor'
 ]
@@ -64,7 +65,7 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
       if to.data && to.data.requiresLogin
         if (_.isNull(user) or _.isUndefined(user) or jwtHelper.isTokenExpired(user.token))
           e.preventDefault();
-          $state.go 'auth',{type:'login',email:null,value:null}
+          $state.go 'auth', {type: 'login', email: null, value: null}
         else
           lastUpdate = moment(user.lastUpdate, 'DD-MM-YYYY')
           refreshTokenFlag = moment().isSame(moment(lastUpdate), 'day')
@@ -75,14 +76,14 @@ angular.module 'joelDashBoard', ['ui.router', 'angular-jwt', 'angular-storage', 
               tokenData = data
               if !(_.isNull(tokenData.token) and _.isUndefined(tokenData.token))
                 userObj =
-                  id:tokenData.id
+                  id: tokenData.id
                   token: tokenData.token
                   username: tokenData.username
                   lastUpdate: moment().format('DD-MM-YYYY')
                 store.set 'user', userObj
               else
                 e.preventDefault()
-                $state.go 'auth',{type:'login',email:null,value:null}
+                $state.go 'auth', {type: 'login', email: null, value: null}
             , (error)->
               e.preventDefault();
 

@@ -19,10 +19,11 @@
     <script src="bower_components/materialize/dist/js/materialize.min.js"></script>
     <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
     <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
+    <script src="bower_components/angular-lazy-img/release/angular-lazy-img.min.js"></script>
     <script src="bower_components/angular-adaptive-backgrounds/dist/angular-adaptive-backgrounds.min.js"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-    <script src="bower_components/angular-lazy-img/release/angular-lazy-img.min.js"></script>
 
 
     <!--Modules-->
@@ -44,21 +45,21 @@
 
 
             <ul class="right hide-on-med-and-down">
-                <li><a scroll-to='Home'>Home</a></li>
-                <li><a scroll-to='About'>About</a></li>
-                <li><a scroll-to='Gigs'>Gigs</a></li>
-                <li><a scroll-to='Mixes'>Mixes</a></li>
-                <li><a scroll-to='Photos'>Photos</a></li>
-                <li><a scroll-to='Contact'>Contact</a></li>
+                <li><a href='#Home' du-smooth-scroll du-scrollspy>Home</a></li>
+                <li><a href="#About" du-smooth-scroll du-scrollspy>About</a></li>
+                <li><a href="#Gigs" du-smooth-scroll du-scrollspy>Gigs</a></li>
+                <li><a href="#Mixes" du-smooth-scroll du-scrollspy>Mixes</a></li>
+                <li><a href="#Photos" du-smooth-scroll du-scrollspy>Photos</a></li>
+                <li><a href="#Contact" du-smooth-scroll du-scrollspy>Contact</a></li>
             </ul>
 
             <ul id="nav-mobile" class="side-nav">
-                <li><a scroll-to='Home'>Home</a></li>
-                <li><a scroll-to='About'>About</a></li>
-                <li><a scroll-to='Gigs'>Gigs</a></li>
-                <li><a scroll-to='Mixes'>Mixes</a></li>
-                <li><a scroll-to='Photos'>Photos</a></li>
-                <li><a scroll-to='Contact'>Contact</a></li>
+                <li><a href='#Home' du-smooth-scroll du-scrollspy>Home</a></li>
+                <li><a href="#About" du-smooth-scroll du-scrollspy>About</a></li>
+                <li><a href="#Gigs" du-smooth-scroll du-scrollspy>Gigs</a></li>
+                <li><a href="#Mixes" du-smooth-scroll du-scrollspy>Mixes</a></li>
+                <li><a href="#Photos" du-smooth-scroll du-scrollspy>Photos</a></li>
+                <li><a href="#Contact" du-smooth-scroll du-scrollspy>Contact</a></li>
             </ul>
 
         </div>
